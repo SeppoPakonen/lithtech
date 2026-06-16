@@ -95,6 +95,7 @@ Games I want to support and the order to work on them
 4. The Operative: No One Lives Forever
 5. F.E.A.R.
 6. Blood II: The Chosen (if I can find a copy)
+7. Global Operations
 
 These are all the Lithtech I am aware of that had a public source release. If there are more out there, I want to eventually support them too.
 
