@@ -1,32 +1,34 @@
 #ifndef MOVEMGR_H
-#define BUYMENU_H
+#define MOVEMGR_H
 
 #include "ltbasedefs.h"
 
 class CMoveMgr {
 public:
-    virtual ~CMoveMgr() {}
+    CMoveMgr();
+    virtual ~CMoveMgr();
 
-    virtual void Init() = 0;
-    virtual uint32 GetClientPlayer() = 0; // +0x18
-    virtual void Update(float fDeltaTime) = 0; // +0x34
+    virtual uint32 GetControlFlags(); // +0x00
+    // ... many accessors ...
+    virtual void Init(uint32 hPlayer); // +0x? (found 1001a470)
+    virtual void Update(float fDeltaTime); // +0x34 (1001a370)
     
-    // Inferred from vtable calls
-    virtual void PreUpdate() = 0; // +0x30?
-    virtual void PostUpdate() = 0; // +0x38?
-    virtual void OnMessage(uint8 mid, HMESSAGEREAD hMsg) = 0; // +0x24?
+    void UpdateRotation(); // 1001a620
     
-    // Internal state for prediction
-    struct PlayerState {
-        LTVector pos;
-        LTRotation rot;
-        LTVector velocity;
-        float timestamp;
-    };
+protected:
+    // Member Variables (from constructor 10019d50 and Init 1001a470)
+    float m_fDeltaTime;            // +0x20
     
-private:
-    PlayerState m_History[64]; // Example history buffer
-    uint32 m_nCurrentTick;
+    // Sub-objects
+    void* m_pSomething5C;          // +0x5c
+    void* m_pHistoryBuffer;        // +0x17c (Size 0xAA1C)
+    void* m_pObject180;            // +0x180
+    
+    uint32 m_hClientPlayer;        // +0x150
+    uint32 m_pClientPlayerObject;  // +0x218
+    
+    // State
+    uint32 m_nMovementState;       // +0x214
 };
 
 #endif // MOVEMGR_H

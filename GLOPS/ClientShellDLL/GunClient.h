@@ -4,38 +4,59 @@
 #include "CBaseClientWeapon.h"
 #include "ltbasedefs.h"
 
-// Reconstructed GunClient class based on Phase 3 research
+// Reconstructed GunClient class
 class GunClient : public CBaseClientWeapon {
 public:
     GunClient();
-    virtual ~GunClient(); // 1007e0e0 (VTable[0])
+    virtual ~GunClient();
 
-    // Virtual Methods (Mapped from VTable at 0x100bcb64)
     virtual void Init();            // 1007b8c0
     virtual void Term();
     virtual void OnModelKey();
-    virtual void Update();          // Likely 1007cf90 or similar
+    virtual void Update();          // 1007cf90
     virtual void PullTrigger();     // 1007c760
     virtual void ReleaseTrigger();
+    
+    // Internal Methods
+    virtual void Fire();            // 1007c770 (VTable offset 0x6c)
+    void UpdateVisibleAmmo();       // 1007e130
 
-    // Reconstructed State Logic
-    void ClientInitGun();           // 1007c25f
+protected:
+    uint32 m_pViewObject;          // +0x04
+    // ...
+    uint32 m_pWeaponModel;         // +0x14
+    uint32 m_nAmmoType;            // +0x18
     
-private:
-    // Memory Map discovered from constructor 1007b717
-    // Object Size: Approx 0x1F0 bytes
+    char pad1[0x18];
+    bool m_bCanFireAlt;            // +0x34?
+    bool m_bHasSecondary;          // +0x35?
+    bool m_bIsFiringSecondary;     // +0x36?
     
-    // Member Variables
-    uint32 m_pViewObject;          // offset 0x04?
-    LTVector m_vBarrelTip;         // Identified by string references in Init
+    char pad2[0x10];
+    uint32 m_nFiringMode;          // +0x48 (0=Single, 1=FullAuto, 2=Burst?)
+    uint32 m_nBurstCount;          // +0x4c
     
-    // State Flags (offsets from constructor)
-    bool m_bFiring;                // offset 0x1e8?
-    bool m_bCanFire;               // offset 0x1e9?
+    char pad3[0x2c];
+    uint32 m_nStateFlags;          // +0x7c
     
-    // Weapon Stats
-    float m_fRecoil;               // offset 0x1b0? (initialized to 1.0)
-    float m_fSpread;               // offset 0x1c8? (initialized to 1.0)
+    char pad4[0x30];
+    uint32 m_nDryFireSound;        // +0xb0
+    uint32 m_nFireSound;           // +0xb4
+    uint32 m_nFireSoundAlt;        // +0xb8
+    
+    char pad5[0x28];
+    bool m_bState130;              // +0x130
+    bool m_bState131;              // +0x131
+    bool m_bState132;              // +0x132
+    bool m_bState133;              // +0x133
+    
+    char pad6[0x60];
+    bool m_bState194;              // +0x194
+    bool m_bState198;              // +0x198
+    
+    char pad7[0x4f];
+    bool m_bFiring;                // +0x1e8
+    bool m_bCanFire;               // +0x1e9
 };
 
 #endif // GUNCLIENT_H
