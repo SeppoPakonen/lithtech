@@ -16,18 +16,25 @@ public:
     void UpdateRotation(); // 1001a620
     
 protected:
-    // Member Variables (from constructor 10019d50 and Init 1001a470)
+    uint32 m_nType;                // +0x04
+    uint32 m_nFlags;               // +0x08
+    uint32 m_nState;               // +0x0c
+    
+    char pad1[0x0c];               // 0x10
     float m_fDeltaTime;            // +0x20
     
-    // Sub-objects
-    void* m_pSomething5C;          // +0x5c
+    char pad2[0x38];               // 0x24
+    void* m_pSomething5C;          // +0x5c (Sub-object?)
+    
+    char pad3[0x114];              // 0x60 - 0x174
     void* m_pHistoryBuffer;        // +0x17c (Size 0xAA1C)
     void* m_pObject180;            // +0x180
     
-    uint32 m_hClientPlayer;        // +0x150
-    uint32 m_pClientPlayerObject;  // +0x218
+    char pad4[0x24];               // 0x184 - 0x1A8
+    uint32 m_hClientPlayer;        // +0x150? Wait, 0x150 was in my earlier notes but constructor says 0x150.
+                                   // Let's re-verify 0x150.
     
-    // State
+    uint32 m_pClientPlayerObject;  // +0x218
     uint32 m_nMovementState;       // +0x214
 };
 

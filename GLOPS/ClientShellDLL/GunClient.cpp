@@ -25,8 +25,23 @@ void GunClient::Init() {
     
     WeaponAttributes* pData = &g_pWeaponAttributes[index];
     
-    // Setup animations, sockets, and hand textures (logic at 0x1009c860, 0x1009d6e0)
-    // ...
+    // Setup animations, sockets, and hand textures
+    // Passing pointers to weapon object, data, etc. (0x1009c860)
+    // SetupWeaponAnimations(m_pViewObject, ...);
+    
+    if (pData->flags & 0x10000) {
+        // Setup hand skins/textures (0x1009d6e0)
+        // SetupHandTextures(m_pViewObject);
+    }
+    
+    float fScale = 1.0f;
+    if (!(pData->flags & 0x1000000) || pData->type == 6) {
+        fScale = 1000.0f; // 0x447a0000
+    } else {
+        fScale = 1350.0f; // 0x44a8c000
+    }
+    
+    // ... further scaling and sound initialization ...
 }
 
 // 0x1007c760
@@ -44,26 +59,26 @@ void GunClient::Fire() {
     // ...
     
     // Check firing mode (0=Single, 1=FullAuto) at +0x48
-    if (m_nFiringMode == 1) {
+    if (m_nFiringMode == 1) { // Full Auto
         if (m_bCanFire) {
-            ILTMessage_Write* pMsg = g_pLTClient->CreateMessage();
-            if (pMsg) {
-                // Get model rotation and position (0x50, 0x4c on +0x14)
-                // pMsg->WriteVector(m_vPos);
-                // pMsg->WriteRotation(m_rRot);
-                
-                // 1007c99c: ILTClient::SendToServer(pMsg, MESSAGE_GUARANTEED, 1)
-                g_pLTClient->SendToServer(pMsg, 0x1); 
-            } else {
-                g_pLTClient->CPrint("ERROR!!: CreateMessage Failed! In GunClient::PullTrigger. FullAuto");
-            }
+            // Get model rotation and position via vtable calls on m_pWeaponModel
+            // 1007c939: call [edx+0x50] (GetRotation)
+            // 1007c945: call [edx+0x4c] (GetPosition)
+            
+            // Create and write message
+            // ILTMessage_Write* pMsg = g_pLTClient->CreateMessage();
+            // pMsg->WriteVector(vPos);
+            // pMsg->WriteRotation(rRot);
+            
+            // SendToServer (0x19c)
+            // g_pLTClient->SendToServer(pMsg, MESSAGE_GUARANTEED, 1);
         }
-    } else if (m_nFiringMode == 0) {
-        // Single shot logic
-        // ... similar to FullAuto but maybe sets a 'has fired' flag
+    } else if (m_nFiringMode == 0) { // Single Shot
+        // Similar to Full Auto but sets state flags
+        m_bState132 = true;
     }
     
-    // Handle visible ammo (bullets in mag) at 0x1007e130
+    // Update visible ammo (bullets in mag)
     UpdateVisibleAmmo();
 }
 

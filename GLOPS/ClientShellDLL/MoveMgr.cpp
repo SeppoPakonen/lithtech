@@ -5,10 +5,18 @@ extern ILTClient* g_pLTClient;
 
 // 10019d50
 CMoveMgr::CMoveMgr() {
-    // Initializer logic
+    m_nType = 4;
+    m_nFlags = 0;
+    m_nState = 8;
+    
     m_fDeltaTime = 0.0f;
+    
     m_pHistoryBuffer = nullptr;
-    m_nMovementState = 1; // EDI = 1 in asm
+    m_pObject180 = nullptr;
+    
+    m_hClientPlayer = 0;
+    m_pClientPlayerObject = 0;
+    m_nMovementState = 1; // EDI = 1
 }
 
 // 1001a470
