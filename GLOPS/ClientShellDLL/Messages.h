@@ -5,6 +5,7 @@
 
 // Network Message IDs (MID_*) for Global Operations
 enum MessageID {
+    // Wrapped in MID_CORE (139)
     MID_PLAYER_UPDATE       = 1,
     MID_PLAYER_STATUS       = 2,
     MID_WEAPON_FIRE         = 3,
@@ -17,23 +18,25 @@ enum MessageID {
     MID_BIND_SECURITYCAM    = 10,
     MID_Sfx                 = 11,
     MID_ClientFX            = 12,
+
+    // Primary Dispatcher IDs (GameClientShell::OnMessage)
+    MID_SHOOT_EVENT         = 31, // GameClientShoot::OnMessage
+    MID_CORE_MESSAGES       = 139, // Contains IDs 0-11
+    MID_CONNECT_1           = 152,
+    MID_DISCONNECT          = 153,
+    MID_CONNECT_2           = 154,
     // Add more as identified
 };
 
 /*
-    Reconstructed GameClientShell::OnMessage Dispatcher logic (Pseudocode)
+    Reconstructed GameClientShell::OnMessage Dispatcher logic (0x100316e0)
     
     void GameClientShell::OnMessage(uint8 messageID, HMESSAGEREAD hMessage) {
-        uint8 mid = g_pLTClient->ReadBits(hMessage, 8);
+        // Translation table (0x10035e00) maps messageID to an index
+        // Jump table (0x10035c88) executes the handler.
         
-        // Example Range handling observed in 10031a5e
-        if (mid >= 0 && mid < 12) {
-             // Handle core messages (10031a9d)
-             // These use an internal table at 0x1010d474
-        } else {
-             // Dispatch to sub-handlers like GameClientShoot::OnMessage
-             // or specific ID branches.
-        }
+        // Example: MID_CORE_MESSAGES (139) is mapped to HandleCoreMessage (0x10031a5e)
+        // HandleCoreMessage then reads another 8 bits for the true core MID (0-11)
     }
 */
 

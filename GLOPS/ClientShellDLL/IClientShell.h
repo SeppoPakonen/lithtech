@@ -16,7 +16,10 @@ public:
     // virtual void OnInit() = 0;
     // virtual void OnTerm() = 0;
     // virtual void OnEvent(uint32 dwEventID, uint32 dwParam) = 0;
-    virtual void OnMessage(uint8 messageID, void* hMessage); // Identified around 10031a5e
+    virtual void OnMessage(uint8 messageID, void* hMessage); // 0x100316e0
+    
+    // Identified handlers
+    void HandleCoreMessage(void* hMessage); // 0x10031a5e (MID 139)
     // virtual void OnCommandOn(int command) = 0;
     // virtual void OnCommandOff(int command) = 0;
     // virtual void OnKeyDown(int key, int rep) = 0;
