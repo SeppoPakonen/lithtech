@@ -3,20 +3,20 @@
 
 #include "ltbasedefs.h"
 
-class ILTClient;
-
 struct SPMissionInfo {
-    char title[64];
-    uint32 affiliation;
-    uint32 teamID;
-    char mapname[64];
+    char szName[64];
+    char szDescription[256];
+    char szMap[64];
+    int nDifficulty;
 };
 
 class SinglePlayerMenu {
 public:
-    static void LoadSPMissions();
+    SinglePlayerMenu();
+    virtual ~SinglePlayerMenu();
 
-private:
+    static void LoadSPMissions(); // 0x10067c40
+
     static SPMissionInfo* s_pMissions;
     static uint32 s_nNumMissions;
 };
