@@ -3,13 +3,16 @@
 
 #include "ltbasedefs.h"
 
-// Forward declarations or dummy types for team and client managers
 class TeamObject {
 public:
-    uint32 m_nTeamId;      // offset 0x34
-    uint32 m_nNumPlayers;  // offset 0x30?
-    // Nested client team pointer or property at offset 0x158
-    void* m_pProperty158;  // offset 0x158
+    uint32 m_pad[12];     // 0x00 to 0x30
+    uint32 m_nStateFlags; // 0x30
+    uint32 m_nTeamId;     // 0x34
+    uint32 m_pad38[73];   // 0x38 to 0x158
+    void* m_pProperty158; // 0x158 (Player list or similar)
+    uint32 m_nState160;   // 0x160
+    uint32 m_pad164[6];   // 0x164 to 0x17C
+    uint32 m_nState17C;   // 0x17C
 };
 
 class WTeamSelect {
@@ -17,15 +20,14 @@ public:
     WTeamSelect();
     virtual ~WTeamSelect();
 
-    bool CanJoinTeam(uint32 teamId);        // 0x1006d480
-    bool CanJoinTeam();                     // 0x1006db20
-    int GetNextAvailableTeam(int direction); // 0x1006db41
+    bool CanJoinTeam(int teamId); // 0x1006d480
 
 protected:
-    uint32 m_pad[10];                       // offsets 0x04 to 0x28
-    uint32 m_nCurrentTeam;                  // offset 0x2c
-    uint32 m_nNumTeams;                     // offset 0x30
-    TeamObject* m_apTeams[8];               // offsets starting at 0x54
+    uint32 m_pad[11];     // 0x00 to 0x2C
+    uint32 m_nCurrentTeam;// 0x2C
+    uint32 m_nNumTeams;   // 0x30
+    uint32 m_pad34[8];    // 0x34 to 0x54
+    TeamObject* m_apTeams[32]; // 0x54 array of teams
 };
 
 #endif // WTEAMSELECT_H
