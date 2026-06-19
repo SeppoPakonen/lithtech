@@ -244,7 +244,34 @@
 10055c0f:	90                   	nop
 
 */
+#include <stdio.h>
+#include <string.h>
+#include "ILTClient.h"
+
+extern ILTClient* g_pLTClient;
+
 void ProfileDialog::ConfirmDeleteProfile() {
-    // TODO: Implement ConfirmDeleteProfile
+    // Abstracted based on 10055959
+    // In actual implementation, the profile name would be fetched from a UI element.
+    const char* profileName = "profile"; 
+    char fileName[256];
+    char fullPath[256];
+
+    // Attempt to delete the .cfg file
+    sprintf(fileName, "%s.cfg", profileName);
+    sprintf(fullPath, "globalops/%s", fileName);
+    
+    // Abstracted remove() call (100b8014 might be a function pointer to remove)
+    if (remove(fullPath) != 0) {
+        g_pLTClient->CPrint("ProfileDialog::ConfirmDeleteProfile: Couldn't delete file \"%s\"", fullPath);
+    }
+
+    // Attempt to delete the .hud file
+    sprintf(fileName, "%s.hud", profileName);
+    sprintf(fullPath, "globalops/%s", fileName);
+    
+    if (remove(fullPath) != 0) {
+        g_pLTClient->CPrint("ProfileDialog::ConfirmDeleteProfile: Couldn't delete file \"%s\"", fullPath);
+    }
 }
 

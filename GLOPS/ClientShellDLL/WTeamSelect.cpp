@@ -1,4 +1,7 @@
 #include "WTeamSelect.h"
+#include "ILTClient.h"
+
+extern ILTClient* g_pLTClient;
 
 // 0x1006d480: WTeamSelect::CanJoinTeam
 /*
@@ -652,8 +655,22 @@
 1006db3e:	c2 04 00             	ret    0x4
 
 */
-void WTeamSelect::CanJoinTeam() {
-    // TODO: Implement CanJoinTeam
+bool WTeamSelect::CanJoinTeam(uint32 teamId) {
+    if (teamId == 0xffffffff) return true;
+    if (teamId >= m_nNumTeams) {
+        g_pLTClient->CPrint("WTeamSelect::CanJoinTeam: team %i out of range [0..%i)", teamId, m_nNumTeams);
+        return false;
+    }
+    
+    TeamObject* pTeam = m_apTeams[teamId];
+    if (!pTeam) return false;
+    
+    return true;
+}
+
+bool WTeamSelect::CanJoinTeam() {
+    if (m_nNumTeams == 0) return false;
+    return GetNextAvailableTeam(0) != -1;
 }
 
 // 0x1006db41: WTeamSelect::GetNextAvailableTeam
@@ -860,7 +877,31 @@ void WTeamSelect::CanJoinTeam() {
 1006dd26:	c2 0c 00             	ret    0xc
 
 */
-void WTeamSelect::GetNextAvailableTeam() {
-    // TODO: Implement GetNextAvailableTeam
+int WTeamSelect::GetNextAvailableTeam(int direction) {
+    if (direction != 0 && direction != 1) {
+        g_pLTClient->CPrint("WTeamSelect::GetNextAvailableTeam: unknown direction %i", direction);
+        return -1;
+    }
+    
+    if (m_nNumTeams == 0) return -1;
+    
+    uint32 current = m_nCurrentTeam;
+    if (current == 0xffffffff) current = 0;
+    
+    uint32 target = current;
+    for (uint32 i = 0; i < m_nNumTeams; ++i) {
+        if (direction == 0) {
+            target = (target + 1) % m_nNumTeams;
+        } else {
+            target = (target + m_nNumTeams - 1) % m_nNumTeams;
+        }
+        
+        TeamObject* pTeam = m_apTeams[target];
+        if (pTeam) {
+            return target;
+        }
+    }
+    
+    return -1;
 }
 

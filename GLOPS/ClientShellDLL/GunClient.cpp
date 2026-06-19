@@ -1,4 +1,7 @@
 #include "GunClient.h"
+#include "ILTClient.h"
+
+extern ILTClient* g_pLTClient;
 
 // 0x10019b90: GunClient::OtherPlayerShoot
 /*
@@ -50,8 +53,12 @@
 10019bff:	90                   	nop
 
 */
-void GunClient::OtherPlayerShoot() {
-    // TODO: Implement OtherPlayerShoot
+void WeaponClass_0x8a0::OtherPlayerShoot_Type1(void* hMessage) {
+    uint8 val = g_pLTClient->ReadBits(hMessage, 8);
+    if (val == 0xff) {
+        g_pLTClient->CPrint("ERROR: ITEM_NOTHING shoot message! (GunClient::OtherPlayerShoot)");
+        return;
+    }
 }
 
 // 0x10019c00: GunClient::OtherPlayerShoot
@@ -90,8 +97,12 @@ void GunClient::OtherPlayerShoot() {
 10019c5f:	90                   	nop
 
 */
-void GunClient::OtherPlayerShoot() {
-    // TODO: Implement OtherPlayerShoot
+void WeaponClass_0x20::OtherPlayerShoot_Type2(void* hMessage) {
+    uint8 val = g_pLTClient->ReadBits(hMessage, 8);
+    if (val == 0xff) {
+        g_pLTClient->CPrint("ERROR: ITEM_NOTHING shoot message! (GunClient::OtherPlayerShoot)");
+        return;
+    }
 }
 
 // 0x10019c60: GunClient::OtherPlayerShoot
@@ -208,8 +219,20 @@ void GunClient::OtherPlayerShoot() {
 10019d4f:	90                   	nop
 
 */
-void GunClient::OtherPlayerShoot() {
-    // TODO: Implement OtherPlayerShoot
+void WeaponClass_0x8a0::Reset_0x8a0() {
+    // Reset logic
+}
+
+void WeaponClass_0x8a0::OtherPlayerShoot_Type3(void* hMessage) {
+    uint8 val = g_pLTClient->ReadBits(hMessage, 8);
+    if (val == 0xff) {
+        g_pLTClient->CPrint("ERROR: ITEM_NOTHING shoot message! (GunClient::OtherPlayerShoot)");
+        return;
+    }
+}
+
+void WeaponClass_0x8a0::OtherPlayerShoot(void* hMessage) {
+    this->OtherPlayerShoot_Type1(hMessage);
 }
 
 // 0x1007b8c0: GunClient::Init
@@ -1383,7 +1406,8 @@ void GunClient::Init() {
 
 */
 void GunClient::ClientInitGun() {
-    // TODO: Implement ClientInitGun
+    // Assert/error logging for missing ammo size definition
+    g_pLTClient->CPrint("Developer: %s, Error: %s (File: %s, Line: %d)", "seamus", "GunClient::ClientInitGun(): no ammo size", "GunClient.cpp", 291);
 }
 
 // 0x1007c760: GunClient::PullTrigger
@@ -3395,7 +3419,8 @@ void GunClient::ClientInitGun() {
 
 */
 void GunClient::PullTrigger() {
-    // TODO: Implement PullTrigger
+    m_bState130 = false;
+    this->Fire();
 }
 
 // 0x1009c450: GunClient::OtherPlayerShoot
@@ -3451,8 +3476,12 @@ void GunClient::PullTrigger() {
 1009c4bf:	90                   	nop
 
 */
-void GunClient::OtherPlayerShoot() {
-    // TODO: Implement OtherPlayerShoot
+void WeaponClass_0x20::OtherPlayerShoot_Type4(void* hMessage) {
+    uint8 val = g_pLTClient->ReadBits(hMessage, 8);
+    if (val == 0xff) {
+        g_pLTClient->CPrint("ERROR: ITEM_NOTHING shoot message! (GunClient::OtherPlayerShoot)");
+        return;
+    }
 }
 
 // 0x1009c4c0: GunClient::OtherPlayerShoot
@@ -3494,8 +3523,12 @@ void GunClient::OtherPlayerShoot() {
 1009c51f:	90                   	nop
 
 */
-void GunClient::OtherPlayerShoot() {
-    // TODO: Implement OtherPlayerShoot
+void WeaponClass_0x20::OtherPlayerShoot_Type5(void* hMessage) {
+    uint8 val = g_pLTClient->ReadBits(hMessage, 8);
+    if (val == 0xff) {
+        g_pLTClient->CPrint("ERROR: ITEM_NOTHING shoot message! (GunClient::OtherPlayerShoot)");
+        return;
+    }
 }
 
 // 0x1009c520: GunClient::OtherPlayerShoot
@@ -3743,7 +3776,19 @@ void GunClient::OtherPlayerShoot() {
 1009c72f:	90                   	nop
 
 */
-void GunClient::OtherPlayerShoot() {
-    // TODO: Implement OtherPlayerShoot
+void WeaponClass_0x20::Reset_0x20() {
+    // Reset logic
+}
+
+void WeaponClass_0x20::OtherPlayerShoot_Type6(void* hMessage) {
+    uint8 val = g_pLTClient->ReadBits(hMessage, 8);
+    if (val == 0xff) {
+        g_pLTClient->CPrint("ERROR: ITEM_NOTHING shoot message! (GunClient::OtherPlayerShoot)");
+        return;
+    }
+}
+
+void WeaponClass_0x20::OtherPlayerShoot(void* hMessage) {
+    this->OtherPlayerShoot_Type4(hMessage);
 }
 
