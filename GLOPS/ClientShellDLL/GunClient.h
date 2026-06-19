@@ -16,6 +16,7 @@ public:
     virtual void Update();          // 1007cf90
     virtual void PullTrigger();     // 1007c760
     virtual void ReleaseTrigger();
+    virtual void OtherPlayerShoot(void* hMessage);
     
     // Internal Methods
     virtual void Fire();            // 1007c770 (VTable offset 0x6c)
@@ -57,6 +58,24 @@ protected:
     char pad7[0x4f];
     bool m_bFiring;                // +0x1e8
     bool m_bCanFire;               // +0x1e9
+};
+
+class WeaponClass_0x20 : public GunClient {
+public:
+    virtual void OtherPlayerShoot(void* hMessage) override;
+    void OtherPlayerShoot_Type4(void* hMessage); // 0x1009c450
+    void OtherPlayerShoot_Type5(void* hMessage); // 0x1009c4c0
+    void OtherPlayerShoot_Type6(void* hMessage); // 0x1009c530
+    void OtherPlayerShoot_Type2(void* hMessage); // 0x10019c00
+    void Reset_0x20();                           // 0x1009c520
+};
+
+class WeaponClass_0x8a0 : public GunClient {
+public:
+    virtual void OtherPlayerShoot(void* hMessage) override;
+    void OtherPlayerShoot_Type1(void* hMessage); // 0x10019b90
+    void OtherPlayerShoot_Type3(void* hMessage); // 0x10019c70
+    void Reset_0x8a0();                          // 0x10019c60
 };
 
 #endif // GUNCLIENT_H

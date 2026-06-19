@@ -17,6 +17,7 @@ public:
     CWidget* GetNextSibling() const { return m_pNextSibling; }
     
     bool IsVisible() const { return (m_nFlags & 0x1) != 0; }
+    void SetStateFlags(uint32 setFlags, uint32 clearFlags);
 
 protected:
     void* vtable;            // +0x00

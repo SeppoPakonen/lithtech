@@ -24,9 +24,9 @@ protected:
     float m_fDeltaTime;            // +0x20
     
     char pad2[0x38];               // 0x24
-    void* m_pSomething5C;          // +0x5c (Sub-object?)
+    class EquipItemClient* m_apObjects[9]; // +0x5c
     
-    char pad3[0x114];              // 0x60 - 0x174
+    char pad3[0xfc];               // 0x80 - 0x17b
     void* m_pHistoryBuffer;        // +0x17c (Size 0xAA1C)
     void* m_pObject180;            // +0x180
     
