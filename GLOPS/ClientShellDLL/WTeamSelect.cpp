@@ -3,6 +3,20 @@
 
 extern ILTClient* g_pLTClient;
 
+static uint32 GetTeamPlayerCount(TeamObject* pTeam) {
+    typedef uint32 (__thiscall *GetPlayerCountFn)(void*);
+    GetPlayerCountFn fn = *(GetPlayerCountFn*)0x10074f50;
+    return fn(pTeam->m_pProperty158);
+}
+
+static uint32 GetTeamMaxPlayers(uint32 teamId) {
+    typedef void* (__thiscall *GetTeamInfoFn)(void*, uint32);
+    GetTeamInfoFn fn = *(GetTeamInfoFn*)0x1001f660;
+    void* pTeamInfo = fn((void*)0x10115910, teamId);
+    if (!pTeamInfo) return 0;
+    return *(uint32*)((char*)pTeamInfo + 0x8);
+}
+
 // 0x1006d480: WTeamSelect::CanJoinTeam
 /*
 1006d480:	64 a1 00 00 00 00    	mov    eax,fs:0x0
@@ -665,6 +679,13 @@ bool WTeamSelect::CanJoinTeam(uint32 teamId) {
     TeamObject* pTeam = m_apTeams[teamId];
     if (!pTeam) return false;
     
+    uint32 currentPlayers = GetTeamPlayerCount(pTeam);
+    uint32 maxPlayers = GetTeamMaxPlayers(pTeam->m_nTeamId);
+    
+    if (currentPlayers >= maxPlayers) {
+        return false;
+    }
+    
     return true;
 }
 
@@ -878,30 +899,36 @@ bool WTeamSelect::CanJoinTeam() {
 
 */
 int WTeamSelect::GetNextAvailableTeam(int direction) {
-    if (direction != 0 && direction != 1) {
-        g_pLTClient->CPrint("WTeamSelect::GetNextAvailableTeam: unknown direction %i", direction);
-        return -1;
-    }
+    if (m_nNumTeams <= 0) return -1;
     
-    if (m_nNumTeams == 0) return -1;
+    uint32 teamId = m_nCurrentTeam;
+    uint32 loopCount = 0;
     
-    uint32 current = m_nCurrentTeam;
-    if (current == 0xffffffff) current = 0;
-    
-    uint32 target = current;
-    for (uint32 i = 0; i < m_nNumTeams; ++i) {
-        if (direction == 0) {
-            target = (target + 1) % m_nNumTeams;
+    while (loopCount < m_nNumTeams) {
+        if (teamId == 0xffffffff) {
+            teamId = 0;
         } else {
-            target = (target + m_nNumTeams - 1) % m_nNumTeams;
+            if (direction == 0) {
+                teamId = (teamId + 1) % m_nNumTeams;
+            } else if (direction == 1) {
+                teamId = (teamId + m_nNumTeams - 1) % m_nNumTeams;
+            } else {
+                g_pLTClient->CPrint("Developer: %s, Error: WTeamSelect::GetNextAvailableTeam: unknown direction %i (File: %s, Line: %d)",
+                                    "Darren", direction, "gui_teamselect.cpp", 704);
+                return -1;
+            }
         }
         
-        TeamObject* pTeam = m_apTeams[target];
+        TeamObject* pTeam = m_apTeams[teamId];
         if (pTeam) {
-            return target;
+            uint32 currentPlayers = GetTeamPlayerCount(pTeam);
+            uint32 maxPlayers = GetTeamMaxPlayers(pTeam->m_nTeamId);
+            if (currentPlayers < maxPlayers) {
+                return teamId;
+            }
         }
+        loopCount++;
     }
-    
     return -1;
 }
 

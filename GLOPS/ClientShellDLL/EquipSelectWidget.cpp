@@ -1,4 +1,7 @@
 #include "EquipSelectWidget.h"
+#include "GameClientShell.h"
+#include "MoveMgr.h"
+#include "EquipItemClient.h"
 
 // 0x10084500: EquipSelectWidget::Init
 /*
@@ -99,8 +102,6 @@
 10084655:	74 06                	je     0x1008465d
 10084657:	89 a8 00 01 00 00    	mov    DWORD PTR [eax+0x100],ebp
 1008465d:	83 c1 04             	add    ecx,0x4
-10084660:	4a                   	dec    edx
-10084661:	75 ee                	jne    0x10084651
 10084663:	a1 c8 cf 10 10       	mov    eax,ds:0x1010cfc8
 10084668:	8b be dc 0e 00 00    	mov    edi,DWORD PTR [esi+0xedc]
 1008466e:	8d 4c 24 10          	lea    ecx,[esp+0x10]
@@ -169,14 +170,103 @@
 10084704:	4f                   	dec    edi
 10084705:	45                   	inc    ebp
 10084706:	08 10                	or     BYTE PTR [eax],dl
-10084708:	90                   	nop
-10084709:	90                   	nop
-1008470a:	90                   	nop
-1008470b:	90                   	nop
-1008470c:	90                   	nop
-1008470d:	90                   	nop
-1008470e:	90                   	nop
-1008470f:	90                   	nop
+*/
+void EquipSelectWidget::Init() {
+    // Cast and read the specialty ID from ClassSelectScreen global pointer
+    void* pClassSelect = *(void**)0x10124310;
+    uint32 specialty = 0;
+    if (pClassSelect) {
+        specialty = *(uint32*)((char*)pClassSelect + 0x60);
+    }
+
+    if (m_nSelectedSpecialty != specialty) {
+        m_nSelectedSpecialty = specialty;
+        if (specialty > 7) {
+            m_dwClassMask = 0;
+        } else {
+            switch (specialty) {
+                case 0: m_dwClassMask = 0x20; break;
+                case 1: m_dwClassMask = 0x22; break;
+                case 3:
+                case 4: m_dwClassMask = 0x32; break;
+                case 6:
+                case 7: m_dwClassMask = 0x1ff; break;
+                default: m_dwClassMask = 0; break;
+            }
+        }
+    }
+
+    if (m_pEquipSelector) {
+        *(uint32*)((char*)m_pEquipSelector + 0xc94) = m_dwClassMask;
+    }
+
+    UpdateFromPlayer();
+
+    m_anSlotIndices[0] = 0xffffffff;
+    m_anSlotIndices[1] = 0xffffffff;
+    uint32 count = 0;
+    for (uint32 slot = 0; slot < 3; slot++) {
+        BOOL* pSpecialtySlots = (BOOL*)0x100bcc00;
+        if (pSpecialtySlots[m_nSelectedSpecialty * 3 + slot]) {
+            if (count < 2) {
+                m_anSlotIndices[count++] = slot;
+            } else {
+                g_pLTClient->CPrint("Developer: %s, Error: EquipSelectWidget::Init: Too many selectable armour types (max %i) (File: %s, Line: %d)",
+                                    "Darren", 2, "InGameMenu.cpp", 2380);
+            }
+        }
+    }
+
+    CMoveMgr* pMoveMgr = g_pGameClientShell->GetMoveMgr();
+    if (pMoveMgr) {
+        m_nMoveMgrVal140 = *(uint32*)((char*)pMoveMgr + 0x140);
+        m_nMoveMgrValB8 = *(uint32*)((char*)pMoveMgr + 0xb8);
+    }
+
+    Method_86f30();
+
+    if (m_pWidgetEE4) {
+        m_pWidgetEE4->SetStateFlags(0, 2);
+        CWidget* pSubWidget = *(CWidget**)((char*)m_pWidgetEE4 + 0x88);
+        if (pSubWidget) {
+            CWidget** apWidgets = (CWidget**)((char*)pSubWidget + 0x2c);
+            for (int i = 0; i < 10; i++) {
+                if (apWidgets[i]) {
+                    *(uint32*)((char*)apWidgets[i] + 0x100) = 0;
+                }
+            }
+        }
+    }
+
+    // Call screen resolution retrieval function pointers on g_pLTClient
+    typedef uint32 (__cdecl *GetScreenResFn)(uint32*, uint32*);
+    typedef void (__cdecl *UnkMethod210Fn)(uint32);
+    uint32 width = 0, height = 0;
+    GetScreenResFn getScreenRes = *(GetScreenResFn*)((char*)g_pLTClient + 0x1e0);
+    UnkMethod210Fn method210 = *(UnkMethod210Fn*)((char*)g_pLTClient + 0x210);
+    uint32 res = getScreenRes(&width, &height);
+    method210(res);
+
+    if (m_pEquipSelector) {
+        *(uint32*)((char*)m_pEquipSelector + 0x14c) = 0;
+        m_pEquipSelector->SetStateFlags(0, 2);
+    }
+
+    if (m_pItemInfoWindow) {
+        *(uint32*)((char*)m_pItemInfoWindow + 0x394) = 0;
+    }
+
+    if (m_dwClassMask == 0x1ff) {
+        SomeMethod_85720(0xff);
+    } else if ((m_dwClassMask & 4) != 0) {
+        SomeMethod_85720(1);
+    } else {
+        SomeMethod_85720(0);
+    }
+}
+
+// 0x10084710: EquipSelectWidget::UpdateSelection
+/*
 10084710:	53                   	push   ebx
 10084711:	55                   	push   ebp
 10084712:	56                   	push   esi
@@ -230,8 +320,31 @@
 1008479b:	5d                   	pop    ebp
 1008479c:	5b                   	pop    ebx
 1008479d:	c3                   	ret
-1008479e:	90                   	nop
-1008479f:	90                   	nop
+*/
+void EquipSelectWidget::UpdateSelection() {
+    uint32 activeSlot = m_nSomeVal_16cc;
+    for (uint32 i = 0; i <= 8; i++) {
+        SomeMethod_85720(i);
+        uint32 row = m_nSomeVal_16d0;
+        EquipSelectItem& item = m_aSomeArray[row][i];
+        if (item.field_0 == 0xff) {
+            continue;
+        }
+        if (item.field_8 == 0) {
+            SomeMethod_10086b20(item.field_0);
+        } else {
+            for (uint32 j = 0; j < 3; j++) {
+                if (item.field_1C[j] == 0) {
+                    SomeMethod_100862a0(j);
+                }
+            }
+        }
+    }
+    SomeMethod_85720(activeSlot);
+}
+
+// 0x100847a0: EquipSelectWidget::UpdateFromPlayer
+/*
 100847a0:	51                   	push   ecx
 100847a1:	a1 34 a1 11 10       	mov    eax,ds:0x1011a134
 100847a6:	53                   	push   ebx
@@ -304,9 +417,124 @@
 1008485e:	5b                   	pop    ebx
 1008485f:	59                   	pop    ecx
 10084860:	c3                   	ret
-
+10084861:	8b 43 0c             	mov    eax,DWORD PTR [ebx+0xc]
+10084864:	8b 4b 7c             	mov    ecx,DWORD PTR [ebx+0x7c]
+10084867:	3d ff 00 00 00       	cmp    eax,0xff
+1008486c:	74 12                	je     0x10084880
+1008486e:	8b 5b 18             	mov    ebx,DWORD PTR [ebx+0x18]
+10084871:	3b dd                	cmp    ebx,ebp
+10084873:	74 10                	je     0x10084885
+10084875:	83 fb 01             	cmp    ebx,0x1
+10084878:	75 06                	jne    0x10084880
+1008487a:	83 c0 40             	add    eax,0x40
+1008487d:	51                   	push   ecx
+1008487e:	eb c1                	jmp    0x10084841
+10084880:	b8 ff 00 00 00       	mov    eax,0xff
+10084885:	51                   	push   ecx
+10084886:	eb b9                	jmp    0x10084841
+10084888:	8b 86 d0 16 00 00    	mov    eax,DWORD PTR [esi+0x16d0]
+1008488e:	8d 0c c7             	lea    ecx,[edi+eax*8]
+10084891:	03 c1                	add    eax,ecx
+10084893:	b9 ff 00 00 00       	mov    ecx,0xff
+10084898:	8d 14 80             	lea    edx,[eax+eax*4]
+1008489b:	8d 04 50             	lea    eax,[eax+edx*2]
+1008489e:	8b 94 86 10 0f 00 00 	mov    edx,DWORD PTR [esi+eax*4+0xf10]
+100848a5:	3b d1                	cmp    edx,ecx
+100848a7:	8d 04 86             	lea    eax,[esi+eax*4]
+100848aa:	74 a2                	je     0x1008484e
+100848ac:	39 a8 18 0f 00 00    	cmp    DWORD PTR [eax+0xf18],ebp
+100848b2:	74 9a                	je     0x1008484e
+100848b4:	89 88 10 0f 00 00    	mov    DWORD PTR [eax+0xf10],ecx
+100848ba:	8b 86 d0 16 00 00    	mov    eax,DWORD PTR [esi+0x16d0]
+100848c0:	8d 0c c7             	lea    ecx,[edi+eax*8]
+100848c3:	03 c1                	add    eax,ecx
+100848c5:	8d 14 80             	lea    edx,[eax+eax*4]
+100848c8:	8d 04 50             	lea    eax,[eax+edx*2]
+100848cb:	89 ac 86 18 0f 00 00 	mov    DWORD PTR [esi+eax*4+0xf18],ebp
+100848d2:	8b 86 d0 16 00 00    	mov    eax,DWORD PTR [esi+0x16d0]
+100848d8:	8d 0c c7             	lea    ecx,[edi+eax*8]
+100848db:	03 c1                	add    eax,ecx
+100848dd:	33 c9                	xor    ecx,ecx
+100848df:	8d 14 80             	lea    edx,[eax+eax*4]
+100848e2:	8d 04 50             	lea    eax,[eax+edx*2]
+100848e5:	89 ac 86 14 0f 00 00 	mov    DWORD PTR [esi+eax*4+0xf14],ebp
+100848ec:	8b 86 d0 16 00 00    	mov    eax,DWORD PTR [esi+0x16d0]
+100848f2:	8d 14 c7             	lea    edx,[edi+eax*8]
+100848f5:	03 c2                	add    eax,edx
+100848f7:	8d 14 80             	lea    edx,[eax+eax*4]
+100848fa:	03 c1                	add    eax,ecx
+100848fc:	8d 14 50             	lea    edx,[eax+edx*2]
+100848ff:	c7 84 96 1c 0f 00 00 	mov    DWORD PTR [esi+edx*4+0xf1c],0xffffffff
+10084906:	ff ff ff ff 
+1008490a:	8b 86 d0 16 00 00    	mov    eax,DWORD PTR [esi+0x16d0]
+10084910:	8d 14 c7             	lea    edx,[edi+eax*8]
+10084913:	03 c2                	add    eax,edx
+10084915:	8d 14 80             	lea    edx,[eax+eax*4]
+10084918:	03 c1                	add    eax,ecx
+1008491a:	41                   	inc    ecx
+1008491b:	8d 14 50             	lea    edx,[eax+edx*2]
+1008491e:	83 f9 04             	cmp    ecx,0x4
+10084921:	89 ac 96 2c 0f 00 00 	mov    DWORD PTR [esi+edx*4+0xf2c],ebp
+10084928:	7c c2                	jl     0x100848ec
+1008492a:	8b 8e dc 0e 00 00    	mov    ecx,DWORD PTR [esi+0xedc]
+10084930:	55                   	push   ebp
+10084931:	55                   	push   ebp
+10084932:	68 ff 00 00 00       	push   0xff
+10084937:	57                   	push   edi
+10084938:	e8 f3 68 00 00       	call   0x1008b230
+1008493d:	e9 0c ff ff ff       	jmp    0x1008484e
 */
-void EquipSelectWidget::Init() {
-    // TODO: Implement Init
-}
+void EquipSelectWidget::UpdateFromPlayer() {
+    CMoveMgr* pMoveMgr = g_pGameClientShell->GetMoveMgr();
+    if (!pMoveMgr) return;
 
+    m_pEquipSelector->ResetSlots();
+    m_pItemInfoWindow->ClearInfo(0xff);
+
+    for (uint32 i = 0; i <= 8; i++) {
+        EquipItemClient* pObj = pMoveMgr->m_apObjects[i];
+        if (pObj && pObj->IsActive()) {
+            uint32 type = pObj->GetType();
+            if (type == 0) {
+                uint32 val_C = pObj->m_nItemId;
+                uint32 val_7C = pObj->m_nSomeVal_7C;
+                uint32 id = 0xff;
+                if (val_C != 0xff) {
+                    uint32 val_18 = pObj->m_nSlot;
+                    if (val_18 == 1) {
+                        id = val_C + 0x40;
+                    } else if (val_18 == 0) {
+                        id = val_C;
+                    }
+                }
+                SomeMethod_10086940(id, i, val_7C);
+            } else if (type == 2 || type == 3) {
+                uint32 val_C = pObj->m_nItemId;
+                uint32 id = 0xff;
+                if (val_C != 0xff) {
+                    uint32 val_18 = pObj->m_nSlot;
+                    if (val_18 == 1) {
+                        id = val_C + 0x40;
+                    } else if (val_18 == 0) {
+                        id = val_C;
+                    }
+                }
+                SomeMethod_10086940(id, i, 0);
+            }
+        } else {
+            uint32 row = m_nSomeVal_16d0;
+            EquipSelectItem& item = m_aSomeArray[row][i];
+            if (item.field_0 != 0xff && item.field_8 != 0) {
+                item.field_0 = 0xff;
+                item.field_8 = 0;
+                item.field_4 = 0;
+                for (int j = 0; j < 4; j++) {
+                    item.field_C[j] = 0xffffffff;
+                    item.field_1C[j] = 0;
+                }
+                m_pEquipSelector->UpdateSlot(i, 0xff, 0, 0);
+            }
+        }
+    }
+    Method_86f30();
+}
