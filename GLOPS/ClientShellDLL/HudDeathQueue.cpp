@@ -1,4 +1,7 @@
 #include "HudDeathQueue.h"
+#include "ILTClient.h"
+
+extern ILTClient* g_pLTClient;
 
 // 0x1005b2f0: HudDeathQueue::Dequeue
 /*
@@ -694,7 +697,65 @@
 1005baef:	90                   	nop
 
 */
-void HudDeathQueue::Dequeue() {
-    // TODO: Implement Dequeue
+void HudDeathQueue::Dequeue(int unknown1, LTRect* pRect) {
+    if (m_bDrawBG && pRect) {
+        typedef void (__thiscall *DrawRectFn)(void*, int, int, int, int, float, float);
+        DrawRectFn pDrawRect = (DrawRectFn)0x10049570;
+        void* pFontMgr = *(void**)0x1011be5c;
+        if (pFontMgr) {
+            pDrawRect(pFontMgr, pRect->left, pRect->top, pRect->right, pRect->bottom, -2.0f, -2.0f);
+        }
+    }
+    
+    if (m_nMaxItems == 0) return;
+    
+    float fTime = g_pLTClient->GetTime();
+    
+    while (m_nNumItems > 0) {
+        uint32 index = m_nHead;
+        if (fTime < m_aItems[index].fTimeRemaining) {
+            break;
+        }
+        
+        m_nHead = (m_nHead + 1) % m_nMaxItems;
+        m_nNumItems--;
+    }
+    
+    if (m_nNumItems == 0) {
+        return;
+    }
+    
+    int height = pRect->bottom - pRect->top;
+    int limit = m_nLineHeight > 0 ? (height / m_nLineHeight) : 0;
+    
+    uint32 startIndex = m_nHead;
+    uint32 drawCount = m_nNumItems;
+    
+    if (drawCount > (uint32)limit) {
+        startIndex = (m_nTail - limit + 7) % 6; // matching assembly (m_nTail - limit + 7) % 6
+        drawCount = limit;
+    }
+    
+    int currentTop = pRect->top;
+    uint32 idx = startIndex;
+    
+    for (uint32 i = 0; i < drawCount; ++i) {
+        DeathQueueItem* pItem = &m_aItems[idx];
+        
+        uint32 color = m_nColor;
+        float timeLeft = pItem->fTimeRemaining - fTime;
+        if (timeLeft < 0.2f) {
+            float factor = timeLeft > 0.0f ? (timeLeft / 0.2f) : 0.0f;
+            uint8 alpha = (uint8)(((m_nColor >> 24) & 0xff) * factor);
+            color = (m_nColor & 0x00ffffff) | (alpha << 24);
+        }
+        
+        typedef void (__thiscall *DrawItemFn)(void* pThis, DeathQueueItem* pItem, int left, int top, uint32 color);
+        DrawItemFn pDrawItem = (DrawItemFn)0x1005b730;
+        pDrawItem(this, pItem, pRect->left, currentTop, color);
+        
+        currentTop += m_nLineHeight;
+        idx = (idx + 1) % 6; // matching assembly (idx + 1) % 6
+    }
 }
 

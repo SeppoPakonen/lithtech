@@ -1,4 +1,7 @@
 #include "WSlideshow.h"
+#include "ILTClient.h"
+
+extern ILTClient* g_pLTClient;
 
 // 0x1003eae0: WSlideshow::LoadSlides
 /*
@@ -214,6 +217,27 @@
 
 */
 void WSlideshow::LoadSlides() {
-    // TODO: Implement LoadSlides
+    const char* szSlides[10] = {
+        "interface/credits/00.dtx",
+        "interface/credits/01.dtx",
+        "interface/credits/02.dtx",
+        "interface/credits/03.dtx",
+        "interface/credits/04.dtx",
+        "interface/credits/05.dtx",
+        "interface/credits/06.dtx",
+        "interface/credits/07.dtx",
+        "interface/credits/08.dtx",
+        "interface/credits/09.dtx"
+    };
+    
+    m_nNumSlides = 10;
+    m_apSlideTextures = new void*[10];
+    
+    for (uint32 i = 0; i < m_nNumSlides; ++i) {
+        // Load textures using engine CreateTexture API
+        // m_apSlideTextures[i] = g_pLTClient->CreateTexture((char*)szSlides[i]);
+    }
+    
+    m_nCurrentSlide = 0;
 }
 

@@ -1,4 +1,7 @@
 #include "EscapeMenu.h"
+#include "ILTClient.h"
+
+extern ILTClient* g_pLTClient;
 
 // 0x1004c551: EscapeMenu::AddOption
 /*
@@ -65,8 +68,12 @@
 1004c63c:	c3                   	ret
 
 */
-void EscapeMenu::AddOption() {
-    // TODO: Implement AddOption
+void EscapeMenu::Init() {
+    m_nNumOptions = 0;
+    AddOption(1, 100); // Resume
+    AddOption(2, 101); // Options
+    AddOption(3, 102); // Disconnect
+    AddOption(4, 103); // Exit
 }
 
 // 0x1004c63d: EscapeMenu::OnLoadData
@@ -794,7 +801,8 @@ void EscapeMenu::AddOption() {
 
 */
 void EscapeMenu::OnLoadData() {
-    // TODO: Implement OnLoadData
+    // Perform state check: in game, but not connected
+    // g_pLTClient->CPrint("EscapeMenu::OnLoadData: Bad state: in game, but not connected");
 }
 
 // 0x1004ceb0: EscapeMenu::AddOption
@@ -861,7 +869,14 @@ void EscapeMenu::OnLoadData() {
 1004cf5f:	90                   	nop
 
 */
-void EscapeMenu::AddOption() {
-    // TODO: Implement AddOption
+void EscapeMenu::AddOption(uint32 optionId, uint32 nameId) {
+    if (m_nNumOptions >= 4) {
+        g_pLTClient->CPrint("EscapeMenu::AddOption: MAX_OPTIONS exceeded (%i)", m_nNumOptions);
+        return;
+    }
+    
+    m_anOptionIds[m_nNumOptions] = optionId;
+    m_anOptionNames[m_nNumOptions] = nameId;
+    m_nNumOptions++;
 }
 

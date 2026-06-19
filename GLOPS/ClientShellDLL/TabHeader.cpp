@@ -1,4 +1,8 @@
 #include "TabHeader.h"
+#include "ILTClient.h"
+#include <string.h>
+
+extern ILTClient* g_pLTClient;
 
 // 0x10072670: TabHeader::AddTab
 /*
@@ -369,7 +373,152 @@
 100729ef:	90                   	nop
 
 */
-void TabHeader::AddTab() {
-    // TODO: Implement AddTab
+TabHeader::TabHeader() {
+    m_pActiveTab = nullptr;
+    m_nNumTabs = 0;
+    for (int i = 0; i < 8; ++i) {
+        m_apTabs[i] = nullptr;
+    }
+}
+
+TabHeader::~TabHeader() {
+    for (uint32 i = 0; i < m_nNumTabs; ++i) {
+        if (m_apTabs[i]) {
+            delete m_apTabs[i];
+            m_apTabs[i] = nullptr;
+        }
+    }
+}
+
+bool TabHeader::AddTab(const char* szName, uint32 tabId) {
+    if (m_nNumTabs >= 8) {
+        g_pLTClient->CPrint("TabHeader::AddTab: MAX_TABS exceeded (%i)", m_nNumTabs);
+        return false;
+    }
+    
+    Tab* pTab = new Tab();
+    if (!pTab) return false;
+    
+    pTab->m_dwStatus = 0;
+    pTab->m_nTabId = tabId;
+    
+    if (szName) {
+        strncpy(pTab->m_szName, szName, 63);
+        pTab->m_szName[63] = '\0';
+    } else {
+        pTab->m_szName[0] = '\0';
+    }
+    
+    pTab->m_dwStatus &= 0xfffffffe;
+    
+    *(uint32*)((char*)pTab + 0x2c) = 0x1011cefc;
+    *(uint32*)((char*)pTab + 0x30) = 0x1011cf18;
+    
+    m_apTabs[m_nNumTabs] = pTab;
+    m_nNumTabs++;
+    
+    if (m_nNumTabs == 1) {
+        SelectTab(tabId);
+    } else {
+        if (m_pActiveTab) {
+            typedef void (__thiscall *ActiveTabFn)(void*);
+            ActiveTabFn pActiveTabFn = (ActiveTabFn)0x1006eab0;
+            pActiveTabFn(m_pActiveTab);
+        }
+    }
+    
+    return true;
+}
+
+uint32 TabHeader::GetCurrentTabId() {
+    if (m_pActiveTab) {
+        return m_pActiveTab->m_nTabId;
+    }
+    return 0xffffffff;
+}
+
+const char* TabHeader::GetTabName(uint32 tabId) {
+    int index = FindTab(tabId);
+    if (index != -1 && m_apTabs[index]) {
+        return m_apTabs[index]->m_szName;
+    }
+    return nullptr;
+}
+
+int TabHeader::FindTab(uint32 tabId) {
+    for (uint32 i = 0; i < m_nNumTabs; ++i) {
+        if (m_apTabs[i] && m_apTabs[i]->m_nTabId == tabId) {
+            return i;
+        }
+    }
+    return -1;
+}
+
+bool TabHeader::SelectTab(uint32 tabId) {
+    int index = FindTab(tabId);
+    if (index == -1) return false;
+    
+    Tab* pNewTab = m_apTabs[index];
+    if (!pNewTab) return false;
+    
+    if (m_pActiveTab) {
+        m_pActiveTab->m_dwStatus &= 0xfffffffe;
+        *(uint32*)((char*)m_pActiveTab + 0x2c) = 0x1011cefc;
+        *(uint32*)((char*)m_pActiveTab + 0x30) = 0x1011cf18;
+    }
+    
+    pNewTab->m_dwStatus |= 0x1;
+    *(uint32*)((char*)pNewTab + 0x2c) = 0x1011cf34;
+    *(uint32*)((char*)pNewTab + 0x30) = 0x1011cf50;
+    
+    m_pActiveTab = pNewTab;
+    
+    typedef void (__thiscall *ActiveTabFn)(void*);
+    ActiveTabFn pActiveTabFn = (ActiveTabFn)0x1006eab0;
+    pActiveTabFn(m_pActiveTab);
+    
+    typedef void (__thiscall *OnCommandFn)(void* pThis, uint32 param1, uint32 param2);
+    OnCommandFn pOnCommand = (OnCommandFn)0x1006e920;
+    uint32 val2c = *(uint32*)((char*)this + 0x2c);
+    pOnCommand(this, val2c, tabId);
+    
+    return true;
+}
+
+void TabHeader::SetPageLayout(LTRect* pRect) {
+    if (m_nNumTabs == 0) return;
+    
+    int width = pRect->right - pRect->left;
+    int tabWidth = (width - 2) / m_nNumTabs;
+    
+    int currentLeft = pRect->left + 1;
+    
+    for (uint32 i = 0; i < m_nNumTabs; ++i) {
+        Tab* pTab = m_apTabs[i];
+        if (!pTab) continue;
+        
+        LTRect tabRect;
+        tabRect.left = currentLeft;
+        tabRect.top = pRect->top;
+        tabRect.right = currentLeft + tabWidth;
+        tabRect.bottom = pRect->bottom;
+        
+        if (i == m_nNumTabs - 1) {
+            tabRect.right = pRect->right - 1;
+        }
+        
+        typedef void (__thiscall *SetRectFn)(void* pWidget, LTRect* pRect);
+        SetRectFn pSetRect = (SetRectFn)0x1006e650;
+        pSetRect(pTab, &tabRect);
+        
+        currentLeft += tabWidth;
+    }
+}
+
+bool TabHeader::OnCommand(uint32 cmd, uint32 tabId) {
+    if (GetCurrentTabId() != tabId) {
+        SelectTab(tabId);
+    }
+    return true;
 }
 

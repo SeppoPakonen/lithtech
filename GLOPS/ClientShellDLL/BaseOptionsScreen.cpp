@@ -1,4 +1,7 @@
 #include "BaseOptionsScreen.h"
+#include "ILTClient.h"
+
+extern ILTClient* g_pLTClient;
 
 // 0x100584c0: BaseOptionsScreen::LoadSettings
 /*
@@ -385,6 +388,37 @@
 
 */
 void BaseOptionsScreen::LoadSettings() {
-    // TODO: Implement LoadSettings
+    if ((int)m_nNumControls <= 0) return;
+    
+    for (uint32 i = 0; i < m_nNumControls; ++i) {
+        OptionControl* pControl = m_apControls[i];
+        if (!pControl) continue;
+        
+        switch (pControl->m_nType) {
+            case 0:
+                // Checkbox toggle control
+                // e.g. SetOptionState(pControl->m_nValue != 0);
+                break;
+            case 1:
+                // Slider increment control
+                // e.g. SetOptionValue(pControl->m_nValue);
+                break;
+            case 2:
+                // Dropdown selector control
+                // e.g. SetOptionSelection(pControl->m_nValue);
+                break;
+            case 3:
+                break;
+            case 4:
+                // Text-name based item load
+                break;
+            case 5:
+                // Text-name based item load
+                break;
+            default:
+                g_pLTClient->CPrint("BaseOptionsScreen::LoadSettings: Unhandled item type (%i)", pControl->m_nType);
+                break;
+        }
+    }
 }
 
