@@ -78,7 +78,7 @@ void WSlideshow::Render(void* pRectPtr) {
 
     int alpha = 255;
     
-    // if fTime >= m_fNextSlideTime - 1.0f
+    // 1003ec8d: fcomp DWORD PTR ds:0x100ab188 (m_fNextSlideTime - 1.0f)
     if (fTime >= (m_fNextSlideTime - 1.0f)) {
         float fFadeTime = m_fNextSlideTime - fTime;
         alpha = (int)((fFadeTime / 1.0f) * 255.0f);

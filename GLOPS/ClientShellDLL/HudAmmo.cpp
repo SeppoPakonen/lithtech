@@ -2387,8 +2387,24 @@
 1005b2ee:	90                   	nop
 1005b2ef:	90                   	nop
 
-*/
 void HudAmmo::SyncBulletTextures() {
-    // TODO: Implement SyncBulletTextures
+    int resolutionIdx = (*(DWORD*)0x1011be58 >= 0x400) ? 1 : 0; 
+    char** pTexStrings = (char**)(0x100db104 + (resolutionIdx * 4)); 
+    
+    for(int i = 0; i < 8; i++) {
+        char* szTex = pTexStrings[i * 2]; 
+        if(!szTex) {
+            m_hBulletTextures[i] = nullptr;
+            continue;
+        }
+        
+        // 10059905: call DWORD PTR [edx+0x8] (CreateTextureFromName)
+        m_hBulletTextures[i] = g_pLTClient->GetTexInterface()->CreateTextureFromName(szTex);
+        
+        if(!m_hBulletTextures[i]) {
+            // 1005991f: call DWORD PTR [eax+0x120] (CPrint)
+            g_pLTClient->CPrint("HudAmmo::SyncBulletTextures: Couldn't create texture %s", szTex);
+        }
+    }
 }
 

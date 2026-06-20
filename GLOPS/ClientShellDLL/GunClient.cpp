@@ -974,9 +974,19 @@ void WeaponClass_0x8a0::OtherPlayerShoot(void* hMessage) {
 
 */
 void GunClient::Init() {
-    // TODO: Implement Init
+    // 1007b8ca: cmp eax, 0xff -> Check if weapon ID is valid
+    if (m_nWeaponID == 0xFF) return;
+    
+    // 1007b92d: Get client interface pointers and initialize gun models
+    if (!m_pClientModel) {
+        // Initialize model offset and layout
+        // 1007b961: call 0x1009c860 (InitModel)
+        InitModel();
+    }
+    
+    // 1007b9a5: call 0x1009d7d0 (LoadSounds)
+    LoadSounds();
 }
-
 // 0x1007c25f: GunClient::ClientInitGun
 /*
 1007c25f:	8b 0d c8 cf 10 10    	mov    ecx,DWORD PTR ds:0x1010cfc8
