@@ -1824,7 +1824,11 @@
 10053e2f:	90                   	nop
 
 */
-void View::View() {
-    // TODO: Implement View
+View::View() {
+    // Basic initialization
+    m_pClientDE = g_pLTClient;
+    m_hCamera = nullptr;
+    m_hPitchNode = nullptr;
+    m_hYawNode = nullptr;
 }
 

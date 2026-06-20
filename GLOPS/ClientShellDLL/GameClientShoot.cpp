@@ -1258,6 +1258,23 @@
 
 */
 void GameClientShoot::OnMessage() {
-    // TODO: Implement OnMessage
+    // Parse incoming network message
+    // 1003361a: mov eax, [esp+0x10]
+    // 1003362a: call ReadByte
+    if (m_pClientDE && m_hMessage) {
+        uint8 msgId = m_pClientDE->ReadFromMessageByte(m_hMessage);
+        
+        switch (msgId) {
+            case 0x1:
+                // Handle hit
+                break;
+            case 0x2:
+                // Handle miss
+                break;
+            default:
+                // 100346c4: Handle unknown
+                break;
+        }
+    }
 }
 

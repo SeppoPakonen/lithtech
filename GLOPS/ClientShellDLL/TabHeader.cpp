@@ -26,7 +26,10 @@ bool TabHeader::AddTab(const char* szName, uint32 tabId) {
     Tab* pTab = new Tab();
     if (!pTab) return false;
 
-    // Simulate 0x1006e380 constructor and initializations
+    typedef void (__thiscall *TabBaseConstructor)(Tab*, void*, uint32, uint32);
+    TabBaseConstructor baseConstructor = (TabBaseConstructor)0x1006e380;
+    baseConstructor(pTab, this, 1, 0);
+
     *(uint32*)pTab = 0x100bbec0; // vtable
     pTab->m_dwStatus = 0;
     pTab->m_nTabId = tabId;

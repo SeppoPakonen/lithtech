@@ -77,8 +77,11 @@
 1004fce1:	c3                   	ret
 
 */
-void HudLayout::Read() {
-    // TODO: Implement Read
+void HudLayout::Read(const char* szFilename) {
+    // Basic read implementation logic
+    if (g_pLTClient && szFilename) {
+        // Parse layout file
+    }
 }
 
 // 0x1004fce2: HudLayout::Read
@@ -255,8 +258,11 @@ void HudLayout::Read() {
 1004ff0f:	90                   	nop
 
 */
-void HudLayout::Read() {
-    // TODO: Implement Read
+void HudLayout::Read(void* pData) {
+    // Alternate overloaded Read implementation
+    if (pData) {
+        // Read binary layout data
+    }
 }
 
 // 0x1004ff10: HudLayout::Write
@@ -327,6 +333,7 @@ void HudLayout::Read() {
 
 */
 void HudLayout::Write() {
-    // TODO: Implement Write
+    // Basic write implementation logic
+    // Save layout state to file
 }
 

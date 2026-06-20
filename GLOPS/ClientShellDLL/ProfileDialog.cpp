@@ -2,8 +2,15 @@
 #include "ILTClient.h"
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 
 extern ILTClient* g_pLTClient;
+
+struct FileEntry {
+    int m_Type;
+    char* m_pBaseFilename;
+    FileEntry* m_pNext;
+};
 
 ProfileDialog::ProfileDialog() {
     m_nNumProfiles = 0;
@@ -12,6 +19,13 @@ ProfileDialog::ProfileDialog() {
 }
 
 ProfileDialog::~ProfileDialog() {
+    if (m_pProfileList) {
+        char** pList = (char**)m_pProfileList;
+        for (unsigned int i = 0; i < m_nNumProfiles; ++i) {
+            free(pList[i]);
+        }
+        free(pList);
+    }
 }
 
 // 0x10055959
@@ -21,7 +35,8 @@ void ProfileDialog::ConfirmDeleteProfile() {
 
     char fileName[256];
     char fullPath[256];
-    const char* profileName = m_pProfileList[m_nSelectedProfile];
+    char** pList = (char**)m_pProfileList;
+    const char* profileName = pList[m_nSelectedProfile];
 
     sprintf(fileName, "%s.cfg", profileName);
     sprintf(fullPath, "globalops\\profiles\\%s", fileName);
@@ -38,33 +53,49 @@ void ProfileDialog::ConfirmDeleteProfile() {
 void ProfileDialog::RefreshList() {
     void* pFileList = g_pLTClient->GetFileList("globalops\\profiles");
     
-    // Assuming m_pProfileList is a vector or similar array container that can be cleared
-    // and m_nNumProfiles tracks the count.
+    if (m_pProfileList) {
+        char** pList = (char**)m_pProfileList;
+        for (unsigned int i = 0; i < m_nNumProfiles; ++i) {
+            free(pList[i]);
+        }
+        free(pList);
+        m_pProfileList = nullptr;
+    }
     m_nNumProfiles = 0;
-    // Clear existing list (mocked as array reset for this reconstruction)
     
     if (pFileList) {
-        // Iterate over file list
-        // Struct assumed: { int type; char* name; void* next; }
-        struct FileEntry { int type; char* name; FileEntry* next; };
         FileEntry* pEntry = (FileEntry*)pFileList;
         
         while (pEntry) {
-            if (pEntry->type == 1) { // 1 = file
-                char* ext = strrchr(pEntry->name, '.');
+            if (pEntry->m_Type == 1) { // 1 = file
+                char* ext = strrchr(pEntry->m_pBaseFilename, '.');
                 if (ext && _stricmp(ext, ".cfg") == 0) {
-                    // Extract filename, strip extension, and populate m_pProfileList
-                    char profileName[256];
-                    int len = ext - pEntry->name;
-                    strncpy(profileName, pEntry->name, len);
-                    profileName[len] = '\0';
-                    
-                    // Add to list (simulated)
-                    // m_pProfileList[m_nNumProfiles] = strdup(profileName);
                     m_nNumProfiles++;
                 }
             }
-            pEntry = pEntry->next;
+            pEntry = pEntry->m_pNext;
+        }
+        
+        if (m_nNumProfiles > 0) {
+            char** pNewList = (char**)malloc(m_nNumProfiles * sizeof(char*));
+            pEntry = (FileEntry*)pFileList;
+            int currentIndex = 0;
+            while (pEntry) {
+                if (pEntry->m_Type == 1) {
+                    char* ext = strrchr(pEntry->m_pBaseFilename, '.');
+                    if (ext && _stricmp(ext, ".cfg") == 0) {
+                        char profileName[256];
+                        int len = ext - pEntry->m_pBaseFilename;
+                        strncpy(profileName, pEntry->m_pBaseFilename, len);
+                        profileName[len] = '\0';
+                        
+                        pNewList[currentIndex] = strdup(profileName);
+                        currentIndex++;
+                    }
+                }
+                pEntry = pEntry->m_pNext;
+            }
+            m_pProfileList = pNewList;
         }
         g_pLTClient->FreeFileList(pFileList);
     }
@@ -76,9 +107,12 @@ void ProfileDialog::RefreshList() {
 // 0x10055b50
 void ProfileDialog::UpdateLayout() {
     // Computes positioning for the profile list
-    // m_pProfileListCtrl->RemoveAll();
-    // for (int i = 0; i < m_nNumProfiles; ++i) {
-    //     bool bSelected = (i == m_nSelectedProfile);
-    //     // m_pProfileListCtrl->AddItem(m_pProfileList[i], bSelected);
-    // }
+    char** pList = (char**)m_pProfileList;
+    if (m_pProfileListCtrl) {
+        m_pProfileListCtrl->RemoveAll();
+        for (unsigned int i = 0; i < m_nNumProfiles; ++i) {
+            bool bSelected = (i == m_nSelectedProfile);
+            m_pProfileListCtrl->AddItem(pList[i], bSelected);
+        }
+    }
 }

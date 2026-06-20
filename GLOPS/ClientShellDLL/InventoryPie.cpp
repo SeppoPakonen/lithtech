@@ -2,6 +2,7 @@
 
 // 0x1008ce80: InventoryPie::ValidateInvSlot
 /*
+
 1008ce80:	55                   	push   ebp
 1008ce81:	56                   	push   esi
 1008ce82:	57                   	push   edi
@@ -99,13 +100,110 @@
 1008cfa8:	5d                   	pop    ebp
 1008cfa9:	c2 08 00             	ret    0x8
 
+
 */
-void InventoryPie::ValidateInvSlot() {
-    // TODO: Implement ValidateInvSlot
+__declspec(naked) void InventoryPie::ValidateInvSlot()  {
+        __asm { push   ebp }
+        __asm { push   esi }
+        __asm { push   edi }
+        __asm { mov    edi,DWORD PTR [esp+0x10] }
+        __asm { test   edi,edi }
+        __asm { mov    ebp,ecx }
+        __asm { jl     0x1008ce92 }
+        __asm { cmp    edi,0xb }
+        __asm { jl     0x1008ced3 }
+        __asm { cmp    edi,0xff }
+        __asm { je     0x1008ced3 }
+        __asm { mov    ecx,DWORD PTR ds:0x1010cfc8 }
+        __asm { push   0x1dc }
+        __asm { push   0x100de130 }
+        __asm { mov    eax,DWORD PTR [ecx] }
+        __asm { call   DWORD PTR [eax+0x120] }
+        __asm { mov    eax,ds:0x1010cfc8 }
+        __asm { push   edi }
+        __asm { push   0x100de0dc }
+        __asm { push   0x100c5d7c }
+        __asm { mov    ecx,DWORD PTR [eax] }
+        __asm { push   eax }
+        __asm { call   DWORD PTR [ecx+0x128] }
+        __asm { add    esp,0x10 }
+        __asm { mov    edi,0xff }
+        __asm { lea    edx,[edi+edi*2] }
+        __asm { mov    eax,DWORD PTR [edx*4+0x100de058] }
+        __asm { lea    esi,[edx*4+0x100de058] }
+        __asm { test   eax,eax }
+        __asm { jne    0x1008cf55 }
+        __asm { mov    eax,DWORD PTR [esp+0x14] }
+        __asm { push   ebx }
+        __asm { mov    BYTE PTR [esp+0x18],al }
+        __asm { mov    ecx,eax }
+        __asm { mov    edx,eax }
+        __asm { mov    ebx,eax }
+        __asm { mov    BYTE PTR [esp+0x14],al }
+        __asm { mov    eax,DWORD PTR [esi+0x4] }
+        __asm { mov    esi,DWORD PTR [esi+0x8] }
+        __asm { mov    BYTE PTR [esp+0x17],0x0 }
+        __asm { shr    ebx,0x18 }
+        __asm { shr    ecx,0x8 }
+        __asm { shr    edx,0x10 }
+        __asm { mov    BYTE PTR [esp+0x1b],bl }
+        __asm { mov    BYTE PTR [esp+0x19],cl }
+        __asm { test   esi,esi }
+        __asm { mov    BYTE PTR [esp+0x1a],dl }
+        __asm { mov    BYTE PTR [esp+0x15],cl }
+        __asm { mov    BYTE PTR [esp+0x16],dl }
+        __asm { pop    ebx }
+        __asm { je     0x1008cfe3 }
+        __asm { mov    edx,DWORD PTR [esp+0x14] }
+        __asm { mov    ecx,DWORD PTR [esp+0x10] }
+        __asm { lea    eax,[eax+eax*2] }
+        __asm { shl    eax,0x4 }
+        __asm { lea    eax,[eax+ebp*1+0x88] }
+        __asm { mov    DWORD PTR [eax-0x10],edx }
+        __asm { mov    DWORD PTR [eax],ecx }
+        __asm { mov    DWORD PTR [eax+0x10],ecx }
+        __asm { add    eax,0x30 }
+        __asm { dec    esi }
+        __asm { jne    0x1008cf41 }
+        __asm { pop    edi }
+        __asm { pop    esi }
+        __asm { pop    ebp }
+        __asm { ret    0x8 }
+        __asm { cmp    eax,0x1 }
+        __asm { jne    0x1008cfac }
+        __asm { mov    eax,DWORD PTR [esp+0x14] }
+        __asm { mov    BYTE PTR [esp+0x14],al }
+        __asm { mov    ecx,eax }
+        __asm { mov    edx,eax }
+        __asm { shr    eax,0x19 }
+        __asm { and    al,0x7f }
+        __asm { mov    BYTE PTR [esp+0x17],al }
+        __asm { mov    eax,DWORD PTR [esi+0x4] }
+        __asm { mov    esi,DWORD PTR [esi+0x8] }
+        __asm { shr    ecx,0x8 }
+        __asm { shr    edx,0x10 }
+        __asm { test   esi,esi }
+        __asm { mov    BYTE PTR [esp+0x15],cl }
+        __asm { mov    BYTE PTR [esp+0x16],dl }
+        __asm { je     0x1008cfe3 }
+        __asm { lea    ecx,[eax+eax*2] }
+        __asm { lea    edx,[eax+ecx*4] }
+        __asm { mov    ecx,DWORD PTR [esp+0x14] }
+        __asm { lea    eax,[ebp+edx*4+0x2dc] }
+        __asm { mov    edx,DWORD PTR [ebp+edx*4+0x2dc] }
+        __asm { dec    esi }
+        __asm { mov    edx,ecx }
+        __asm { jne    0x1008cf9f }
+        __asm { pop    edi }
+        __asm { pop    esi }
+        __asm { mov    DWORD PTR [eax],edx }
+        __asm { pop    ebp }
+        __asm { ret    0x8 }
 }
 
 // 0x1008cfac: InventoryPie::SetSlotColour
 /*
+
 1008cfac:	8b 0d c8 cf 10 10    	mov    ecx,DWORD PTR ds:0x1010cfc8
 1008cfb2:	68 d0 01 00 00       	push   0x1d0
 1008cfb7:	68 30 e1 0d 10       	push   0x100de130
@@ -344,13 +442,248 @@ void InventoryPie::ValidateInvSlot() {
 1008d20e:	90                   	nop
 1008d20f:	90                   	nop
 
+
 */
-void InventoryPie::SetSlotColour() {
-    // TODO: Implement SetSlotColour
+__declspec(naked) void InventoryPie::SetSlotColour()  {
+        __asm { mov    ecx,DWORD PTR ds:0x1010cfc8 }
+        __asm { push   0x1d0 }
+        __asm { push   0x100de130 }
+        __asm { mov    eax,DWORD PTR [ecx] }
+        __asm { call   DWORD PTR [eax+0x120] }
+        __asm { mov    edx,DWORD PTR [esi] }
+        __asm { mov    eax,ds:0x1010cfc8 }
+        __asm { push   edi }
+        __asm { push   edx }
+        __asm { mov    ecx,DWORD PTR [eax] }
+        __asm { push   0x100de164 }
+        __asm { push   0x100c5d7c }
+        __asm { push   eax }
+        __asm { call   DWORD PTR [ecx+0x128] }
+        __asm { add    esp,0x14 }
+        __asm { pop    edi }
+        __asm { pop    esi }
+        __asm { pop    ebp }
+        __asm { ret    0x8 }
+        __asm { nop }
+        __asm { nop }
+        __asm { nop }
+        __asm { nop }
+        __asm { nop }
+        __asm { nop }
+        __asm { nop }
+        __asm { push   0xffffffff }
+        __asm { push   0x100b6d38 }
+        __asm { mov    eax,fs:0x0 }
+        __asm { push   eax }
+        __asm { mov    DWORD PTR fs:0x0,esp }
+        __asm { sub    esp,0x14 }
+        __asm { mov    eax,DWORD PTR [esp+0x28] }
+        __asm { push   ebx }
+        __asm { push   ebp }
+        __asm { push   esi }
+        __asm { mov    esi,DWORD PTR [esp+0x38] }
+        __asm { mov    ebx,ecx }
+        __asm { mov    ecx,DWORD PTR [esp+0x30] }
+        __asm { push   edi }
+        __asm { or     al,0x4 }
+        __asm { push   esi }
+        __asm { push   eax }
+        __asm { push   ecx }
+        __asm { mov    ecx,ebx }
+        __asm { mov    DWORD PTR [esp+0x1c],ebx }
+        __asm { call   0x1006e380 }
+        __asm { lea    ebp,[ebx+0x2c] }
+        __asm { xor    edi,edi }
+        __asm { mov    ecx,ebp }
+        __asm { mov    DWORD PTR [esp+0x2c],edi }
+        __asm { call   0x1008c7e0 }
+        __asm { cmp    esi,edi }
+        __asm { mov    DWORD PTR [ebx],0x100bd744 }
+        __asm { mov    DWORD PTR [ebx+0x340],edi }
+        __asm { je     0x1008d0c4 }
+        __asm { mov    edx,DWORD PTR ds:0x1011be58 }
+        __asm { mov    eax,0xaaaaaaab }
+        __asm { lea    ecx,[edx+edx*1] }
+        __asm { mul    ecx }
+        __asm { mov    ecx,edx }
+        __asm { mov    edx,DWORD PTR ds:0x1011be54 }
+        __asm { add    edx,edx }
+        __asm { mov    eax,0xaaaaaaab }
+        __asm { mul    edx }
+        __asm { mov    eax,DWORD PTR [esi+0x8] }
+        __asm { mov    edi,edx }
+        __asm { cdq }
+        __asm { sub    eax,edx }
+        __asm { mov    edx,eax }
+        __asm { shr    ecx,1 }
+        __asm { sar    edx,1 }
+        __asm { mov    eax,ecx }
+        __asm { mov    DWORD PTR [esp+0x3c],edx }
+        __asm { cdq }
+        __asm { sub    eax,edx }
+        __asm { mov    edx,DWORD PTR [esi] }
+        __asm { mov    DWORD PTR [esp+0x1c],ecx }
+        __asm { mov    ecx,DWORD PTR [esp+0x3c] }
+        __asm { sar    eax,1 }
+        __asm { sub    ecx,eax }
+        __asm { mov    eax,DWORD PTR [esi+0xc] }
+        __asm { add    ecx,edx }
+        __asm { cdq }
+        __asm { sub    eax,edx }
+        __asm { mov    DWORD PTR [esp+0x14],ecx }
+        __asm { shr    edi,1 }
+        __asm { mov    ecx,eax }
+        __asm { mov    eax,edi }
+        __asm { cdq }
+        __asm { sub    eax,edx }
+        __asm { mov    edx,DWORD PTR [esi+0x4] }
+        __asm { sar    ecx,1 }
+        __asm { sar    eax,1 }
+        __asm { sub    ecx,eax }
+        __asm { mov    DWORD PTR [esp+0x20],edi }
+        __asm { add    ecx,edx }
+        __asm { lea    edx,[esp+0x14] }
+        __asm { mov    DWORD PTR [esp+0x18],ecx }
+        __asm { push   edx }
+        __asm { mov    ecx,ebp }
+        __asm { call   0x1008c9e0 }
+        __asm { mov    ecx,DWORD PTR [esp+0x24] }
+        __asm { pop    edi }
+        __asm { pop    esi }
+        __asm { mov    eax,ebx }
+        __asm { pop    ebp }
+        __asm { pop    ebx }
+        __asm { mov    DWORD PTR fs:0x0,ecx }
+        __asm { add    esp,0x20 }
+        __asm { ret    0xc }
+        __asm { nop }
+        __asm { nop }
+        __asm { nop }
+        __asm { nop }
+        __asm { nop }
+        __asm { push   esi }
+        __asm { mov    esi,ecx }
+        __asm { call   0x1008d100 }
+        __asm { test   BYTE PTR [esp+0x8],0x1 }
+        __asm { je     0x1008d0f8 }
+        __asm { push   esi }
+        __asm { call   0x100a391e }
+        __asm { add    esp,0x4 }
+        __asm { mov    eax,esi }
+        __asm { pop    esi }
+        __asm { ret    0x4 }
+        __asm { nop }
+        __asm { nop }
+        __asm { push   0xffffffff }
+        __asm { push   0x100b6d58 }
+        __asm { mov    eax,fs:0x0 }
+        __asm { push   eax }
+        __asm { mov    DWORD PTR fs:0x0,esp }
+        __asm { push   ecx }
+        __asm { push   esi }
+        __asm { mov    esi,ecx }
+        __asm { mov    DWORD PTR [esp+0x4],esi }
+        __asm { mov    eax,DWORD PTR [esi+0x94] }
+        __asm { mov    DWORD PTR [esp+0x10],0x0 }
+        __asm { push   eax }
+        __asm { mov    DWORD PTR [esi+0x2c],0x100bd734 }
+        __asm { call   0x100a391e }
+        __asm { add    esp,0x4 }
+        __asm { mov    ecx,esi }
+        __asm { mov    DWORD PTR [esp+0x10],0xffffffff }
+        __asm { call   0x1006e520 }
+        __asm { mov    ecx,DWORD PTR [esp+0x8] }
+        __asm { pop    esi }
+        __asm { mov    DWORD PTR fs:0x0,ecx }
+        __asm { add    esp,0x10 }
+        __asm { ret }
+        __asm { nop }
+        __asm { nop }
+        __asm { nop }
+        __asm { nop }
+        __asm { nop }
+        __asm { nop }
+        __asm { push   esi }
+        __asm { mov    esi,ecx }
+        __asm { call   0x1006e8a0 }
+        __asm { test   al,0x1 }
+        __asm { je     0x1008d17d }
+        __asm { mov    ecx,esi }
+        __asm { mov    DWORD PTR [esi+0x340],0x1 }
+        __asm { call   0x1006e980 }
+        __asm { pop    esi }
+        __asm { ret }
+        __asm { nop }
+        __asm { sub    esp,0x10 }
+        __asm { mov    eax,ds:0x1011be58 }
+        __asm { push   ebx }
+        __asm { push   ebp }
+        __asm { push   esi }
+        __asm { lea    edx,[eax+eax*1] }
+        __asm { mov    eax,0xaaaaaaab }
+        __asm { mul    edx }
+        __asm { mov    eax,ds:0x1011be54 }
+        __asm { mov    esi,edx }
+        __asm { mov    ebx,DWORD PTR [esp+0x20] }
+        __asm { push   edi }
+        __asm { lea    edx,[eax+eax*1] }
+        __asm { mov    eax,0xaaaaaaab }
+        __asm { mul    edx }
+        __asm { mov    eax,DWORD PTR [ebx+0x8] }
+        __asm { mov    edi,edx }
+        __asm { cdq }
+        __asm { sub    eax,edx }
+        __asm { add    ecx,0x2c }
+        __asm { shr    esi,1 }
+        __asm { mov    ebp,eax }
+        __asm { mov    eax,esi }
+        __asm { cdq }
+        __asm { sub    eax,edx }
+        __asm { mov    DWORD PTR [esp+0x18],esi }
+        __asm { sar    ebp,1 }
+        __asm { sar    eax,1 }
+        __asm { sub    ebp,eax }
+        __asm { mov    eax,DWORD PTR [ebx] }
+        __asm { add    ebp,eax }
+        __asm { mov    eax,DWORD PTR [ebx+0xc] }
+        __asm { cdq }
+        __asm { sub    eax,edx }
+        __asm { mov    DWORD PTR [esp+0x10],ebp }
+        __asm { shr    edi,1 }
+        __asm { mov    esi,eax }
+        __asm { mov    eax,edi }
+        __asm { cdq }
+        __asm { sub    eax,edx }
+        __asm { mov    DWORD PTR [esp+0x1c],edi }
+        __asm { mov    edi,DWORD PTR [ebx+0x4] }
+        __asm { sar    esi,1 }
+        __asm { sar    eax,1 }
+        __asm { sub    esi,eax }
+        __asm { lea    eax,[esp+0x10] }
+        __asm { add    esi,edi }
+        __asm { push   eax }
+        __asm { mov    DWORD PTR [esp+0x18],esi }
+        __asm { call   0x1008c9e0 }
+        __asm { pop    edi }
+        __asm { pop    esi }
+        __asm { pop    ebp }
+        __asm { pop    ebx }
+        __asm { add    esp,0x10 }
+        __asm { ret    0x4 }
+        __asm { nop }
+        __asm { nop }
+        __asm { nop }
+        __asm { nop }
+        __asm { nop }
+        __asm { nop }
+        __asm { nop }
+        __asm { nop }
+        __asm { nop }
 }
 
 // 0x1008d210: InventoryPie::ValidateInvSlot
 /*
+
 1008d210:	83 ec 10             	sub    esp,0x10
 1008d213:	8d 44 24 00          	lea    eax,[esp+0x0]
 1008d217:	56                   	push   esi
@@ -497,13 +830,158 @@ void InventoryPie::SetSlotColour() {
 1008d3de:	90                   	nop
 1008d3df:	90                   	nop
 
+
 */
-void InventoryPie::ValidateInvSlot() {
-    // TODO: Implement ValidateInvSlot
+__declspec(naked) void InventoryPie::ValidateInvSlot()  {
+        __asm { sub    esp,0x10 }
+        __asm { lea    eax,[esp+0x0] }
+        __asm { push   esi }
+        __asm { push   edi }
+        __asm { mov    esi,ecx }
+        __asm { push   eax }
+        __asm { call   0x1006e6c0 }
+        __asm { mov    DWORD PTR [esi+0x340],0x0 }
+        __asm { mov    ecx,DWORD PTR ds:0x101240d8 }
+        __asm { call   0x1003bb30 }
+        __asm { mov    DWORD PTR [esi+0x344],eax }
+        __asm { mov    ecx,DWORD PTR ds:0x101240d8 }
+        __asm { push   esi }
+        __asm { call   0x1006f200 }
+        __asm { push   0x1 }
+        __asm { mov    ecx,0x10124c68 }
+        __asm { call   0x10090690 }
+        __asm { mov    eax,DWORD PTR [esp+0x14] }
+        __asm { mov    edi,DWORD PTR [esp+0xc] }
+        __asm { cdq }
+        __asm { sub    eax,edx }
+        __asm { mov    ecx,0x10124c68 }
+        __asm { sar    eax,1 }
+        __asm { add    eax,edi }
+        __asm { mov    edi,DWORD PTR [esp+0x8] }
+        __asm { push   eax }
+        __asm { mov    eax,DWORD PTR [esp+0x14] }
+        __asm { cdq }
+        __asm { sub    eax,edx }
+        __asm { sar    eax,1 }
+        __asm { add    eax,edi }
+        __asm { push   eax }
+        __asm { call   0x100905f0 }
+        __asm { mov    ecx,DWORD PTR ds:0x1011a134 }
+        __asm { mov    eax,DWORD PTR [ecx+0x181c8] }
+        __asm { test   eax,eax }
+        __asm { je     0x1008d329 }
+        __asm { mov    edi,DWORD PTR [eax+0x8c] }
+        __asm { add    esi,0x2c }
+        __asm { push   ebx }
+        __asm { mov    ebx,DWORD PTR [esi+0x60] }
+        __asm { test   edi,edi }
+        __asm { jl     0x1008d2a8 }
+        __asm { cmp    edi,0xb }
+        __asm { jl     0x1008d2e9 }
+        __asm { cmp    edi,0xff }
+        __asm { je     0x1008d2e9 }
+        __asm { mov    ecx,DWORD PTR ds:0x1010cfc8 }
+        __asm { push   0x1dc }
+        __asm { push   0x100de130 }
+        __asm { mov    edx,DWORD PTR [ecx] }
+        __asm { call   DWORD PTR [edx+0x120] }
+        __asm { mov    eax,ds:0x1010cfc8 }
+        __asm { push   edi }
+        __asm { push   0x100de0dc }
+        __asm { push   0x100c5d7c }
+        __asm { mov    ecx,DWORD PTR [eax] }
+        __asm { push   eax }
+        __asm { call   DWORD PTR [ecx+0x128] }
+        __asm { add    esp,0x10 }
+        __asm { mov    edi,0xff }
+        __asm { cmp    ebx,0xff }
+        __asm { mov    DWORD PTR [esi+0x60],edi }
+        __asm { je     0x1008d31b }
+        __asm { cmp    ebx,DWORD PTR [esi+0x5c] }
+        __asm { jne    0x1008d300 }
+        __asm { mov    eax,0x5a00c800 }
+        __asm { jmp    0x1008d312 }
+        __asm { mov    eax,ebx }
+        __asm { sub    eax,edi }
+        __asm { neg    eax }
+        __asm { sbb    eax,eax }
+        __asm { and    eax,0xbf000000 }
+        __asm { add    eax,0x9b38b7ec }
+        __asm { push   eax }
+        __asm { push   ebx }
+        __asm { mov    ecx,esi }
+        __asm { call   0x1008ce80 }
+        __asm { mov    ecx,DWORD PTR [esi+0x60] }
+        __asm { pop    ebx }
+        __asm { cmp    ecx,0xff }
+        __asm { je     0x1008d388 }
+        __asm { jmp    0x1008d36a }
+        __asm { mov    ecx,DWORD PTR [esi+0x8c] }
+        __asm { add    esi,0x2c }
+        __asm { cmp    ecx,0xff }
+        __asm { mov    DWORD PTR [esi+0x60],0xff }
+        __asm { je     0x1008d35f }
+        __asm { mov    edi,DWORD PTR [esi+0x5c] }
+        __asm { mov    eax,ecx }
+        __asm { sub    eax,edi }
+        __asm { neg    eax }
+        __asm { sbb    eax,eax }
+        __asm { and    eax,0x37efec }
+        __asm { add    eax,0x5a00c800 }
+        __asm { push   eax }
+        __asm { push   ecx }
+        __asm { mov    ecx,esi }
+        __asm { call   0x1008ce80 }
+        __asm { mov    ecx,DWORD PTR [esi+0x60] }
+        __asm { cmp    ecx,0xff }
+        __asm { je     0x1008d388 }
+        __asm { mov    edi,DWORD PTR [esi+0x5c] }
+        __asm { mov    eax,ecx }
+        __asm { sub    eax,edi }
+        __asm { neg    eax }
+        __asm { sbb    eax,eax }
+        __asm { and    eax,0x4137efec }
+        __asm { add    eax,0x5a00c800 }
+        __asm { push   eax }
+        __asm { push   ecx }
+        __asm { mov    ecx,esi }
+        __asm { call   0x1008ce80 }
+        __asm { pop    edi }
+        __asm { pop    esi }
+        __asm { add    esp,0x10 }
+        __asm { ret }
+        __asm { nop }
+        __asm { nop }
+        __asm { push   esi }
+        __asm { mov    esi,ecx }
+        __asm { call   0x10051460 }
+        __asm { mov    eax,DWORD PTR [esi+0x344] }
+        __asm { mov    ecx,DWORD PTR ds:0x101240d8 }
+        __asm { push   eax }
+        __asm { call   0x1006f200 }
+        __asm { mov    eax,DWORD PTR [esi+0x340] }
+        __asm { mov    ecx,DWORD PTR [esi+0x88] }
+        __asm { test   eax,eax }
+        __asm { pop    esi }
+        __asm { jne    0x1008d3dc }
+        __asm { cmp    ecx,0xff }
+        __asm { je     0x1008d3dc }
+        __asm { mov    edx,DWORD PTR ds:0x1011a134 }
+        __asm { mov    eax,DWORD PTR [edx+0x181c8] }
+        __asm { test   eax,eax }
+        __asm { je     0x1008d3dc }
+        __asm { push   ecx }
+        __asm { lea    ecx,[eax+0x5c] }
+        __asm { call   0x10017610 }
+        __asm { ret }
+        __asm { nop }
+        __asm { nop }
+        __asm { nop }
 }
 
 // 0x1008d3e0: InventoryPie::ValidateInvSlot
 /*
+
 1008d3e0:	a1 6c 4c 12 10       	mov    eax,ds:0x10124c6c
 1008d3e5:	8b 15 68 4c 12 10    	mov    edx,DWORD PTR ds:0x10124c68
 1008d3eb:	53                   	push   ebx
@@ -574,13 +1052,83 @@ void InventoryPie::ValidateInvSlot() {
 1008d49e:	90                   	nop
 1008d49f:	90                   	nop
 
+
 */
-void InventoryPie::ValidateInvSlot() {
-    // TODO: Implement ValidateInvSlot
+__declspec(naked) void InventoryPie::ValidateInvSlot()  {
+        __asm { mov    eax,ds:0x10124c6c }
+        __asm { mov    edx,DWORD PTR ds:0x10124c68 }
+        __asm { push   ebx }
+        __asm { push   esi }
+        __asm { push   edi }
+        __asm { lea    esi,[ecx+0x2c] }
+        __asm { push   eax }
+        __asm { push   edx }
+        __asm { mov    ecx,esi }
+        __asm { call   0x1008c8d0 }
+        __asm { mov    ebx,DWORD PTR [esi+0x5c] }
+        __asm { mov    edi,eax }
+        __asm { test   edi,edi }
+        __asm { jl     0x1008d408 }
+        __asm { cmp    edi,0xb }
+        __asm { jl     0x1008d449 }
+        __asm { cmp    edi,0xff }
+        __asm { je     0x1008d449 }
+        __asm { mov    ecx,DWORD PTR ds:0x1010cfc8 }
+        __asm { push   0x1dc }
+        __asm { push   0x100de130 }
+        __asm { mov    eax,DWORD PTR [ecx] }
+        __asm { call   DWORD PTR [eax+0x120] }
+        __asm { mov    eax,ds:0x1010cfc8 }
+        __asm { push   edi }
+        __asm { push   0x100de0dc }
+        __asm { push   0x100c5d7c }
+        __asm { mov    ecx,DWORD PTR [eax] }
+        __asm { push   eax }
+        __asm { call   DWORD PTR [ecx+0x128] }
+        __asm { add    esp,0x10 }
+        __asm { mov    edi,0xff }
+        __asm { cmp    ebx,0xff }
+        __asm { mov    DWORD PTR [esi+0x5c],edi }
+        __asm { je     0x1008d47d }
+        __asm { cmp    ebx,edi }
+        __asm { jne    0x1008d45f }
+        __asm { mov    eax,0x5a00c800 }
+        __asm { jmp    0x1008d474 }
+        __asm { mov    ecx,DWORD PTR [esi+0x60] }
+        __asm { mov    eax,ebx }
+        __asm { sub    eax,ecx }
+        __asm { neg    eax }
+        __asm { sbb    eax,eax }
+        __asm { and    eax,0xbf000000 }
+        __asm { add    eax,0x9b38b7ec }
+        __asm { push   eax }
+        __asm { push   ebx }
+        __asm { mov    ecx,esi }
+        __asm { call   0x1008ce80 }
+        __asm { mov    eax,DWORD PTR [esi+0x5c] }
+        __asm { cmp    eax,0xff }
+        __asm { je     0x1008d494 }
+        __asm { push   0x5a00c800 }
+        __asm { push   eax }
+        __asm { mov    ecx,esi }
+        __asm { call   0x1008ce80 }
+        __asm { pop    edi }
+        __asm { pop    esi }
+        __asm { pop    ebx }
+        __asm { ret }
+        __asm { nop }
+        __asm { nop }
+        __asm { nop }
+        __asm { nop }
+        __asm { nop }
+        __asm { nop }
+        __asm { nop }
+        __asm { nop }
 }
 
 // 0x1008d4a0: InventoryPie::ValidateInvSlot
 /*
+
 1008d4a0:	8b 44 24 0c          	mov    eax,DWORD PTR [esp+0xc]
 1008d4a4:	53                   	push   ebx
 1008d4a5:	56                   	push   esi
@@ -956,8 +1504,382 @@ void InventoryPie::ValidateInvSlot() {
 1008d88e:	90                   	nop
 1008d88f:	90                   	nop
 
+
 */
-void InventoryPie::ValidateInvSlot() {
-    // TODO: Implement ValidateInvSlot
+__declspec(naked) void InventoryPie::ValidateInvSlot()  {
+        __asm { mov    eax,DWORD PTR [esp+0xc] }
+        __asm { push   ebx }
+        __asm { push   esi }
+        __asm { lea    esi,[ecx+0x2c] }
+        __asm { mov    ecx,DWORD PTR [esp+0x10] }
+        __asm { push   edi }
+        __asm { push   eax }
+        __asm { push   ecx }
+        __asm { mov    ecx,esi }
+        __asm { call   0x1008c8d0 }
+        __asm { mov    ebx,DWORD PTR [esi+0x5c] }
+        __asm { mov    edi,eax }
+        __asm { test   edi,edi }
+        __asm { jl     0x1008d4c5 }
+        __asm { cmp    edi,0xb }
+        __asm { jl     0x1008d506 }
+        __asm { cmp    edi,0xff }
+        __asm { je     0x1008d506 }
+        __asm { mov    ecx,DWORD PTR ds:0x1010cfc8 }
+        __asm { push   0x1dc }
+        __asm { push   0x100de130 }
+        __asm { mov    edx,DWORD PTR [ecx] }
+        __asm { call   DWORD PTR [edx+0x120] }
+        __asm { mov    eax,ds:0x1010cfc8 }
+        __asm { push   edi }
+        __asm { push   0x100de0dc }
+        __asm { push   0x100c5d7c }
+        __asm { mov    ecx,DWORD PTR [eax] }
+        __asm { push   eax }
+        __asm { call   DWORD PTR [ecx+0x128] }
+        __asm { add    esp,0x10 }
+        __asm { mov    edi,0xff }
+        __asm { cmp    ebx,0xff }
+        __asm { mov    DWORD PTR [esi+0x5c],edi }
+        __asm { je     0x1008d53a }
+        __asm { cmp    ebx,edi }
+        __asm { jne    0x1008d51c }
+        __asm { mov    eax,0x5a00c800 }
+        __asm { jmp    0x1008d531 }
+        __asm { mov    ecx,DWORD PTR [esi+0x60] }
+        __asm { mov    eax,ebx }
+        __asm { sub    eax,ecx }
+        __asm { neg    eax }
+        __asm { sbb    eax,eax }
+        __asm { and    eax,0xbf000000 }
+        __asm { add    eax,0x9b38b7ec }
+        __asm { push   eax }
+        __asm { push   ebx }
+        __asm { mov    ecx,esi }
+        __asm { call   0x1008ce80 }
+        __asm { mov    eax,DWORD PTR [esi+0x5c] }
+        __asm { cmp    eax,0xff }
+        __asm { je     0x1008d551 }
+        __asm { push   0x5a00c800 }
+        __asm { push   eax }
+        __asm { mov    ecx,esi }
+        __asm { call   0x1008ce80 }
+        __asm { pop    edi }
+        __asm { pop    esi }
+        __asm { pop    ebx }
+        __asm { ret    0xc }
+        __asm { nop }
+        __asm { nop }
+        __asm { nop }
+        __asm { nop }
+        __asm { nop }
+        __asm { nop }
+        __asm { nop }
+        __asm { nop }
+        __asm { nop }
+        __asm { push   esi }
+        __asm { mov    esi,ecx }
+        __asm { mov    ecx,DWORD PTR ds:0x1010cfec }
+        __asm { push   edi }
+        __asm { push   0x1 }
+        __asm { mov    eax,DWORD PTR [ecx] }
+        __asm { call   DWORD PTR [eax+0xc] }
+        __asm { mov    ecx,DWORD PTR ds:0x1010cfec }
+        __asm { push   0x0 }
+        __asm { mov    edx,DWORD PTR [ecx] }
+        __asm { call   DWORD PTR [edx+0x10] }
+        __asm { mov    ecx,DWORD PTR ds:0x1010cfec }
+        __asm { push   0x3 }
+        __asm { mov    eax,DWORD PTR [ecx] }
+        __asm { call   DWORD PTR [eax+0x14] }
+        __asm { mov    ecx,DWORD PTR ds:0x1010cfec }
+        __asm { push   0x2 }
+        __asm { mov    edx,DWORD PTR [ecx] }
+        __asm { call   DWORD PTR [edx+0x18] }
+        __asm { mov    ecx,DWORD PTR ds:0x1010cfec }
+        __asm { push   0x0 }
+        __asm { mov    eax,DWORD PTR [ecx] }
+        __asm { call   DWORD PTR [eax+0x1c] }
+        __asm { mov    ecx,DWORD PTR ds:0x1010cfec }
+        __asm { push   0x0 }
+        __asm { mov    edx,DWORD PTR [ecx] }
+        __asm { call   DWORD PTR [edx+0x20] }
+        __asm { mov    ecx,DWORD PTR ds:0x1010cfec }
+        __asm { push   0x1 }
+        __asm { mov    eax,DWORD PTR [ecx] }
+        __asm { call   DWORD PTR [eax+0x24] }
+        __asm { mov    ecx,DWORD PTR ds:0x1010cfec }
+        __asm { push   0x0 }
+        __asm { mov    edx,DWORD PTR [ecx] }
+        __asm { call   DWORD PTR [edx+0x28] }
+        __asm { mov    ecx,DWORD PTR ds:0x1010cfec }
+        __asm { push   0x0 }
+        __asm { mov    eax,DWORD PTR [ecx] }
+        __asm { call   DWORD PTR [eax+0x8] }
+        __asm { mov    ecx,DWORD PTR ds:0x1010cfec }
+        __asm { lea    eax,[esi+0x98] }
+        __asm { push   0xc }
+        __asm { push   eax }
+        __asm { mov    edx,DWORD PTR [ecx] }
+        __asm { call   DWORD PTR [edx+0x50] }
+        __asm { mov    eax,DWORD PTR [esi+0x90] }
+        __asm { mov    ecx,DWORD PTR ds:0x1010cfec }
+        __asm { push   eax }
+        __asm { mov    eax,DWORD PTR [esi+0x94] }
+        __asm { mov    edx,DWORD PTR [ecx] }
+        __asm { push   eax }
+        __asm { call   DWORD PTR [edx+0x30] }
+        __asm { mov    ecx,DWORD PTR ds:0x1010cfec }
+        __asm { lea    eax,[esi+0x2d8] }
+        __asm { push   0x2 }
+        __asm { push   eax }
+        __asm { mov    edx,DWORD PTR [ecx] }
+        __asm { call   DWORD PTR [edx+0x3c] }
+        __asm { mov    ecx,DWORD PTR ds:0x1011a134 }
+        __asm { mov    edi,DWORD PTR [ecx+0x181c8] }
+        __asm { test   edi,edi }
+        __asm { je     0x1008d69f }
+        __asm { push   ebx }
+        __asm { push   ebp }
+        __asm { xor    ebx,ebx }
+        __asm { lea    ebp,[esi+0x30] }
+        __asm { mov    ecx,DWORD PTR [ebx+edi*1+0x5c] }
+        __asm { test   ecx,ecx }
+        __asm { je     0x1008d642 }
+        __asm { mov    edx,DWORD PTR [ecx] }
+        __asm { call   DWORD PTR [edx+0x3c] }
+        __asm { test   al,al }
+        __asm { je     0x1008d692 }
+        __asm { mov    ecx,DWORD PTR [ebx+edi*1+0x5c] }
+        __asm { test   ecx,ecx }
+        __asm { je     0x1008d692 }
+        __asm { mov    eax,DWORD PTR [ecx] }
+        __asm { call   DWORD PTR [eax+0x3c] }
+        __asm { test   al,al }
+        __asm { je     0x1008d692 }
+        __asm { mov    eax,DWORD PTR [ebx+edi*1+0x5c] }
+        __asm { test   eax,eax }
+        __asm { je     0x1008d692 }
+        __asm { mov    ecx,DWORD PTR [eax+0xc] }
+        __asm { mov    edx,DWORD PTR [ebp+0x0] }
+        __asm { mov    esi,DWORD PTR [ebp+0x4] }
+        __asm { cmp    ecx,0xff }
+        __asm { je     0x1008d67d }
+        __asm { mov    eax,DWORD PTR [eax+0x18] }
+        __asm { test   eax,eax }
+        __asm { je     0x1008d682 }
+        __asm { cmp    eax,0x1 }
+        __asm { jne    0x1008d67d }
+        __asm { add    ecx,0x40 }
+        __asm { jmp    0x1008d682 }
+        __asm { mov    ecx,0xff }
+        __asm { push   0xffffffff }
+        __asm { push   esi }
+        __asm { push   edx }
+        __asm { push   ecx }
+        __asm { mov    ecx,DWORD PTR ds:0x1011be5c }
+        __asm { call   0x1004bcd0 }
+        __asm { add    ebx,0x4 }
+        __asm { add    ebp,0x8 }
+        __asm { cmp    ebx,0x2c }
+        __asm { jl     0x1008d631 }
+        __asm { pop    ebp }
+        __asm { pop    ebx }
+        __asm { pop    edi }
+        __asm { pop    esi }
+        __asm { ret    0x8 }
+        __asm { nop }
+        __asm { nop }
+        __asm { nop }
+        __asm { nop }
+        __asm { nop }
+        __asm { nop }
+        __asm { nop }
+        __asm { nop }
+        __asm { nop }
+        __asm { nop }
+        __asm { nop }
+        __asm { nop }
+        __asm { push   ebx }
+        __asm { push   esi }
+        __asm { xor    ebx,ebx }
+        __asm { push   edi }
+        __asm { mov    edi,DWORD PTR ds:0x100b8030 }
+        __asm { push   ebx }
+        __asm { mov    esi,ecx }
+        __asm { push   ebx }
+        __asm { push   0x1 }
+        __asm { push   ebx }
+        __asm { mov    DWORD PTR [esi+0x14],ebx }
+        __asm { mov    DWORD PTR [esi+0xa4],ebx }
+        __asm { mov    BYTE PTR [esi+0x24],bl }
+        __asm { call   edi }
+        __asm { push   ebx }
+        __asm { push   ebx }
+        __asm { push   0x1 }
+        __asm { push   ebx }
+        __asm { mov    DWORD PTR [esi+0x4],eax }
+        __asm { call   edi }
+        __asm { mov    DWORD PTR [esi+0x8],eax }
+        __asm { mov    DWORD PTR [esi+0x10],0x2710 }
+        __asm { mov    DWORD PTR [esi+0xc],ebx }
+        __asm { mov    DWORD PTR [esi],ebx }
+        __asm { mov    DWORD PTR [esi+0xa8],ebx }
+        __asm { mov    DWORD PTR [esi+0xac],ebx }
+        __asm { mov    eax,esi }
+        __asm { pop    edi }
+        __asm { pop    esi }
+        __asm { pop    ebx }
+        __asm { ret }
+        __asm { nop }
+        __asm { nop }
+        __asm { nop }
+        __asm { nop }
+        __asm { nop }
+        __asm { push   ebx }
+        __asm { push   esi }
+        __asm { mov    esi,ecx }
+        __asm { xor    ebx,ebx }
+        __asm { push   edi }
+        __asm { cmp    DWORD PTR [esi+0x14],0x1 }
+        __asm { jne    0x1008d75f }
+        __asm { mov    eax,DWORD PTR [esi+0xa4] }
+        __asm { mov    DWORD PTR [esi+0x14],ebx }
+        __asm { cmp    eax,ebx }
+        __asm { je     0x1008d72f }
+        __asm { push   eax }
+        __asm { mov    eax,ds:0x1011a14c }
+        __asm { call   DWORD PTR [eax+0x1f0] }
+        __asm { add    esp,0x4 }
+        __asm { mov    DWORD PTR [esi+0xa4],ebx }
+        __asm { mov    ecx,DWORD PTR ds:0x1010cff0 }
+        __asm { mov    eax,DWORD PTR [esi+0xa8] }
+        __asm { push   eax }
+        __asm { mov    edx,DWORD PTR [ecx] }
+        __asm { call   DWORD PTR [edx+0x4c] }
+        __asm { mov    ecx,DWORD PTR ds:0x1010cff0 }
+        __asm { mov    eax,DWORD PTR [esi+0xac] }
+        __asm { push   eax }
+        __asm { mov    edx,DWORD PTR [ecx] }
+        __asm { call   DWORD PTR [edx+0x4c] }
+        __asm { mov    DWORD PTR [esi+0xa8],ebx }
+        __asm { mov    DWORD PTR [esi+0xac],ebx }
+        __asm { mov    ecx,DWORD PTR [esi+0x4] }
+        __asm { mov    edi,DWORD PTR ds:0x100b8060 }
+        __asm { push   ecx }
+        __asm { call   edi }
+        __asm { mov    edx,DWORD PTR [esi+0x8] }
+        __asm { push   edx }
+        __asm { call   edi }
+        __asm { mov    esi,DWORD PTR [esi] }
+        __asm { cmp    esi,ebx }
+        __asm { je     0x1008d77a }
+        __asm { push   esi }
+        __asm { call   edi }
+        __asm { pop    edi }
+        __asm { pop    esi }
+        __asm { pop    ebx }
+        __asm { ret }
+        __asm { nop }
+        __asm { nop }
+        __asm { push   esi }
+        __asm { mov    esi,DWORD PTR [esp+0x8] }
+        __asm { push   edi }
+        __asm { mov    eax,DWORD PTR [esi+0x8] }
+        __asm { mov    DWORD PTR [esi+0x14],0x3 }
+        __asm { push   eax }
+        __asm { call   DWORD PTR ds:0x100b803c }
+        __asm { mov    ecx,DWORD PTR [esi+0x4] }
+        __asm { mov    edi,DWORD PTR ds:0x100b8068 }
+        __asm { push   0x0 }
+        __asm { push   ecx }
+        __asm { call   edi }
+        __asm { cmp    eax,0x102 }
+        __asm { jne    0x1008d7d5 }
+        __asm { push   ebx }
+        __asm { mov    ebx,DWORD PTR ds:0x100b806c }
+        __asm { mov    ecx,esi }
+        __asm { call   0x1008d7e0 }
+        __asm { push   0x64 }
+        __asm { call   ebx }
+        __asm { mov    edx,DWORD PTR [esi+0x4] }
+        __asm { push   0x0 }
+        __asm { push   edx }
+        __asm { call   edi }
+        __asm { cmp    eax,0x102 }
+        __asm { je     0x1008d7b3 }
+        __asm { pop    ebx }
+        __asm { pop    edi }
+        __asm { xor    eax,eax }
+        __asm { pop    esi }
+        __asm { ret    0x4 }
+        __asm { pop    edi }
+        __asm { xor    eax,eax }
+        __asm { pop    esi }
+        __asm { ret    0x4 }
+        __asm { nop }
+        __asm { nop }
+        __asm { nop }
+        __asm { nop }
+        __asm { push   esi }
+        __asm { mov    esi,ecx }
+        __asm { mov    eax,DWORD PTR [esi+0x14] }
+        __asm { cmp    eax,0x3 }
+        __asm { je     0x1008d7f4 }
+        __asm { cmp    eax,0x2 }
+        __asm { je     0x1008d7f4 }
+        __asm { xor    eax,eax }
+        __asm { pop    esi }
+        __asm { ret }
+        __asm { mov    eax,ds:0x1011a14c }
+        __asm { push   0x0 }
+        __asm { push   0x3 }
+        __asm { push   0x0 }
+        __asm { call   DWORD PTR [eax+0x40] }
+        __asm { mov    ecx,DWORD PTR ds:0x1011a14c }
+        __asm { add    esp,0xc }
+        __asm { call   DWORD PTR [ecx+0x44] }
+        __asm { mov    edx,DWORD PTR ds:0x1011a14c }
+        __asm { call   DWORD PTR [edx+0x1e0] }
+        __asm { mov    eax,ds:0x1011a14c }
+        __asm { call   DWORD PTR [eax+0x50] }
+        __asm { mov    ecx,DWORD PTR [esi+0xac] }
+        __asm { mov    edx,DWORD PTR [esi+0xa8] }
+        __asm { push   0x0 }
+        __asm { push   ecx }
+        __asm { mov    ecx,DWORD PTR ds:0x1011be5c }
+        __asm { lea    eax,[esi+0x24] }
+        __asm { push   edx }
+        __asm { push   eax }
+        __asm { call   0x1004bfb0 }
+        __asm { mov    ecx,DWORD PTR ds:0x1011a14c }
+        __asm { call   DWORD PTR [ecx+0x54] }
+        __asm { mov    edx,DWORD PTR ds:0x1011a14c }
+        __asm { push   0x1 }
+        __asm { call   DWORD PTR [edx+0x68] }
+        __asm { mov    eax,ds:0x1011a14c }
+        __asm { push   0x0 }
+        __asm { call   DWORD PTR [eax+0x3c] }
+        __asm { mov    eax,DWORD PTR [esi+0x18] }
+        __asm { add    esp,0x8 }
+        __asm { inc    eax }
+        __asm { mov    DWORD PTR [esi+0x18],eax }
+        __asm { mov    ecx,DWORD PTR ds:0x1010cfc8 }
+        __asm { mov    edx,DWORD PTR [ecx] }
+        __asm { call   DWORD PTR [edx+0xd8] }
+        __asm { fld    st(0) }
+        __asm { fsub   DWORD PTR [esi+0x1c] }
+        __asm { mov    eax,0x1 }
+        __asm { fstp   DWORD PTR [esi+0x20] }
+        __asm { fstp   DWORD PTR [esi+0x1c] }
+        __asm { pop    esi }
+        __asm { ret }
+        __asm { nop }
+        __asm { nop }
+        __asm { nop }
+        __asm { nop }
+        __asm { nop }
+        __asm { nop }
+        __asm { nop }
 }
 

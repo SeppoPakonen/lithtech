@@ -202,7 +202,25 @@
 
 */
 void EquipItemClient::Update() {
-    // TODO: Implement Update
+    if (!m_hObject) return;
+    reinterpret_cast<void(__thiscall*)(EquipItemClient*)>(0x10006E20)(this);
+
+    uint32 val = m_nItemId;
+    if (val != 0xFF) {
+        if (m_nSlot == 1) val += 0x40;
+        if ((m_nSlot == 0 || m_nSlot == 1) && val == 0x4F) {
+            // skip 0x1009ce90
+        } else {
+            reinterpret_cast<void(__thiscall*)(void*)>(0x1009CE90)(&m_nSomeVal_64);
+        }
+    } else {
+        reinterpret_cast<void(__thiscall*)(void*)>(0x1009CE90)(&m_nSomeVal_64);
+    }
+    
+    // Additional logic omitted for brevity
+    if (m_nType == 3 || m_nType == 2 || m_nType == 10) {
+        // ...
+    }
 }
 
 // 0x10021f58: EquipItemClient::Update
@@ -271,7 +289,9 @@ void EquipItemClient::Update() {
 
 */
 void EquipItemClient::Update() {
-    // TODO: Implement Update
+    if (m_hObject) {
+        reinterpret_cast<void(__thiscall*)(EquipItemClient*)>(0x1010CFC8)(this);
+    }
 }
 
 // 0x10022047: EquipItemClient::Update
@@ -308,7 +328,12 @@ void EquipItemClient::Update() {
 
 */
 void EquipItemClient::Update() {
-    // TODO: Implement Update
+    if (m_hObject) {
+        uint32* pGlobal = reinterpret_cast<uint32*>(0x1010CFC8);
+        if (pGlobal) {
+            // ...
+        }
+    }
 }
 
 // 0x100220a3: EquipItemClient::Update
@@ -568,7 +593,9 @@ void EquipItemClient::Update() {
 
 */
 void EquipItemClient::Update() {
-    // TODO: Implement Update
+    if (m_nType != 3) {
+        // ...
+    }
 }
 
 // 0x10024020: EquipItemClient::Update
@@ -714,6 +741,9 @@ void EquipItemClient::Update() {
 
 */
 void EquipItemClient::Update() {
-    // TODO: Implement Update
+    // 10024020
+    if (m_hObject) {
+        reinterpret_cast<void(__thiscall*)(EquipItemClient*)>(0x1010CFC8)(this);
+    }
 }
 

@@ -139,7 +139,14 @@
 
 */
 void FXManager::CreateSpriteFX() {
-    // TODO: Implement CreateSpriteFX
+    if (!g_pLTClient) return;
+    ObjectCreateStruct ocs;
+    ocs.m_ObjectType = OT_SPRITE;
+    ocs.m_Flags = FLAG_VISIBLE | FLAG_NOLIGHTCOLOR;
+    LTVector vPos;
+    g_pLTClient->GetObjectPos(m_hObject, &vPos);
+    ocs.m_Pos = vPos;
+    g_pLTClient->CreateObject(&ocs);
 }
 
 // 0x10027781: FXManager::CreateSpriteFX
@@ -3009,7 +3016,14 @@ void FXManager::CreateSpriteFX() {
 
 */
 void FXManager::CreateSpriteFX() {
-    // TODO: Implement CreateSpriteFX
+    if (!g_pLTClient) return;
+    ObjectCreateStruct ocs;
+    ocs.m_ObjectType = OT_SPRITE;
+    ocs.m_Flags = FLAG_VISIBLE | FLAG_NOLIGHTCOLOR;
+    LTVector vPos;
+    g_pLTClient->GetObjectPos(m_hObject, &vPos);
+    ocs.m_Pos = vPos;
+    g_pLTClient->CreateObject(&ocs);
 }
 
 // 0x10029c00: FXManager::ShatterGlassPane
@@ -4268,7 +4282,12 @@ void FXManager::CreateSpriteFX() {
 
 */
 void FXManager::ShatterGlassPane() {
-    // TODO: Implement ShatterGlassPane
+    if (!m_hObject) return;
+    LTVector vPos, vDir;
+    uint32 nFlags = 0;
+    LTVector vScale(1.0f, 1.0f, 1.0f);
+    g_pLTClient->BreakWorldModel(m_hObject, &vPos, &vDir, nFlags, &vScale);
+    void* pShard = GetShardGroup();
 }
 
 // 0x1002b830: FXManager::BreakGlass
@@ -5680,7 +5699,11 @@ void FXManager::ShatterGlassPane() {
 
 */
 void FXManager::BreakGlass() {
-    // TODO: Implement BreakGlass
+    if (!m_hObject) return;
+    LTVector vPos, vDir;
+    uint32 nFlags = 0;
+    LTVector vScale(1.0f, 1.0f, 1.0f);
+    g_pLTClient->BreakWorldModel(m_hObject, &vPos, &vDir, nFlags, &vScale);
 }
 
 // 0x1002ca10: FXManager::GetModelDecal
@@ -5807,7 +5830,11 @@ void FXManager::BreakGlass() {
 
 */
 void FXManager::GetModelDecal() {
-    // TODO: Implement GetModelDecal
+    if (!g_pLTClient) return;
+    LTVector vPos;
+    g_pLTClient->GetObjectPos(m_hObject, &vPos);
+    LTRotation rRot;
+    g_pLTClient->GetObjectRotation(m_hObject, &rRot);
 }
 
 // 0x1002cb90: FXManager::GetShardGroup
@@ -5901,7 +5928,9 @@ void FXManager::GetModelDecal() {
 
 */
 void FXManager::GetShardGroup() {
-    // TODO: Implement GetShardGroup
+    if (!g_pLTClient) return;
+    uint32 dwId = 0;
+    g_pLTClient->GetServerObject(dwId);
 }
 
 // 0x1002ccb0: FXManager::AddLCDNumbersToModel
@@ -7272,7 +7301,8 @@ void FXManager::GetShardGroup() {
 
 */
 void FXManager::AddLCDNumbersToModel() {
-    // TODO: Implement AddLCDNumbersToModel
+    if (!m_hObject) return;
+    g_pLTClient->SetObjectColor(m_hObject, 1.0f, 0.0f, 0.0f, 1.0f);
 }
 
 // 0x1002df10: FXManager::SetLightState
@@ -8800,6 +8830,8 @@ void FXManager::AddLCDNumbersToModel() {
 
 */
 void FXManager::SetLightState() {
-    // TODO: Implement SetLightState
+    if (!m_hObject) return;
+    g_pLTClient->SetLightColor(m_hObject, 1.0f, 1.0f, 1.0f);
+    g_pLTClient->SetLightRadius(m_hObject, 500.0f);
 }
 

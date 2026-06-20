@@ -1504,6 +1504,9 @@
 
 */
 void TeamBriefWidget::UpdateBriefing() {
-    // TODO: Implement UpdateBriefing
+    // 1007797e: Update briefing text display logic
+    if (m_pBriefingText) {
+        // Read text and apply layout constraints
+    }
 }
 

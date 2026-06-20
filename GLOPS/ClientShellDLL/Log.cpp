@@ -4,31 +4,38 @@
 #include <stdarg.h>
 #include <time.h>
 #include <string.h>
+
 extern ILTClient* g_pLTClient;
 
 class Log {
 public:
     void Open();
     void Print(const char* fmt, ...);
-    void GenerateFileSuffix();
+    void GenerateFilePrefix();
 
 protected:
+    uint32 m_nFlags;
     FILE* m_pFile;
-    char m_szSuffix[32];
+    char m_szRootPath[512];
+    char m_szPrefix[9];
+    char m_szName[32];
 };
 
 void Log::Open() {
-    if (m_pFile) {
+    if (m_nFlags & 1) {
         g_pLTClient->CPrint("Log::Open: Previous log was left open, closing");
-        fclose(m_pFile);
-        m_pFile = nullptr;
+        Print("Log file closed");
+        m_nFlags &= ~1;
     }
     
-    GenerateFileSuffix();
+    GenerateFilePrefix();
     
-    // Construct full path, dummy implementation for the reconstructed file
     char szFullPath[512];
-    sprintf(szFullPath, "Logs/Log-%s.log", m_szSuffix);
+    _snprintf(szFullPath, 511, "%s/%s-%s.log", m_szRootPath, m_szPrefix, m_szName);
+    
+    if (strlen(m_szRootPath) >= 494) {
+        g_pLTClient->CPrint("Log::GenerateFullPath: Full path truncated to \"%s\"", szFullPath);
+    }
     
     m_pFile = fopen(szFullPath, "w");
     if (!m_pFile) {
@@ -36,11 +43,12 @@ void Log::Open() {
         return;
     }
     
-    fprintf(m_pFile, "Log file started\n");
+    m_nFlags |= 1;
+    Print("Log file started");
 }
 
 void Log::Print(const char* fmt, ...) {
-    if (!m_pFile) return;
+    if (!(m_nFlags & 1) || !m_pFile) return;
     
     char szBuffer[1024];
     va_list args;
@@ -64,15 +72,15 @@ void Log::Print(const char* fmt, ...) {
     fflush(m_pFile);
 }
 
-void Log::GenerateFileSuffix() {
+void Log::GenerateFilePrefix() {
     time_t t;
     time(&t);
     struct tm* ptm = localtime(&t);
     
     if (ptm) {
-        sprintf(m_szSuffix, "%04i%02i%02i", ptm->tm_year + 1900, ptm->tm_mon + 1, ptm->tm_mday);
+        sprintf(m_szPrefix, "%04i%02i%02i", ptm->tm_year + 1900, ptm->tm_mon + 1, ptm->tm_mday);
     } else {
         g_pLTClient->CPrint("Log::GenerateFilePrefix: System time out of range");
-        sprintf(m_szSuffix, "00000000");
+        sprintf(m_szPrefix, "00000000");
     }
 }

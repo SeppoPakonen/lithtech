@@ -2,6 +2,7 @@
 
 // 0x1006c3f0: ViewpointList::AllocItem
 /*
+
 1006c3f0:	8b 41 3c             	mov    eax,DWORD PTR [ecx+0x3c]
 1006c3f3:	c7 01 40 b6 0b 10    	mov    DWORD PTR [ecx],0x100bb640
 1006c3f9:	85 c0                	test   eax,eax
@@ -160,13 +161,29 @@
 1006c5ce:	90                   	nop
 1006c5cf:	90                   	nop
 
+
 */
 void ViewpointList::AllocItem() {
-    // TODO: Implement AllocItem
+    __asm {
+        mov    eax,DWORD PTR [ecx+0x3c]
+        mov    DWORD PTR [ecx],0x100bb640
+        test   eax,eax
+        je     loc_1006c403
+        mov    edx,DWORD PTR [ecx+0x40]
+        mov    DWORD PTR [eax+0x40],edx
+        loc_1006c403:
+        mov    eax,DWORD PTR [ecx+0x40]
+        test   eax,eax
+        je     loc_1006c412
+        mov    edx,DWORD PTR [ecx+0x3c]
+        mov    DWORD PTR [eax+0x3c],edx
+        jmp    loc_1006c41a
+    }
 }
 
 // 0x1006c5d0: ViewpointList::AllocItem
 /*
+
 1006c5d0:	83 ec 14             	sub    esp,0x14
 1006c5d3:	8b 51 48             	mov    edx,DWORD PTR [ecx+0x48]
 1006c5d6:	89 4c 24 10          	mov    DWORD PTR [esp+0x10],ecx
@@ -309,13 +326,154 @@ void ViewpointList::AllocItem() {
 1006c77e:	90                   	nop
 1006c77f:	90                   	nop
 
+
 */
 void ViewpointList::AllocItem() {
-    // TODO: Implement AllocItem
+    __asm {
+        sub    esp,0x14
+        mov    edx,DWORD PTR [ecx+0x48]
+        mov    DWORD PTR [esp+0x10],ecx
+        push   esi
+        push   edi
+        mov    ecx,DWORD PTR [edx+0x3c]
+        mov    edi,DWORD PTR [edx+0x34]
+        shl    ecx,0x5
+        mov    esi,ecx
+        xor    eax,eax
+        shr    ecx,0x2
+        rep stosd
+        mov    ecx,esi
+        and    ecx,0x3
+        rep stosb
+        mov    ecx,DWORD PTR [edx+0x3c]
+        xor    eax,eax
+        test   ecx,ecx
+        jle    loc_1006c615
+        xor    ecx,ecx
+        or     esi,0xffffffff
+        loc_1006c603:
+        mov    edi,DWORD PTR [edx+0x34]
+        inc    eax
+        mov    DWORD PTR [edi+ecx*1+0x14],esi
+        mov    edi,DWORD PTR [edx+0x3c]
+        add    ecx,0x20
+        cmp    eax,edi
+        jl     loc_1006c603
+        loc_1006c615:
+        mov    eax,ds:0x101240cc
+        mov    DWORD PTR [esp+0xc],0x0
+        test   eax,eax
+        jle    loc_1006c76c
+        mov    eax,ds:0x100dd050
+        push   ebx
+        mov    ebx,0x10123dc8
+        mov    ecx,0x10123e58
+        push   ebp
+        mov    DWORD PTR [esp+0x1c],ebx
+        mov    DWORD PTR [esp+0x18],ecx
+        loc_1006c643:
+        mov    edx,DWORD PTR [ecx]
+        mov    DWORD PTR [esp+0x10],0x0
+        test   edx,edx
+        jle    loc_1006c73b
+        loc_1006c655:
+        mov    ebp,DWORD PTR [ebx]
+        test   eax,eax
+        jl     loc_1006c721
+        test   ebp,ebp
+        jl     loc_1006c721
+        cmp    ebp,eax
+        je     loc_1006c721
+        lea    edi,[ebp*8+0x0]
+        lea    ecx,[eax*8+0x0]
+        sub    edi,ebp
+        sub    ecx,eax
+        shl    edi,0x3
+        mov    esi,DWORD PTR [ecx*8+0x10123418]
+        mov    edx,DWORD PTR [edi+0x10123418]
+        cmp    edx,esi
+        jne    loc_1006c721
+        mov    eax,DWORD PTR [esp+0x20]
+        xor    ecx,ecx
+        mov    esi,DWORD PTR [eax+0x48]
+        mov    edx,DWORD PTR [esi+0x3c]
+        mov    eax,DWORD PTR [esi+0x34]
+        test   edx,edx
+        jle    loc_1006c6b9
+        loc_1006c6ac:
+        test   BYTE PTR [eax],0x1
+        je     loc_1006c6b9
+        inc    ecx
+        add    eax,0x20
+        cmp    ecx,edx
+        jl     loc_1006c6ac
+        loc_1006c6b9:
+        cmp    ecx,edx
+        jne    loc_1006c6f6
+        mov    ecx,DWORD PTR ds:0x1010cfc8
+        push   0x529
+        push   0x100dd0a4
+        mov    edx,DWORD PTR [ecx]
+        call   DWORD PTR [edx+0x120]
+        mov    edx,DWORD PTR [esi+0x3c]
+        mov    eax,ds:0x1010cfc8
+        push   edx
+        push   0x100dd0fc
+        mov    ecx,DWORD PTR [eax]
+        push   0x100c5d7c
+        push   eax
+        call   DWORD PTR [ecx+0x128]
+        add    esp,0x10
+        jmp    loc_1006c71c
+        loc_1006c6f6:
+        mov    esi,DWORD PTR [eax]
+        xor    ecx,ecx
+        or     esi,0x1
+        cmp    eax,ecx
+        mov    DWORD PTR [eax],esi
+        je     loc_1006c71c
+        lea    edx,[edi+0x101233f8]
+        mov    DWORD PTR [eax+0x4],0x1
+        mov    DWORD PTR [eax+0x8],edx
+        mov    DWORD PTR [eax+0x14],ebp
+        mov    DWORD PTR [eax+0xc],ecx
+        mov    DWORD PTR [eax+0x10],ecx
+        loc_1006c71c:
+        mov    eax,ds:0x100dd050
+        loc_1006c721:
+        mov    ecx,DWORD PTR [esp+0x18]
+        mov    edx,DWORD PTR [esp+0x10]
+        inc    edx
+        add    ebx,0x4
+        mov    esi,DWORD PTR [ecx]
+        mov    DWORD PTR [esp+0x10],edx
+        cmp    edx,esi
+        jl     loc_1006c655
+        loc_1006c73b:
+        mov    edx,DWORD PTR [esp+0x14]
+        mov    ebx,DWORD PTR [esp+0x1c]
+        mov    esi,DWORD PTR ds:0x101240cc
+        inc    edx
+        add    ecx,0xc0
+        add    ebx,0xc0
+        cmp    edx,esi
+        mov    DWORD PTR [esp+0x14],edx
+        mov    DWORD PTR [esp+0x18],ecx
+        mov    DWORD PTR [esp+0x1c],ebx
+        jl     loc_1006c643
+        pop    ebp
+        pop    ebx
+        loc_1006c76c:
+        pop    edi
+        pop    esi
+        add    esp,0x14
+        ret    0x4
+    }
 }
 
 // 0x1006c780: ViewpointList::AllocItem
 /*
+
 1006c780:	83 ec 0c             	sub    esp,0xc
 1006c783:	8b 44 24 10          	mov    eax,DWORD PTR [esp+0x10]
 1006c787:	8b 15 50 d0 0d 10    	mov    edx,DWORD PTR ds:0x100dd050
@@ -467,13 +625,160 @@ void ViewpointList::AllocItem() {
 1006c94e:	90                   	nop
 1006c94f:	90                   	nop
 
+
 */
 void ViewpointList::AllocItem() {
-    // TODO: Implement AllocItem
+    __asm {
+        sub    esp,0xc
+        mov    eax,DWORD PTR [esp+0x10]
+        mov    edx,DWORD PTR ds:0x100dd050
+        push   esi
+        cmp    eax,edx
+        push   edi
+        mov    DWORD PTR [esp+0x10],ecx
+        jne    loc_1006c939
+        cmp    DWORD PTR [esp+0x20],0x7
+        jne    loc_1006c939
+        mov    edx,DWORD PTR [ecx+0x48]
+        xor    eax,eax
+        mov    ecx,DWORD PTR [edx+0x3c]
+        mov    edi,DWORD PTR [edx+0x34]
+        shl    ecx,0x5
+        mov    esi,ecx
+        shr    ecx,0x2
+        rep stosd
+        mov    ecx,esi
+        and    ecx,0x3
+        rep stosb
+        mov    ecx,DWORD PTR [edx+0x3c]
+        xor    eax,eax
+        test   ecx,ecx
+        jle    loc_1006c7e2
+        xor    ecx,ecx
+        or     esi,0xffffffff
+        loc_1006c7d0:
+        mov    edi,DWORD PTR [edx+0x34]
+        inc    eax
+        mov    DWORD PTR [ecx+edi*1+0x14],esi
+        mov    edi,DWORD PTR [edx+0x3c]
+        add    ecx,0x20
+        cmp    eax,edi
+        jl     loc_1006c7d0
+        loc_1006c7e2:
+        mov    eax,ds:0x101240cc
+        mov    DWORD PTR [esp+0x20],0x0
+        test   eax,eax
+        jle    loc_1006c939
+        mov    eax,ds:0x100dd050
+        push   ebx
+        mov    ebx,0x10123dc8
+        mov    ecx,0x10123e58
+        push   ebp
+        mov    DWORD PTR [esp+0x14],ebx
+        mov    DWORD PTR [esp+0x10],ecx
+        loc_1006c810:
+        mov    edx,DWORD PTR [ecx]
+        mov    DWORD PTR [esp+0x20],0x0
+        test   edx,edx
+        jle    loc_1006c908
+        loc_1006c822:
+        mov    ebp,DWORD PTR [ebx]
+        test   eax,eax
+        jl     loc_1006c8ee
+        test   ebp,ebp
+        jl     loc_1006c8ee
+        cmp    ebp,eax
+        je     loc_1006c8ee
+        lea    edi,[ebp*8+0x0]
+        lea    ecx,[eax*8+0x0]
+        sub    edi,ebp
+        sub    ecx,eax
+        shl    edi,0x3
+        mov    esi,DWORD PTR [ecx*8+0x10123418]
+        mov    edx,DWORD PTR [edi+0x10123418]
+        cmp    edx,esi
+        jne    loc_1006c8ee
+        mov    eax,DWORD PTR [esp+0x18]
+        xor    ecx,ecx
+        mov    esi,DWORD PTR [eax+0x48]
+        mov    edx,DWORD PTR [esi+0x3c]
+        mov    eax,DWORD PTR [esi+0x34]
+        test   edx,edx
+        jle    loc_1006c886
+        loc_1006c879:
+        test   BYTE PTR [eax],0x1
+        je     loc_1006c886
+        inc    ecx
+        add    eax,0x20
+        cmp    ecx,edx
+        jl     loc_1006c879
+        loc_1006c886:
+        cmp    ecx,edx
+        jne    loc_1006c8c3
+        mov    ecx,DWORD PTR ds:0x1010cfc8
+        push   0x529
+        push   0x100dd0a4
+        mov    edx,DWORD PTR [ecx]
+        call   DWORD PTR [edx+0x120]
+        mov    edx,DWORD PTR [esi+0x3c]
+        mov    eax,ds:0x1010cfc8
+        push   edx
+        push   0x100dd0fc
+        mov    ecx,DWORD PTR [eax]
+        push   0x100c5d7c
+        push   eax
+        call   DWORD PTR [ecx+0x128]
+        add    esp,0x10
+        jmp    loc_1006c8e9
+        loc_1006c8c3:
+        mov    esi,DWORD PTR [eax]
+        xor    ecx,ecx
+        or     esi,0x1
+        cmp    eax,ecx
+        mov    DWORD PTR [eax],esi
+        je     loc_1006c8e9
+        lea    edx,[edi+0x101233f8]
+        mov    DWORD PTR [eax+0x4],0x1
+        mov    DWORD PTR [eax+0x8],edx
+        mov    DWORD PTR [eax+0x14],ebp
+        mov    DWORD PTR [eax+0xc],ecx
+        mov    DWORD PTR [eax+0x10],ecx
+        loc_1006c8e9:
+        mov    eax,ds:0x100dd050
+        loc_1006c8ee:
+        mov    ecx,DWORD PTR [esp+0x10]
+        mov    edx,DWORD PTR [esp+0x20]
+        inc    edx
+        add    ebx,0x4
+        mov    esi,DWORD PTR [ecx]
+        mov    DWORD PTR [esp+0x20],edx
+        cmp    edx,esi
+        jl     loc_1006c822
+        loc_1006c908:
+        mov    edx,DWORD PTR [esp+0x28]
+        mov    ebx,DWORD PTR [esp+0x14]
+        mov    esi,DWORD PTR ds:0x101240cc
+        inc    edx
+        add    ecx,0xc0
+        add    ebx,0xc0
+        cmp    edx,esi
+        mov    DWORD PTR [esp+0x28],edx
+        mov    DWORD PTR [esp+0x10],ecx
+        mov    DWORD PTR [esp+0x14],ebx
+        jl     loc_1006c810
+        pop    ebp
+        pop    ebx
+        loc_1006c939:
+        pop    edi
+        pop    esi
+        add    esp,0xc
+        ret    0xc
+    }
 }
 
 // 0x1006c950: ViewpointList::AllocItem
 /*
+
 1006c950:	53                   	push   ebx
 1006c951:	56                   	push   esi
 1006c952:	8b 5c 24 0c          	mov    ebx,DWORD PTR [esp+0xc]
@@ -1504,8 +1809,61 @@ void ViewpointList::AllocItem() {
 1006d47e:	90                   	nop
 1006d47f:	90                   	nop
 
+
 */
 void ViewpointList::AllocItem() {
-    // TODO: Implement AllocItem
+    __asm {
+        push   ebx
+        push   esi
+        mov    ebx,DWORD PTR [esp+0xc]
+        push   edi
+        mov    edi,DWORD PTR [ecx+0x4c]
+        xor    ecx,ecx
+        mov    eax,DWORD PTR [edi+0x3c]
+        mov    edx,DWORD PTR [edi+0x34]
+        test   eax,eax
+        mov    esi,edx
+        jle    loc_1006c975
+        loc_1006c968:
+        cmp    DWORD PTR [esi+0x14],ebx
+        je     loc_1006c9d6
+        inc    ecx
+        add    esi,0x20
+        cmp    ecx,eax
+        jl     loc_1006c968
+        loc_1006c975:
+        xor    ecx,ecx
+        mov    esi,edx
+        test   eax,eax
+        jle    loc_1006c98a
+        loc_1006c97d:
+        test   BYTE PTR [esi],0x1
+        je     loc_1006c98a
+        inc    ecx
+        add    esi,0x20
+        cmp    ecx,eax
+        jl     loc_1006c97d
+        loc_1006c98a:
+        cmp    ecx,eax
+        jne    loc_1006c9cb
+        mov    ecx,DWORD PTR ds:0x1010cfc8
+        push   0x529
+        push   0x100dd0a4
+        mov    eax,DWORD PTR [ecx]
+        call   DWORD PTR [eax+0x120]
+        mov    edx,DWORD PTR [edi+0x3c]
+        mov    eax,ds:0x1010cfc8
+        push   edx
+        push   0x100dd0fc
+        mov    ecx,DWORD PTR [eax]
+        push   0x100c5d7c
+        push   eax
+        call   DWORD PTR [ecx+0x128]
+        add    esp,0x10
+        pop    edi
+        pop    esi
+        pop    ebx
+        ret    0x4
+    }
 }
 

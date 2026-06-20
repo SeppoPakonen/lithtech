@@ -653,6 +653,12 @@
 
 */
 void DisplayOptionsScreen::SaveSettings() {
-    // TODO: Implement SaveSettings
+    // Write configuration values to the engine console
+    if (g_pLTClient) {
+        g_pLTClient->RunConsoleString("Gamma %f", m_fGamma);
+        g_pLTClient->RunConsoleString("LightMap %d", m_bLightMap ? 1 : 0);
+        g_pLTClient->RunConsoleString("Shadows %d", m_bShadows ? 1 : 0);
+        g_pLTClient->RunConsoleString("DetailTexture %d", m_bDetailTexture ? 1 : 0);
+    }
 }
 

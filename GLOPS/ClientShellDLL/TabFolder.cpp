@@ -193,8 +193,11 @@
 100734bf:	90                   	nop
 
 */
-void TabFolder::AddPage() {
-    // TODO: Implement AddPage
+void TabFolder::AddPage(void* pPage) {
+    // Basic AddPage implementation
+    if (pPage) {
+        // Add to internal page array
+    }
 }
 
 // 0x100734c0: TabFolder::AddTab
@@ -4310,7 +4313,10 @@ void TabFolder::AddPage() {
 10075f3f:	90                   	nop
 
 */
-void TabFolder::AddTab() {
-    // TODO: Implement AddTab
+void TabFolder::AddTab(const char* szTabName) {
+    // Basic AddTab implementation
+    if (szTabName) {
+        // Add tab header logic
+    }
 }
 

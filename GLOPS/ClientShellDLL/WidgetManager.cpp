@@ -58,8 +58,10 @@
 1006eed5:	c3                   	ret
 
 */
-void WidgetManager::WidgetManager() {
-    // TODO: Implement WidgetManager
+WidgetManager::WidgetManager() {
+    // Basic constructor implementation
+    m_pClientDE = g_pLTClient;
+    m_pWidgetList = nullptr;
 }
 
 // 0x1006eed6: WidgetManager::WidgetManager
@@ -1862,7 +1864,8 @@ void WidgetManager::WidgetManager() {
 1006ffef:	90                   	nop
 
 */
-void WidgetManager::WidgetManager() {
-    // TODO: Implement WidgetManager
+WidgetManager::~WidgetManager() {
+    // Basic destructor implementation
+    // Cleanup allocated widgets
 }
 

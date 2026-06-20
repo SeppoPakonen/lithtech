@@ -1758,7 +1758,10 @@
 1006ee1f:	90                   	nop
 
 */
-void TiledBitmap::Load() {
-    // TODO: Implement Load
+void TiledBitmap::Load(const char* szFilename) {
+    // Basic texture loading logic from assembly
+    if (g_pLTClient && szFilename) {
+        m_hTexture = g_pLTClient->GetTexInterface()->CreateTextureFromName(szFilename);
+    }
 }
 

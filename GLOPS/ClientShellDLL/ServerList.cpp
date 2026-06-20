@@ -1,7 +1,25 @@
 #include "ServerList.h"
 #include "ILTClient.h"
+#include <stdio.h>
+#include <vector>
 
 extern ILTClient* g_pLTClient;
+
+// Internal declarations based on ASM
+extern void* GetGamespyServer();
+extern void UpdateGamespyServer(void* pGamespyServer);
+extern void UpdateFavoritesList(void* pList);
+extern void CallUnknown74d60(ServerList* pList, int arg);
+extern void CallUnknownA1630(void* pGamespyServer, int arg1, int arg2, int arg3);
+extern void CallUnknownA1340(void* pGamespyServer);
+extern int CallUnknown62980(ServerList* pList);
+extern const char* GetGamespyErrorString(void* pGamespyServer, int errorCode);
+extern void SortFavorites(ServerList* pList);
+
+struct Favourite {
+    char ip[16];
+    int port;
+};
 
 ServerList::ServerList() {
     // Constructor
@@ -13,74 +31,88 @@ ServerList::~ServerList() {
 
 // 0x10062310
 void ServerList::Update() {
-    // 10062310:	56                   	push   esi
-    // 10062311:	57                   	push   edi
-    // 10062312:	8b f1                	mov    esi,ecx
-    // 10062314:	bf 01 00 00 00       	mov    edi,0x1
-    // 10062319:	89 be 34 13 00 00    	mov    DWORD PTR [esi+0x1334],edi
     m_nUnknown1334 = 1;
+    void* pGamespy = GetGamespyServer();
+    m_pUnknown1338 = (void*)*((uint32_t*)((char*)pGamespy + 0x54)); // State
     
-    // 1006231f:	e8 2c 5b 00 00       	call   0x10067e50
-    // GetGamespyServer();
+    UpdateGamespyServer(m_pGamespyServer);
+    UpdateFavoritesList(&m_pFavoritesList);
     
-    // 10062324:	8b 8e 18 13 00 00    	mov    ecx,DWORD PTR [esi+0x1318]
-    // 1006232a:	8b 40 54             	mov    eax,DWORD PTR [eax+0x54]
-    // 1006232d:	51                   	push   ecx
-    // 1006232e:	89 86 38 13 00 00    	mov    DWORD PTR [esi+0x1338],eax
-    // 10062334:	e8 37 0a 04 00       	call   0x100a2d70
-    // int serverState = GetGamespyServerState(m_pGamespyServer);
-    // m_nUnknown1338 = serverState;
-    
-    // 100623b2:	85 ff                	test   edi,edi
-    // 100623b4:	74 4a                	je     0x10062400
-    // 100623b6:	8b 0d c8 cf 10 10    	mov    ecx,DWORD PTR ds:0x1010cfc8
-    // 100623bc:	53                   	push   ebx
-    // 100623bd:	68 48 01 00 00       	push   0x148
-    // 100623c2:	68 30 cb 0d 10       	push   0x100dcb30
-    // 100623c7:	8b 11                	mov    edx,DWORD PTR [ecx]
-    // 100623c9:	ff 92 20 01 00 00    	call   DWORD PTR [edx+0x120]
-    // ...
-    // 100623f6:	ff 93 28 01 00 00    	call   DWORD PTR [ebx+0x128]
-    
-    if (m_pGamespyServer && m_pGamespyServer->State == ERROR) {
-        g_pLTClient->CPrint("ServerList::Update: Gamespy error (%u): %s", m_pGamespyServer->State, "Error");
+    uint32_t unk = m_nUnknown1314;
+    m_nUnknown1314 = 0xFFFFFFFF;
+    if (unk != 0xFFFFFFFF) {
+        void* pGamespy2 = GetGamespyServer();
+        typedef void (__thiscall *FuncType)(void*);
+        FuncType func = *(FuncType*)(*(uintptr_t*)pGamespy2 + 0x74);
+        func(pGamespy2);
     }
     
-    if (m_pServerArray && m_nNumServers > 0) {
-        // ... Refresh servers loop ...
+    CallUnknown74d60(this, 0);
+    
+    int state = (int)m_pUnknown1338;
+    if (state == 1) {
+        CallUnknownA1630(m_pGamespyServer, 1, 0x7000, 0x700A);
+    } else {
+        CallUnknownA1340(m_pGamespyServer);
+    }
+    
+    int retCode = CallUnknown62980(this);
+    if (retCode != 0) {
+        g_pLTClient->DebugOut("ServerList.cpp", 328);
+        const char* errorStr = GetGamespyErrorString(m_pGamespyServer, retCode);
+        g_pLTClient->CPrint("ServerList::Update: Gamespy error (%u): %s", retCode, errorStr);
     }
 }
 
 // 0x100632c0
 void ServerList::SaveFavourites() {
-    const char* szFilename = "globalops/favorite_servers.txt";
+    SortFavorites(this);
     
-    // Abstracted sorting or internal state prep call
-    // 100632c4: call 0x1006ab20
-    
-    FILE* fp = fopen(szFilename, "wt");
+    FILE* fp = fopen("globalops/favorite_servers.txt", "wt");
     if (!fp) {
+        g_pLTClient->DebugOut("ServerList.cpp", 787);
         g_pLTClient->CPrint("ServerList::SaveFavourites: Couldn't open favorites.txt for writing");
         return;
     }
     
-    // Iterate over favorite servers and save them
-    // Abstracted
+    std::vector<Favourite>& favs = *(std::vector<Favourite>*)((char*)this + 0x1414);
+    for (size_t i = 0; i < favs.size(); ++i) {
+        fprintf(fp, "%s:%d\n", favs[i].ip, favs[i].port);
+    }
     
     fclose(fp);
 }
 
 // 0x10063380
 void ServerList::LoadFavourites() {
-    const char* szFilename = "globalops/favorite_servers.txt";
+    std::vector<Favourite>& favs = *(std::vector<Favourite>*)((char*)this + 0x1414);
+    favs.clear();
     
-    FILE* fp = fopen(szFilename, "rt");
+    FILE* fp = fopen("globalops/favorite_servers.txt", "rt");
     if (!fp) {
+        g_pLTClient->DebugOut("ServerList.cpp", 742);
         g_pLTClient->CPrint("ServerList::LoadFavourites: Couldn't open favorites.txt for reading");
-        return;
+    } else {
+        while (!feof(fp)) {
+            int ip1 = 0, ip2 = 0, ip3 = 0, ip4 = 0, port = 0;
+            if (fscanf(fp, "%d.%d.%d.%d:%d", &ip1, &ip2, &ip3, &ip4, &port) >= 5) {
+                if (ip1 >= 0 && ip1 <= 255 && ip2 >= 0 && ip2 <= 255 &&
+                    ip3 >= 0 && ip3 <= 255 && ip4 >= 0 && ip4 <= 255) {
+                    
+                    Favourite fav;
+                    _snprintf(fav.ip, 15, "%d.%d.%d.%d", ip1, ip2, ip3, ip4);
+                    fav.ip[15] = '\0';
+                    fav.port = port;
+                    favs.push_back(fav);
+                }
+            }
+        }
+        fclose(fp);
     }
     
-    // Abstracted read loop (fgets etc)
-    
-    fclose(fp);
+    int numServers = 0;
+    if (m_pServerArray) {
+        numServers = (m_nNumServers - (uint32_t)m_pServerArray) / 220;
+    }
+    CallUnknown74d60(this, numServers);
 }

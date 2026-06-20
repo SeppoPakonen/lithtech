@@ -4,7 +4,7 @@
 
 extern ILTClient* g_pLTClient;
 
-// Abstracted UI control methods
+// UI control methods
 class CUIList {
 public:
     void Clear();
@@ -25,16 +25,26 @@ public:
 };
 
 PlayerList::PlayerList() {
+    m_pServer = nullptr;
+    m_pPlayerListCtrl = nullptr;
+    m_pColNumPlayers = nullptr;
+    m_pColHostname = nullptr;
+    m_pColGameVer = nullptr;
+    m_pColMapName = nullptr;
+    m_pColAdmin = nullptr;
+    m_pColEmail = nullptr;
+    m_pColTimeLeft = nullptr;
+    m_pColMaxPlayers = nullptr;
+    m_pColPlayerName = nullptr;
 }
 
 PlayerList::~PlayerList() {
+    // UI elements are managed by the GUI manager in LithTech, so we typically do not delete them here.
 }
 
 // 0x100654f0
 void PlayerList::AddPlayer() {
     if (!m_pServer) {
-        // Fallback or clear if no server selected
-        // 100657a6 block calls multiple UI clear methods for the info columns
         if (m_pPlayerListCtrl) {
              ((CUIList*)m_pPlayerListCtrl)->Clear();
         }
@@ -58,7 +68,6 @@ void PlayerList::AddPlayer() {
         pList->Clear();
     }
     
-    // 100655d5: Loop over numPlayers to populate the m_pPlayerListCtrl
     for (int i = 0; i < numPlayers; ++i) {
         char szKey[32];
         sprintf(szKey, "player_%i", i);
@@ -92,19 +101,6 @@ void PlayerList::AddPlayer() {
         ((CUIStaticText*)m_pColGameVer)->SetText(pServer->GetProperty("gamever"));
     }
     
-    // There isn't a direct address column pointer in the header around 0x104 except m_pColGameVer.
-    // Let's assume m_pColHostname or another column takes the formatted hostport if we check the asm.
-    // Actually, looking at the header, we have:
-    // 0x100: m_pColHostname
-    // 0x104: m_pColGameVer
-    // 0x108: m_pColMapName
-    // 0x10c: m_pColAdmin
-    // 0x110: m_pColEmail
-    // 0x114: m_pColTimeLeft
-    // 0x118: m_pColMaxPlayers
-    // 0x11c: m_pColPlayerName
-    // We should map these properly.
-    
     if (m_pColMapName) {
         ((CUIStaticText*)m_pColMapName)->SetText(pServer->GetProperty("mapname"));
     }
@@ -129,7 +125,6 @@ void PlayerList::AddPlayer() {
     }
     
     if (m_pColNumPlayers) {
-        // Based on the assembly, m_pColNumPlayers (0xfc) uses %s:%i which might be hostname:port.
         sprintf(szBuffer, "%s:%i", pServer->GetProperty("hostname"), pServer->GetIntProperty("hostport"));
         ((CUIStaticText*)m_pColNumPlayers)->SetText(szBuffer);
     }
