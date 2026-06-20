@@ -10,10 +10,7 @@ public:
 };
 
 void MessageBox::Show(const char* message, uint32 type) {
-    // Overlays a modal dialog with Yes/No/Ok buttons, capturing input focus
-    // and rendering the provided message string centered.
 }
 
 void MessageBox::Hide() {
-    // Dismisses the modal and restores input routing to the previous UI screen
 }

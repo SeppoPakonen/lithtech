@@ -3,7 +3,6 @@
 
 extern ILTClient* g_pLTClient;
 
-// Simulated Bute manager API
 class CButeMgr {
 public:
     char* GetString(const char* szTag, const char* szKey);
@@ -11,8 +10,10 @@ public:
     bool Exist(const char* szTag, const char* szKey);
 };
 
-// Abstract simulated method
 extern void* CreateTextureFromName(const char* szName);
+
+// Dummy external list insert
+extern void* AddNodeToList(void* pList, int nVal);
 
 ClientTeamManager::ClientTeamManager() {
 }
@@ -20,7 +21,6 @@ ClientTeamManager::ClientTeamManager() {
 ClientTeamManager::~ClientTeamManager() {
 }
 
-// 0x1001f2c0
 ClientTeam* ClientTeamManager::AddTeam(void* pMgr, const char* szTeamTag) {
     CButeMgr* pButeMgr = (CButeMgr*)pMgr;
     if (!pButeMgr) return nullptr;
@@ -28,7 +28,6 @@ ClientTeam* ClientTeamManager::AddTeam(void* pMgr, const char* szTeamTag) {
     ClientTeam* pTeam = new ClientTeam();
     if (!pTeam) return nullptr;
 
-    // Zero out pointers and strings
     pTeam->m_szName = nullptr;
     pTeam->m_szAffiliationName = nullptr;
     pTeam->m_szBriefing = nullptr;
@@ -102,7 +101,6 @@ ClientTeam* ClientTeamManager::AddTeam(void* pMgr, const char* szTeamTag) {
         pTeam->m_nMaxPlayers = pButeMgr->GetInt(szTeamTag, "MaxPlayers");
     }
     
-    // Attempting to load flag texture (usually "Flag" or similar)
     if (pButeMgr->Exist(szTeamTag, "Flag")) {
         const char* szFlag = pButeMgr->GetString(szTeamTag, "Flag");
         pTeam->m_hFlag = CreateTextureFromName(szFlag);
@@ -111,5 +109,14 @@ ClientTeam* ClientTeamManager::AddTeam(void* pMgr, const char* szTeamTag) {
         }
     }
     
+    int* pUnk14 = (int*)((char*)this + 0x14);
+    char* pList = ((char*)this + 0x0c);
+    void* pNode = AddNodeToList(pList, *pUnk14);
+    if (pNode) {
+        *((ClientTeam**)((char*)pNode + 0x8)) = pTeam;
+        int* pNumTeams = (int*)((char*)this + 0x18);
+        (*pNumTeams)++;
+    }
+
     return pTeam;
 }

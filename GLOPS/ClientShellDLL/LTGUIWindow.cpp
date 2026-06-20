@@ -11,13 +11,10 @@ public:
 };
 
 void LTGUIWindow::Init() {
-    // Sets up window dimensions, background surfaces, and widget containers
 }
 
 void LTGUIWindow::Render() {
-    // Draws window frames, backgrounds, and iterates through child widgets to draw them
 }
 
 void LTGUIWindow::Update() {
-    // Processes generic window states, fade-ins/outs, and positional interpolation
 }

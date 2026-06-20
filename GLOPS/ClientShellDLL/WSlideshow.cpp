@@ -1,6 +1,7 @@
 #include "WSlideshow.h"
 #include "ILTClient.h"
 
+// Assuming g_pLTClient is an ILTClient* and ITexInterface is used for textures
 extern ILTClient* g_pLTClient;
 
 struct LTRect {
@@ -10,24 +11,53 @@ struct LTRect {
     int bottom;
 };
 
-// Assuming an external texture drawing function
-extern void DrawTexture(void* hTex, int x, int y, int w, int h, int unknown, uint32 color);
+// 0x1004a690 - External texture drawing function (possibly DrawPrim)
+// The assembly pushes color, 0, bottom, right, y, x, hTex, and calls a member function on 0x1011be5c
+extern void DrawTexture(void* hTex, int x, int y, int right, int bottom, int unknown, uint32 color);
+
+// 0x100a50dc - Random function, returns an integer
+extern int GetRandomSlideIndex();
 
 // 0x1003eae0
 void WSlideshow::LoadSlides() {
-    // Original code loads 19 textures from specific string pointers
-    m_nNumSlides = 19; // 0x13
-    m_apSlideTextures = new void*[m_nNumSlides];
-    
-    // The original code passed hardcoded string pointers (e.g. 0x100d9dec to 0x100d9bf4) 
-    // to a texture creation function (0x100a50dc or similar).
-    for (uint32 i = 0; i < m_nNumSlides; ++i) {
-        // m_apSlideTextures[i] = CreateTextureFromName(szSlides[i]);
-        m_apSlideTextures[i] = nullptr; 
+    if (m_apSlideTextures != nullptr) {
+        delete[] m_apSlideTextures;
     }
-    
+
+    m_nNumSlides = 19; // 0x13
+    m_apSlideTextures = nullptr;
     m_nCurrentSlide = 0xFFFFFFFF; // -1
     m_fNextSlideTime = 0.0f;
+
+    m_apSlideTextures = new void*[m_nNumSlides];
+    
+    // Original code placed 19 string pointers on the stack
+    const char* szSlides[19] = {
+        (const char*)0x100d9dec, (const char*)0x100d9dd0, (const char*)0x100d9db4,
+        (const char*)0x100d9d98, (const char*)0x100d9d7c, (const char*)0x100d9d60,
+        (const char*)0x100d9d44, (const char*)0x100d9d28, (const char*)0x100d9d0c,
+        (const char*)0x100d9cf0, (const char*)0x100d9cd4, (const char*)0x100d9cb8,
+        (const char*)0x100d9c9c, (const char*)0x100d9c80, (const char*)0x100d9c64,
+        (const char*)0x100d9c48, (const char*)0x100d9c2c, (const char*)0x100d9c10,
+        (const char*)0x100d9bf4
+    };
+    
+    for (uint32 i = 0; i < m_nNumSlides; ++i) {
+        m_apSlideTextures[i] = nullptr;
+    }
+
+    for (uint32 i = 0; i < m_nNumSlides; ++i) {
+        // g_pLTClient->GetTexInterface()->CreateTextureFromName(szSlides[i]);
+        // The assembly calls ds:0x1010cff0 (TexInterface) and virtual function offset 0x8
+        // m_apSlideTextures[i] = ...
+    }
+
+    // Call random function and modulo by m_nNumSlides
+    m_nCurrentSlide = GetRandomSlideIndex() % m_nNumSlides;
+
+    // Set initial next slide time: fTime + 1.0f + 4.0f
+    float fTime = g_pLTClient->GetTime();
+    m_fNextSlideTime = fTime + 1.0f + 4.0f; // 0x100d8c74 and 0x100d8c70
 }
 
 // 0x1003ec60
@@ -38,39 +68,32 @@ void WSlideshow::Render(void* pRectPtr) {
 
     LTRect* pRect = (LTRect*)pRectPtr;
     
-    float fTime = g_pLTClient->GetTime(); // 0xd8
+    float fTime = g_pLTClient->GetTime(); // ds:0x1011a14c -> +0xd8
 
     if (fTime >= m_fNextSlideTime) {
         m_nCurrentSlide = (m_nCurrentSlide + 1) % m_nNumSlides;
-        
-        // Time constants from memory (0x100d8c74 and 0x100d8c70)
-        // Assume 4.0s display time, 1.0s fade time
-        m_fNextSlideTime = fTime + 4.0f + 1.0f; 
+        // m_fNextSlideTime += 1.0f + 4.0f;
+        m_fNextSlideTime = fTime + 1.0f + 4.0f;
     }
 
-    float fFadeTime = m_fNextSlideTime - fTime;
     int alpha = 255;
     
-    // Crossfade logic: if less than 1.0s remaining, start fading
-    if (fFadeTime < 1.0f) {
-        alpha = (int)(fFadeTime * 255.0f);
+    // if fTime >= m_fNextSlideTime - 1.0f
+    if (fTime >= (m_fNextSlideTime - 1.0f)) {
+        float fFadeTime = m_fNextSlideTime - fTime;
+        alpha = (int)((fFadeTime / 1.0f) * 255.0f);
     }
     
     int nextAlpha = 255 - alpha;
 
-    int x = pRect->x;
-    int y = pRect->y;
-    int w = pRect->right;  // assuming right/bottom or width/height
-    int h = pRect->bottom;
-
-    if (alpha > 0) {
+    if (alpha != 0) {
         uint32 color = ((alpha & 0xFF) << 24) | 0xFFFFFF;
-        DrawTexture(m_apSlideTextures[m_nCurrentSlide], x, y, w, h, 0, color);
+        DrawTexture(m_apSlideTextures[m_nCurrentSlide], pRect->x, pRect->y, pRect->right, pRect->bottom, 0, color);
     }
 
-    if (nextAlpha > 0) {
+    if (nextAlpha != 0) {
         uint32 color = ((nextAlpha & 0xFF) << 24) | 0xFFFFFF;
         uint32 nextSlide = (m_nCurrentSlide + 1) % m_nNumSlides;
-        DrawTexture(m_apSlideTextures[nextSlide], x, y, w, h, 0, color);
+        DrawTexture(m_apSlideTextures[nextSlide], pRect->x, pRect->y, pRect->right, pRect->bottom, 0, color);
     }
 }
