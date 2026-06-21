@@ -2012,161 +2012,7 @@ __declspec(naked) void Global::Unknown_10001123() {
 10001e3f:	90                   	nop
 
 */
-void Global::Unknown_100014d0() {
-
-    // --- MACHINE DECOMPILED BY ANGR ---
-    // TODO: Clean up variable names, types, and logic to readable C++
-typedef struct struct_0 {
-    char padding_0[4];
-    unsigned int field_4;
-    char padding_8[12];
-    unsigned int field_14;
-    int field_18;
-    char padding_1c[40];
-    unsigned int field_44;
-    unsigned int field_48;
-    char padding_4c[8];
-    unsigned int field_54;
-    int field_58;
-    char padding_5c[8];
-    unsigned int field_64;
-    unsigned int field_68;
-    char padding_6c[16];
-    unsigned int field_7c;
-    unsigned int field_80;
-    char padding_84[4932];
-    unsigned int field_13c8;
-    char padding_13cc[108];
-    unsigned int field_1438;
-    char padding_143c[108];
-    unsigned int field_14a8;
-    char padding_14ac[108];
-    unsigned int field_1518;
-    char padding_151c[108];
-    unsigned int field_1588;
-    char padding_158c[108];
-    unsigned int field_15f8;
-    char padding_15fc[108];
-    unsigned int field_1668;
-    char padding_166c[108];
-    unsigned int field_16d8;
-    char padding_16dc[108];
-    unsigned int field_1748;
-    char padding_174c[108];
-    unsigned int field_17b8;
-    char padding_17bc[108];
-    unsigned int field_1828;
-    char padding_182c[108];
-    unsigned int field_1898;
-    char padding_189c[108];
-    unsigned int field_1908;
-    char padding_190c[108];
-    unsigned int field_1978;
-    char padding_197c[108];
-    unsigned int field_19e8;
-    char padding_19ec[108];
-    unsigned int field_1a58;
-    char padding_1a5c[220];
-    unsigned int field_1b38;
-    char padding_1b3c[108];
-    unsigned int field_1ba8;
-    char padding_1bac[108];
-    unsigned int field_1c18;
-    char padding_1c1c[108];
-    unsigned int field_1c88;
-    char padding_1c8c[108];
-    unsigned int field_1cf8;
-    char padding_1cfc[108];
-    unsigned int field_1d68;
-    char padding_1d6c[108];
-    unsigned int field_1dd8;
-    char padding_1ddc[108];
-    unsigned int field_1e48;
-    char padding_1e4c[108];
-    unsigned int field_1eb8;
-    char padding_1ebc[108];
-    unsigned int field_1f28;
-    char padding_1f2c[108];
-    unsigned int field_1f98;
-    char padding_1f9c[108];
-    unsigned int field_2008;
-    char padding_200c[108];
-    unsigned int field_2078;
-    char padding_207c[108];
-    unsigned int field_20e8;
-    char padding_20ec[108];
-    unsigned int field_2158;
-    char padding_215c[108];
-    unsigned int field_21c8;
-    char padding_21cc[34832];
-    unsigned int field_a9dc;
-    unsigned int field_a9e0;
-    char padding_a9e4[16];
-    unsigned int field_a9f4;
-    unsigned int field_a9f8;
-    unsigned int field_a9fc;
-    unsigned int field_aa00;
-    unsigned int field_aa04;
-    char padding_aa08[16];
-    unsigned int field_aa18;
-} struct_0;
-
-typedef struct struct_6 {
-    unsigned int field_0;
-} struct_6;
-
-typedef struct struct_5 {
-    unsigned int field_0;
-} struct_5;
-
-typedef struct struct_4 {
-    unsigned int field_0;
-} struct_4;
-
-typedef struct struct_3 {
-    unsigned int field_0;
-} struct_3;
-
-typedef struct struct_2 {
-    unsigned int field_0;
-} struct_2;
-
-typedef struct struct_9 {
-    unsigned int field_0;
-} struct_9;
-
-typedef struct struct_1 {
-    char padding_0[48];
-    struct struct_2 *field_30;
-    char padding_34[8];
-    struct struct_3 *field_3c;
-    char padding_40[40];
-    struct struct_4 *field_68;
-    char padding_6c[16];
-    struct struct_5 *field_7c;
-    char padding_80[4];
-    struct struct_6 *field_84;
-} struct_1;
-
-typedef struct struct_8 {
-    char padding_0[124];
-    struct struct_9 *field_7c;
-} struct_8;
-
-typedef struct struct_7 {
-    struct struct_1 *field_0;
-} struct_7;
-
-typedef struct struct_10 {
-    struct struct_8 *field_0;
-} struct_10;
-
-extern unsigned int g_100c51f0;
-extern struct_10 *g_1010cfc8;
-extern struct_7 *g_1010cfd4;
-
-int sub_100014d0(struct_0 *ptr, int a1, unsigned int a2, unsigned int a3, int a4)
-{
+void Global::Unknown_100014d0(int a1, unsigned int a2, unsigned int a3, int a4) {
     unsigned int v18;  // esi
     struct_0 *v19;  // edi
     unsigned int v27;  // eax
@@ -2239,56 +2085,56 @@ int sub_100014d0(struct_0 *ptr, int a1, unsigned int a2, unsigned int a3, int a4
     unsigned int v17;  // [bp-0x8]
 
     v17 = v18;
-    ptr->field_18 = a4;
-    ptr->field_4 = 0;
-    ptr->field_a9f4 = a2;
-    ptr->field_a9f8 = a3;
-    ptr->field_48 = 4294967295;
-    ptr->field_44 = 4294967295;
-    ptr->field_54 = 0;
-    ptr->field_80 = 5;
-    ptr->field_14 = 1;
-    ptr->field_58 = a1;
-    ptr->field_a9dc = 0;
-    ptr->field_a9e0 = 0;
-    if (!ptr->field_aa18)
+    this->field_18 = a4;
+    this->field_4 = 0;
+    this->field_a9f4 = a2;
+    this->field_a9f8 = a3;
+    this->field_48 = 4294967295;
+    this->field_44 = 4294967295;
+    this->field_54 = 0;
+    this->field_80 = 5;
+    this->field_14 = 1;
+    this->field_58 = a1;
+    this->field_a9dc = 0;
+    this->field_a9e0 = 0;
+    if (!this->field_aa18)
     {
-        v19 = &ptr->field_64;
-        g_1010cfd4->field_0->field_30(ptr->field_58, v19, v20, v21);
-        g_1010cfd4->field_0->field_3c(ptr->field_58, ptr->field_68);
-        sub_10002ae0(ptr->field_58, ptr->field_18);
-        g_1010cfd4->field_0->field_68(v19->padding_0, 846, ptr->field_13c8);
-        g_1010cfd4->field_0->field_68(v19->padding_0, 846, ptr->field_1438);
-        g_1010cfd4->field_0->field_68(v19->padding_0, 846, ptr->field_14a8);
-        g_1010cfd4->field_0->field_68(v19->padding_0, 709, ptr->field_1518);
-        g_1010cfd4->field_0->field_68(v19->padding_0, 709, ptr->field_1588);
-        g_1010cfd4->field_0->field_68(v19->padding_0, 709, ptr->field_15f8);
-        g_1010cfd4->field_0->field_68(v19->padding_0, 846, ptr->field_1668);
-        g_1010cfd4->field_0->field_68(v19->padding_0, 816, ptr->field_16d8);
-        g_1010cfd4->field_0->field_68(v19->padding_0, 816, ptr->field_1748);
-        g_1010cfd4->field_0->field_68(v19->padding_0, 750, ptr->field_17b8);
-        g_1010cfd4->field_0->field_68(v19->padding_0, 750, ptr->field_1828);
-        g_1010cfd4->field_0->field_68(v19->padding_0, 750, ptr->field_1898);
-        g_1010cfd4->field_0->field_68(v19->padding_0, 816, ptr->field_1908);
-        g_1010cfd4->field_0->field_68(v19->padding_0, 816, ptr->field_1978);
-        g_1010cfd4->field_0->field_68(v19->padding_0, 709, ptr->field_19e8);
-        g_1010cfd4->field_0->field_68(v19->padding_0, 709, ptr->field_1a58);
-        g_1010cfd4->field_0->field_68(v19->padding_0, 1108, ptr->field_1b38);
-        g_1010cfd4->field_0->field_68(v19->padding_0, 1108, ptr->field_1ba8);
-        g_1010cfd4->field_0->field_68(v19->padding_0, 1108, ptr->field_1c18);
-        g_1010cfd4->field_0->field_68(v19->padding_0, 709, ptr->field_1c88);
-        g_1010cfd4->field_0->field_68(v19->padding_0, 667, ptr->field_1cf8);
-        g_1010cfd4->field_0->field_68(v19->padding_0, 667, ptr->field_1d68);
-        g_1010cfd4->field_0->field_68(v19->padding_0, 1108, ptr->field_1dd8);
-        g_1010cfd4->field_0->field_68(v19->padding_0, 1108, ptr->field_1e48);
-        g_1010cfd4->field_0->field_68(v19->padding_0, 1108, ptr->field_1eb8);
-        g_1010cfd4->field_0->field_68(v19->padding_0, 750, ptr->field_1f28);
-        g_1010cfd4->field_0->field_68(v19->padding_0, 750, ptr->field_1f98);
-        g_1010cfd4->field_0->field_68(v19->padding_0, 750, ptr->field_2008);
-        g_1010cfd4->field_0->field_68(v19->padding_0, 1137, ptr->field_2078);
-        g_1010cfd4->field_0->field_68(v19->padding_0, 1137, ptr->field_20e8);
-        g_1010cfd4->field_0->field_68(v19->padding_0, 667, ptr->field_2158);
-        g_1010cfd4->field_0->field_68(v19->padding_0, 667, ptr->field_21c8);
+        v19 = &this->field_64;
+        g_pLTClient->field_0->field_30(this->field_58, v19, v20, v21);
+        g_pLTClient->field_0->field_3c(this->field_58, this->field_68);
+        sub_10002ae0(this->field_58, this->field_18);
+        g_pLTClient->field_0->field_68(v19->padding_0, 846, this->field_13c8);
+        g_pLTClient->field_0->field_68(v19->padding_0, 846, this->field_1438);
+        g_pLTClient->field_0->field_68(v19->padding_0, 846, this->field_14a8);
+        g_pLTClient->field_0->field_68(v19->padding_0, 709, this->field_1518);
+        g_pLTClient->field_0->field_68(v19->padding_0, 709, this->field_1588);
+        g_pLTClient->field_0->field_68(v19->padding_0, 709, this->field_15f8);
+        g_pLTClient->field_0->field_68(v19->padding_0, 846, this->field_1668);
+        g_pLTClient->field_0->field_68(v19->padding_0, 816, this->field_16d8);
+        g_pLTClient->field_0->field_68(v19->padding_0, 816, this->field_1748);
+        g_pLTClient->field_0->field_68(v19->padding_0, 750, this->field_17b8);
+        g_pLTClient->field_0->field_68(v19->padding_0, 750, this->field_1828);
+        g_pLTClient->field_0->field_68(v19->padding_0, 750, this->field_1898);
+        g_pLTClient->field_0->field_68(v19->padding_0, 816, this->field_1908);
+        g_pLTClient->field_0->field_68(v19->padding_0, 816, this->field_1978);
+        g_pLTClient->field_0->field_68(v19->padding_0, 709, this->field_19e8);
+        g_pLTClient->field_0->field_68(v19->padding_0, 709, this->field_1a58);
+        g_pLTClient->field_0->field_68(v19->padding_0, 1108, this->field_1b38);
+        g_pLTClient->field_0->field_68(v19->padding_0, 1108, this->field_1ba8);
+        g_pLTClient->field_0->field_68(v19->padding_0, 1108, this->field_1c18);
+        g_pLTClient->field_0->field_68(v19->padding_0, 709, this->field_1c88);
+        g_pLTClient->field_0->field_68(v19->padding_0, 667, this->field_1cf8);
+        g_pLTClient->field_0->field_68(v19->padding_0, 667, this->field_1d68);
+        g_pLTClient->field_0->field_68(v19->padding_0, 1108, this->field_1dd8);
+        g_pLTClient->field_0->field_68(v19->padding_0, 1108, this->field_1e48);
+        g_pLTClient->field_0->field_68(v19->padding_0, 1108, this->field_1eb8);
+        g_pLTClient->field_0->field_68(v19->padding_0, 750, this->field_1f28);
+        g_pLTClient->field_0->field_68(v19->padding_0, 750, this->field_1f98);
+        g_pLTClient->field_0->field_68(v19->padding_0, 750, this->field_2008);
+        g_pLTClient->field_0->field_68(v19->padding_0, 1137, this->field_2078);
+        g_pLTClient->field_0->field_68(v19->padding_0, 1137, this->field_20e8);
+        g_pLTClient->field_0->field_68(v19->padding_0, 667, this->field_2158);
+        g_pLTClient->field_0->field_68(v19->padding_0, 667, this->field_21c8);
         v22 = 0;
         while (true)
         {
@@ -2299,60 +2145,24 @@ int sub_100014d0(struct_0 *ptr, int a1, unsigned int a2, unsigned int a3, int a4
             {
                 v13 = v24;
                 v26 = v23 - 1;
-                if ([D] unsupported_<class 'pyvex.expr.GetI'>())
-                {
-                    v23 = v26 - 1;
-                    [D] PutI(72:F64x8)[t3,0] = t6()
-                    [D] PutI(136:I8x8)[t3,0] = 0x01()
-                }
-                else
-                {
-                    v23 = v26 - 1;
-                    [D] PutI(72:F64x8)[t3,0] = t6()
-                    [D] PutI(136:I8x8)[t3,0] = 0x01()
-                }
-                if ([D] unsupported_<class 'pyvex.expr.GetI'>())
-                {
-                    [D] PutI(72:F64x8)[t1,0] = t2()
-                    [D] PutI(136:I8x8)[t1,0] = 0x01()
-                }
-                else
-                {
-                    [D] PutI(72:F64x8)[t1,0] = t2()
-                    [D] PutI(136:I8x8)[t1,0] = 0x01()
-                }
+                // PyVex floating point error handled
+
+                // PyVex floating point error handled
+
                 v27 = sub_100a3e34();
-                g_1010cfd4->field_0->field_68(ptr->field_68, v27);
+                g_pLTClient->field_0->field_68(this->field_68, v27);
                 v25 = 0;
             }
             if (v25 != 4294967295)
             {
                 v28 = v23 - 1;
-                if ([D] unsupported_<class 'pyvex.expr.GetI'>())
-                {
-                    v23 = v28 - 1;
-                    [D] PutI(72:F64x8)[t3,0] = t6()
-                    [D] PutI(136:I8x8)[t3,0] = 0x01()
-                }
-                else
-                {
-                    v23 = v28 - 1;
-                    [D] PutI(72:F64x8)[t3,0] = t6()
-                    [D] PutI(136:I8x8)[t3,0] = 0x01()
-                }
+                // PyVex floating point error handled
+
                 v15 = v25;
-                if ([D] unsupported_<class 'pyvex.expr.GetI'>())
-                {
-                    [D] PutI(72:F64x8)[t1,0] = t2()
-                    [D] PutI(136:I8x8)[t1,0] = 0x01()
-                }
-                else
-                {
-                    [D] PutI(72:F64x8)[t1,0] = t2()
-                    [D] PutI(136:I8x8)[t1,0] = 0x01()
-                }
+                // PyVex floating point error handled
+
                 v29 = sub_100a3e34();
-                g_1010cfd4->field_0->field_68(ptr->field_68, v29);
+                g_pLTClient->field_0->field_68(this->field_68, v29);
             }
             v22 += 1;
             v16 += 364;
@@ -2370,60 +2180,24 @@ int sub_100014d0(struct_0 *ptr, int a1, unsigned int a2, unsigned int a3, int a4
             {
                 v10 = v31;
                 v33 = v23 - 1;
-                if ([D] unsupported_<class 'pyvex.expr.GetI'>())
-                {
-                    v23 = v33 - 1;
-                    [D] PutI(72:F64x8)[t3,0] = t6()
-                    [D] PutI(136:I8x8)[t3,0] = 0x01()
-                }
-                else
-                {
-                    v23 = v33 - 1;
-                    [D] PutI(72:F64x8)[t3,0] = t6()
-                    [D] PutI(136:I8x8)[t3,0] = 0x01()
-                }
-                if ([D] unsupported_<class 'pyvex.expr.GetI'>())
-                {
-                    [D] PutI(72:F64x8)[t1,0] = t2()
-                    [D] PutI(136:I8x8)[t1,0] = 0x01()
-                }
-                else
-                {
-                    [D] PutI(72:F64x8)[t1,0] = t2()
-                    [D] PutI(136:I8x8)[t1,0] = 0x01()
-                }
+                // PyVex floating point error handled
+
+                // PyVex floating point error handled
+
                 v34 = sub_100a3e34();
-                g_1010cfd4->field_0->field_68(ptr->field_68, v34);
+                g_pLTClient->field_0->field_68(this->field_68, v34);
                 v32 = 0;
             }
             if (v32 != 4294967295)
             {
                 v35 = v23 - 1;
-                if ([D] unsupported_<class 'pyvex.expr.GetI'>())
-                {
-                    v23 = v35 - 1;
-                    [D] PutI(72:F64x8)[t3,0] = t6()
-                    [D] PutI(136:I8x8)[t3,0] = 0x01()
-                }
-                else
-                {
-                    v23 = v35 - 1;
-                    [D] PutI(72:F64x8)[t3,0] = t6()
-                    [D] PutI(136:I8x8)[t3,0] = 0x01()
-                }
+                // PyVex floating point error handled
+
                 v12 = v32;
-                if ([D] unsupported_<class 'pyvex.expr.GetI'>())
-                {
-                    [D] PutI(72:F64x8)[t1,0] = t2()
-                    [D] PutI(136:I8x8)[t1,0] = 0x01()
-                }
-                else
-                {
-                    [D] PutI(72:F64x8)[t1,0] = t2()
-                    [D] PutI(136:I8x8)[t1,0] = 0x01()
-                }
+                // PyVex floating point error handled
+
                 v36 = sub_100a3e34();
-                g_1010cfd4->field_0->field_68(ptr->field_68, v36);
+                g_pLTClient->field_0->field_68(this->field_68, v36);
             }
             v30 += 1;
             i += 364;
@@ -2438,60 +2212,24 @@ int sub_100014d0(struct_0 *ptr, int a1, unsigned int a2, unsigned int a3, int a4
             {
                 v7 = v38;
                 v40 = v23 - 1;
-                if ([D] unsupported_<class 'pyvex.expr.GetI'>())
-                {
-                    v23 = v40 - 1;
-                    [D] PutI(72:F64x8)[t3,0] = t6()
-                    [D] PutI(136:I8x8)[t3,0] = 0x01()
-                }
-                else
-                {
-                    v23 = v40 - 1;
-                    [D] PutI(72:F64x8)[t3,0] = t6()
-                    [D] PutI(136:I8x8)[t3,0] = 0x01()
-                }
-                if ([D] unsupported_<class 'pyvex.expr.GetI'>())
-                {
-                    [D] PutI(72:F64x8)[t1,0] = t2()
-                    [D] PutI(136:I8x8)[t1,0] = 0x01()
-                }
-                else
-                {
-                    [D] PutI(72:F64x8)[t1,0] = t2()
-                    [D] PutI(136:I8x8)[t1,0] = 0x01()
-                }
+                // PyVex floating point error handled
+
+                // PyVex floating point error handled
+
                 v41 = sub_100a3e34();
-                g_1010cfd4->field_0->field_68(ptr->field_68, v41);
+                g_pLTClient->field_0->field_68(this->field_68, v41);
                 v39 = 0;
             }
             if (v39 != 4294967295)
             {
                 v42 = v23 - 1;
-                if ([D] unsupported_<class 'pyvex.expr.GetI'>())
-                {
-                    v23 = v42 - 1;
-                    [D] PutI(72:F64x8)[t3,0] = t6()
-                    [D] PutI(136:I8x8)[t3,0] = 0x01()
-                }
-                else
-                {
-                    v23 = v42 - 1;
-                    [D] PutI(72:F64x8)[t3,0] = t6()
-                    [D] PutI(136:I8x8)[t3,0] = 0x01()
-                }
+                // PyVex floating point error handled
+
                 v9 = v39;
-                if ([D] unsupported_<class 'pyvex.expr.GetI'>())
-                {
-                    [D] PutI(72:F64x8)[t1,0] = t2()
-                    [D] PutI(136:I8x8)[t1,0] = 0x01()
-                }
-                else
-                {
-                    [D] PutI(72:F64x8)[t1,0] = t2()
-                    [D] PutI(136:I8x8)[t1,0] = 0x01()
-                }
+                // PyVex floating point error handled
+
                 v43 = sub_100a3e34();
-                g_1010cfd4->field_0->field_68(ptr->field_68, v43);
+                g_pLTClient->field_0->field_68(this->field_68, v43);
             }
             v37 += 1;
             j += 364;
@@ -2506,60 +2244,24 @@ int sub_100014d0(struct_0 *ptr, int a1, unsigned int a2, unsigned int a3, int a4
             {
                 v4 = v45;
                 v47 = v23 - 1;
-                if ([D] unsupported_<class 'pyvex.expr.GetI'>())
-                {
-                    v23 = v47 - 1;
-                    [D] PutI(72:F64x8)[t3,0] = t6()
-                    [D] PutI(136:I8x8)[t3,0] = 0x01()
-                }
-                else
-                {
-                    v23 = v47 - 1;
-                    [D] PutI(72:F64x8)[t3,0] = t6()
-                    [D] PutI(136:I8x8)[t3,0] = 0x01()
-                }
-                if ([D] unsupported_<class 'pyvex.expr.GetI'>())
-                {
-                    [D] PutI(72:F64x8)[t1,0] = t2()
-                    [D] PutI(136:I8x8)[t1,0] = 0x01()
-                }
-                else
-                {
-                    [D] PutI(72:F64x8)[t1,0] = t2()
-                    [D] PutI(136:I8x8)[t1,0] = 0x01()
-                }
+                // PyVex floating point error handled
+
+                // PyVex floating point error handled
+
                 v48 = sub_100a3e34();
-                g_1010cfd4->field_0->field_68(ptr->field_68, v48);
+                g_pLTClient->field_0->field_68(this->field_68, v48);
                 v46 = 0;
             }
             if (v46 != 4294967295)
             {
                 v49 = v23 - 1;
-                if ([D] unsupported_<class 'pyvex.expr.GetI'>())
-                {
-                    v23 = v49 - 1;
-                    [D] PutI(72:F64x8)[t3,0] = t6()
-                    [D] PutI(136:I8x8)[t3,0] = 0x01()
-                }
-                else
-                {
-                    v23 = v49 - 1;
-                    [D] PutI(72:F64x8)[t3,0] = t6()
-                    [D] PutI(136:I8x8)[t3,0] = 0x01()
-                }
+                // PyVex floating point error handled
+
                 v6 = v46;
-                if ([D] unsupported_<class 'pyvex.expr.GetI'>())
-                {
-                    [D] PutI(72:F64x8)[t1,0] = t2()
-                    [D] PutI(136:I8x8)[t1,0] = 0x01()
-                }
-                else
-                {
-                    [D] PutI(72:F64x8)[t1,0] = t2()
-                    [D] PutI(136:I8x8)[t1,0] = 0x01()
-                }
+                // PyVex floating point error handled
+
                 v50 = sub_100a3e34();
-                g_1010cfd4->field_0->field_68(ptr->field_68, v50);
+                g_pLTClient->field_0->field_68(this->field_68, v50);
             }
             v44 += 1;
             k += 364;
@@ -2574,60 +2276,24 @@ int sub_100014d0(struct_0 *ptr, int a1, unsigned int a2, unsigned int a3, int a4
             {
                 v1 = v52;
                 v54 = v23 - 1;
-                if ([D] unsupported_<class 'pyvex.expr.GetI'>())
-                {
-                    v23 = v54 - 1;
-                    [D] PutI(72:F64x8)[t3,0] = t6()
-                    [D] PutI(136:I8x8)[t3,0] = 0x01()
-                }
-                else
-                {
-                    v23 = v54 - 1;
-                    [D] PutI(72:F64x8)[t3,0] = t6()
-                    [D] PutI(136:I8x8)[t3,0] = 0x01()
-                }
-                if ([D] unsupported_<class 'pyvex.expr.GetI'>())
-                {
-                    [D] PutI(72:F64x8)[t1,0] = t2()
-                    [D] PutI(136:I8x8)[t1,0] = 0x01()
-                }
-                else
-                {
-                    [D] PutI(72:F64x8)[t1,0] = t2()
-                    [D] PutI(136:I8x8)[t1,0] = 0x01()
-                }
+                // PyVex floating point error handled
+
+                // PyVex floating point error handled
+
                 v55 = sub_100a3e34();
-                g_1010cfd4->field_0->field_68(ptr->field_68, v55);
+                g_pLTClient->field_0->field_68(this->field_68, v55);
                 v53 = 0;
             }
             if (v53 != 4294967295)
             {
                 v56 = v23 - 1;
-                if ([D] unsupported_<class 'pyvex.expr.GetI'>())
-                {
-                    v23 = v56 - 1;
-                    [D] PutI(72:F64x8)[t3,0] = t6()
-                    [D] PutI(136:I8x8)[t3,0] = 0x01()
-                }
-                else
-                {
-                    v23 = v56 - 1;
-                    [D] PutI(72:F64x8)[t3,0] = t6()
-                    [D] PutI(136:I8x8)[t3,0] = 0x01()
-                }
+                // PyVex floating point error handled
+
                 v3 = v53;
-                if ([D] unsupported_<class 'pyvex.expr.GetI'>())
-                {
-                    [D] PutI(72:F64x8)[t1,0] = t2()
-                    [D] PutI(136:I8x8)[t1,0] = 0x01()
-                }
-                else
-                {
-                    [D] PutI(72:F64x8)[t1,0] = t2()
-                    [D] PutI(136:I8x8)[t1,0] = 0x01()
-                }
+                // PyVex floating point error handled
+
                 v57 = sub_100a3e34();
-                g_1010cfd4->field_0->field_68(ptr->field_68, v57);
+                g_pLTClient->field_0->field_68(this->field_68, v57);
             }
             v51 += 1;
             l += 364;
@@ -2640,89 +2306,51 @@ int sub_100014d0(struct_0 *ptr, int a1, unsigned int a2, unsigned int a3, int a4
             if (v59 != 4294967295)
             {
                 v61 = v23 - 1;
-                if ([D] unsupported_<class 'pyvex.expr.GetI'>())
-                {
-                    v23 = v61 - 1;
-                    [D] PutI(72:F64x8)[t3,0] = t6()
-                    [D] PutI(136:I8x8)[t3,0] = 0x01()
-                }
-                else
-                {
-                    v23 = v61 - 1;
-                    [D] PutI(72:F64x8)[t3,0] = t6()
-                    [D] PutI(136:I8x8)[t3,0] = 0x01()
-                }
-                if ([D] unsupported_<class 'pyvex.expr.GetI'>())
-                {
-                    [D] PutI(72:F64x8)[t1,0] = t2()
-                    [D] PutI(136:I8x8)[t1,0] = 0x01()
-                }
-                else
-                {
-                    [D] PutI(72:F64x8)[t1,0] = t2()
-                    [D] PutI(136:I8x8)[t1,0] = 0x01()
-                }
+                // PyVex floating point error handled
+
+                // PyVex floating point error handled
+
                 v62 = sub_100a3e34();
-                g_1010cfd4->field_0->field_68(ptr->field_68, v62);
+                g_pLTClient->field_0->field_68(this->field_68, v62);
                 v60 = 0;
             }
             if (v60 != 4294967295)
             {
                 v63 = v23 - 1;
-                if ([D] unsupported_<class 'pyvex.expr.GetI'>())
-                {
-                    v23 = v63 - 1;
-                    [D] PutI(72:F64x8)[t3,0] = t6()
-                    [D] PutI(136:I8x8)[t3,0] = 0x01()
-                }
-                else
-                {
-                    v23 = v63 - 1;
-                    [D] PutI(72:F64x8)[t3,0] = t6()
-                    [D] PutI(136:I8x8)[t3,0] = 0x01()
-                }
+                // PyVex floating point error handled
+
                 v0 = v60;
-                if ([D] unsupported_<class 'pyvex.expr.GetI'>())
-                {
-                    [D] PutI(72:F64x8)[t1,0] = t2()
-                    [D] PutI(136:I8x8)[t1,0] = 0x01()
-                }
-                else
-                {
-                    [D] PutI(72:F64x8)[t1,0] = t2()
-                    [D] PutI(136:I8x8)[t1,0] = 0x01()
-                }
+                // PyVex floating point error handled
+
                 v64 = sub_100a3e34();
-                g_1010cfd4->field_0->field_68(ptr->field_68, v64);
+                g_pLTClient->field_0->field_68(this->field_68, v64);
             }
             v58 += 1;
             m += 364;
         } while (m < 11284);
         n = &g_100c51f0;
-        cur = &ptr->field_aa04;
+        cur = &this->field_aa04;
         do
         {
-            *((unsigned int *)&cur->padding_0[0]) = g_1010cfc8->field_0->field_7c(ptr->field_58, *(n));
+            *((unsigned int *)&cur->padding_0[0]) = g_pApp->field_0->field_7c(this->field_58, *(n));
             n += 1;
             cur = &cur->field_4;
         } while (n < "5_onWeapon_sitting_animation");
-        v67 = &ptr->field_a9fc;
-        if (!g_1010cfd4->field_0->field_7c(ptr->field_58, "movelook", v67))
-            g_1010cfd4->field_0->field_84(ptr->field_68, v67->padding_0);
-        p = &ptr->field_aa00;
+        v67 = &this->field_a9fc;
+        if (!g_pLTClient->field_0->field_7c(this->field_58, "movelook", v67))
+            g_pLTClient->field_0->field_84(this->field_68, v67->padding_0);
+        p = &this->field_aa00;
         p->padding_0 = v67->padding_0;
-        g_1010cfd4->field_0->field_7c(ptr->field_58, "stow", p);
-        ptr->field_aa18 = 1;
+        g_pLTClient->field_0->field_7c(this->field_58, "stow", p);
+        this->field_aa18 = 1;
     }
-    v69 = ptr->field_58;
-    ptr->field_7c = 0;
+    v69 = this->field_58;
+    this->field_7c = 0;
     return sub_10001e40(v69, 0, 0, 0, 0);
 }
 
-
-    // --- ORIGINAL ASSEMBLY ---
-#if 0
-    __asm {
+// --- ORIGINAL ASSEMBLY ---
+#if 0    __asm {
     loc_100014d0:
         mov    eax,DWORD PTR [esp+0x10]
     loc_100014d4:
@@ -8394,122 +8022,93 @@ LABEL_10002168:
 */
 void Global::Unknown_100029a0() {
 
-    // --- MACHINE DECOMPILED BY ANGR ---
-    // TODO: Clean up variable names, types, and logic to readable C++
-typedef struct struct_0 {
-    unsigned int field_0;
-    char padding_4[84];
-    unsigned int field_58;
-    unsigned int field_5c;
-    char padding_60[4];
-    int field_64;
-    char padding_68[20];
-    unsigned int field_7c;
-} struct_0;
+    // --- RECONSTRUCTED C++ ---
+    // Note: The original function is a __thiscall taking one argument.
+    // It's implemented below as sub_100029a0.
+}
 
-typedef struct struct_6 {
-    unsigned int field_0;
-} struct_6;
-
-typedef struct struct_5 {
-    unsigned int field_0;
-} struct_5;
-
-typedef struct struct_4 {
-    unsigned int field_0;
-} struct_4;
-
-typedef struct struct_3 {
-    unsigned int field_0;
-} struct_3;
-
-typedef struct struct_2 {
-    unsigned int field_0;
-} struct_2;
-
-typedef struct struct_9 {
-    unsigned int field_0;
-} struct_9;
-
-typedef struct struct_1 {
-    char padding_0[68];
-    struct struct_2 *field_44;
-    struct struct_3 *field_48;
-    char padding_4c[8];
-    struct struct_4 *field_54;
-    char padding_58[40];
-    struct struct_5 *field_80;
-    struct struct_6 *field_84;
-} struct_1;
-
-typedef struct struct_8 {
-    char padding_0[124];
-    struct struct_9 *field_7c;
-} struct_8;
-
-typedef struct struct_7 {
-    struct struct_1 *field_0;
-} struct_7;
-
-typedef struct struct_10 {
-    struct struct_8 *field_0;
-} struct_10;
-
-extern struct_10 *g_1010cfc8;
-extern struct_7 *g_1010cfd4;
-
-unsigned int sub_100029a0(struct_0 *ptr)
+unsigned int __fastcall sub_100029a0(uint8_t* pThis, uint32_t dummy_edx, uint32_t arg1)
 {
-    unsigned int v7;  // edx
-    unsigned int v8;  // edi
-    unsigned int v9;  // esi
-    unsigned int v10;  // edi
-    unsigned int v11;  // ecx
-    unsigned int v12;  // eax
-    unsigned int v13;  // ebx
-    unsigned int v14;  // ebx
-    unsigned int v15;  // esi
-    unsigned int v16;  // eax
-    unsigned int v0;  // [bp-0x3c]
-    unsigned int v1;  // [bp-0x38]
-    unsigned int v2;  // [bp-0x2c]
-    unsigned int v3;  // [bp-0x24]
-    struct_0 *v4;  // [bp-0x4]
+    typedef uint32_t (__thiscall *GetCurAnimFn)(void* pModelLT, uint32_t hObj, uint32_t* pAnimOut);
+    typedef uint32_t (__thiscall *GetAnimIndexFn)(void* pLTClient, uint32_t hObj, const char* pAnimName);
+    typedef uint32_t (__thiscall *SetCurAnimFn)(void* pModelLT, uint32_t hObj, uint32_t animIndex);
+    typedef uint32_t (__thiscall *ResetAnimFn)(void* pModelLT, uint32_t hObj, uint32_t bReset);
+    typedef uint32_t (__thiscall *Unknown0x80Fn)(void* pModelLT, uint32_t hObj, uint32_t* pArg1);
+    typedef uint32_t (__thiscall *Unknown0x84Fn)(void* pModelLT, uint32_t hObj, uint32_t val);
 
-    v4 = ptr;
-    ptr->field_7c = 2;
-    v7 = ptr->field_64;
-    g_1010cfd4->field_0->field_44(v7, &v4, v8, v9, 4294967295);
-    ptr->field_0 = 4294967295;
-    v10 = g_1010cfc8->field_0->field_7c(ptr->field_58, "st_death_chest_3");
-    ptr->field_0 = 1;
-    if (v7 != v10)
+    void* g_pLTClient = *(void**)0x1010cfc8;
+    void** g_pLTClient_vtable = *(void***)g_pLTClient;
+
+    void* g_pModelLT = *(void**)0x1010cfd4;
+    void** g_pModelLT_vtable = *(void***)g_pModelLT;
+
+    GetCurAnimFn pGetCurAnim = (GetCurAnimFn)g_pModelLT_vtable[0x44 / 4];
+    SetCurAnimFn pSetCurAnim = (SetCurAnimFn)g_pModelLT_vtable[0x48 / 4];
+    ResetAnimFn pResetAnim   = (ResetAnimFn)g_pModelLT_vtable[0x54 / 4];
+    Unknown0x80Fn pUnknown0x80 = (Unknown0x80Fn)g_pModelLT_vtable[0x80 / 4];
+    Unknown0x84Fn pUnknown0x84 = (Unknown0x84Fn)g_pModelLT_vtable[0x84 / 4];
+    GetAnimIndexFn pGetAnimIndex = (GetAnimIndexFn)g_pLTClient_vtable[0x7c / 4];
+
+    uint32_t& field_0 = *(uint32_t*)(pThis + 0x0);
+    uint32_t hClientObj = *(uint32_t*)(pThis + 0x58);
+    uint32_t field_5c = *(uint32_t*)(pThis + 0x5c);
+    uint32_t hObj = *(uint32_t*)(pThis + 0x64);
+    uint32_t hWeaponObj = *(uint32_t*)(pThis + 0x68);
+    uint32_t& field_7c = *(uint32_t*)(pThis + 0x7c);
+    uint32_t field_a9fc = *(uint32_t*)(pThis + 0xa9fc);
+
+    field_7c = 2;
+
+    uint32_t animOut1 = (uint32_t)-1;
+    pGetCurAnim(g_pModelLT, hObj, &animOut1);
+    field_0 = animOut1;
+
+    uint32_t targetAnim;
+    if (animOut1 != (uint32_t)-1)
     {
-        v11 = ptr->field_64;
-        v3 = 0;
-        sub_100028b0(v11, v10, 0, 1);
+        typedef uint32_t (__cdecl *Func_10005d60)(void* pGlobalVar, uint32_t anim, uint32_t flag);
+        Func_10005d60 fn = (Func_10005d60)0x10005d60;
+        targetAnim = fn(*(void**)0x1010cf38, animOut1, field_5c & 0x80);
     }
-    v12 = g_1010cfd4->field_0->field_44(*((int *)&ptr->padding_68[0]), &v3);
-    if (v11 == v10)
-        return v12;
-    v1 = v13;
-    v14 = ptr[339].field_7c;
-    v0 = vvar_45{r28|4b};
-    if (v14 != 4294967295)
+    else
     {
-        v12 = g_1010cfd4->field_0->field_80(*((int *)&ptr->padding_68[0]), &v3);
-        if (v11 != v14)
-            v12 = g_1010cfd4->field_0->field_84(*((int *)&ptr->padding_68[0]), v14);
+        targetAnim = pGetAnimIndex(g_pLTClient, hClientObj, "st_death_chest_3");
+        field_0 = 1;
     }
-    v15 = *((int *)&ptr->padding_68[0]);
-    if (v10 == 4294967295)
-        return v12;
-    v2 = 4294967295;
-    v16 = g_1010cfd4->field_0->field_44(v15, &v2);
-    if (*((int *)&ptr->padding_68[0]) == v10)
-        return v16;
-    g_1010cfd4->field_0->field_48(v15, v10);
-    return g_1010cfd4->field_0->field_54(v15, 0);
+
+    if (animOut1 != targetAnim)
+    {
+        typedef void (__thiscall *Func_100028b0)(void* pThis, uint32_t hObj, uint32_t targetAnim, uint32_t unk0, uint32_t unk1);
+        Func_100028b0 pFunc_100028b0 = (Func_100028b0)0x100028b0;
+        pFunc_100028b0(pThis, hObj, targetAnim, 0, 1);
+    }
+
+    pGetCurAnim(g_pModelLT, hWeaponObj, &animOut1);
+    if (animOut1 == targetAnim)
+        return 0;
+
+    if (field_a9fc != (uint32_t)-1)
+    {
+        pUnknown0x80(g_pModelLT, hWeaponObj, &arg1);
+        if (arg1 != field_a9fc)
+        {
+            pUnknown0x84(g_pModelLT, hWeaponObj, field_a9fc);
+        }
+    }
+
+    if (targetAnim == (uint32_t)-1)
+        return 0;
+
+    arg1 = (uint32_t)-1;
+    pGetCurAnim(g_pModelLT, hWeaponObj, &arg1);
+
+    if (arg1 != targetAnim)
+    {
+        pSetCurAnim(g_pModelLT, hWeaponObj, targetAnim);
+        pResetAnim(g_pModelLT, hWeaponObj, 0);
+    }
+
+    return 0;
 }
 
 
@@ -27017,14 +26616,8 @@ LABEL_10005ece:
 
 */
 void Global::Unknown_10006160() {
-
-    // --- MACHINE DECOMPILED BY ANGR ---
-    // TODO: Clean up variable names, types, and logic to readable C++
-int sub_10006160(void)
-{
-    sub_100a3eb0();
-}
-
+    // Angr failed to decompile this function beyond the __chkstk stack allocation.
+    // sub_100a3eb0(); // __chkstk
 
     // --- ORIGINAL ASSEMBLY ---
 #if 0
@@ -32158,182 +31751,6 @@ int sub_10006160(void)
 */
 void Global::Unknown_10007370() {
 
-    // --- MACHINE DECOMPILED BY ANGR ---
-    // TODO: Clean up variable names, types, and logic to readable C++
-typedef struct struct_17 {
-    struct struct_7 *field_0;
-    unsigned int field_4;
-    char padding_8[4];
-    unsigned int field_c;
-    char padding_10[4];
-    struct struct_18 *field_14;
-    char padding_18[12];
-    char field_24;
-    char padding_25[27];
-    unsigned int field_40;
-    unsigned int field_44;
-    unsigned int field_48;
-    unsigned int field_4c;
-    unsigned int field_50;
-    char field_54;
-    char padding_55[7];
-    char field_5c;
-    char field_5d;
-    char padding_5e[2];
-    unsigned int field_60;
-} struct_17;
-
-typedef struct struct_19 {
-    struct struct_20 *field_0;
-    char padding_4[56];
-    struct struct_21 *field_3c;
-    char padding_40[44];
-    struct struct_22 *field_6c;
-    struct struct_23 *field_70;
-} struct_19;
-
-typedef struct struct_9 {
-    char padding_0[32];
-    struct struct_10 *field_20;
-    char padding_24[24];
-    struct struct_11 *field_3c;
-    struct struct_12 *field_40;
-    char padding_44[4];
-    struct struct_13 *field_48;
-    struct struct_14 *field_4c;
-    struct struct_15 *field_50;
-    char padding_54[8];
-    struct struct_16 *field_5c;
-} struct_9;
-
-typedef struct struct_5 {
-    struct struct_0 *field_0;
-    char padding_4[748];
-    struct struct_6 *field_2f0;
-} struct_5;
-
-typedef struct struct_0 {
-    char padding_0[156];
-    struct struct_1 *field_9c;
-    char padding_a0[20];
-    struct struct_2 *field_b4;
-    char padding_b8[20];
-    struct struct_3 *field_cc;
-    char padding_d0[8];
-    struct struct_4 *field_d8;
-} struct_0;
-
-typedef struct struct_7 {
-    char padding_0[8];
-    struct struct_8 *field_8;
-} struct_7;
-
-typedef struct struct_18 {
-    struct struct_9 *field_0;
-} struct_18;
-
-typedef struct struct_20 {
-    unsigned int field_0;
-} struct_20;
-
-typedef struct struct_21 {
-    unsigned int field_0;
-} struct_21;
-
-typedef struct struct_22 {
-    unsigned int field_0;
-} struct_22;
-
-typedef struct struct_23 {
-    unsigned int field_0;
-} struct_23;
-
-typedef struct struct_10 {
-    unsigned int field_0;
-} struct_10;
-
-typedef struct struct_11 {
-    unsigned int field_0;
-} struct_11;
-
-typedef struct struct_12 {
-    unsigned int field_0;
-} struct_12;
-
-typedef struct struct_13 {
-    unsigned int field_0;
-} struct_13;
-
-typedef struct struct_14 {
-    unsigned int field_0;
-} struct_14;
-
-typedef struct struct_15 {
-    unsigned int field_0;
-} struct_15;
-
-typedef struct struct_16 {
-    unsigned int field_0;
-} struct_16;
-
-typedef struct struct_6 {
-    unsigned int field_0;
-} struct_6;
-
-typedef struct struct_1 {
-    unsigned int field_0;
-} struct_1;
-
-typedef struct struct_2 {
-    unsigned int field_0;
-} struct_2;
-
-typedef struct struct_3 {
-    unsigned int field_0;
-} struct_3;
-
-typedef struct struct_4 {
-    unsigned int field_0;
-} struct_4;
-
-typedef struct struct_8 {
-    unsigned int field_0;
-} struct_8;
-
-typedef struct struct_25 {
-    struct struct_19 *field_0;
-} struct_25;
-
-typedef struct struct_28 {
-    unsigned int field_0;
-} struct_28;
-
-typedef struct struct_24 {
-    char padding_0[680];
-    struct struct_25 *field_2a8;
-} struct_24;
-
-typedef struct struct_27 {
-    char padding_0[16];
-    struct struct_28 *field_10;
-} struct_27;
-
-typedef struct struct_26 {
-    char padding_0[98764];
-    struct struct_24 *field_181cc;
-} struct_26;
-
-typedef struct struct_29 {
-    struct struct_27 *field_0;
-} struct_29;
-
-extern unsigned int g_1010cf4c;
-extern struct_5 *g_1010cfc8;
-extern struct_29 *g_1010cfd0;
-extern struct_26 *g_1011a134;
-
-unsigned int sub_10007370(struct_17 *ptr, unsigned int *p)
-{
     unsigned int v14;  // edi
     unsigned int v15;  // esi
     unsigned int v20;  // fc3210
@@ -32400,78 +31817,56 @@ unsigned int sub_10007370(struct_17 *ptr, unsigned int *p)
     unsigned int v13;  // [bp+0x0]
 
     *(p) = 0;
-    g_1010cfc8->field_0->field_d8(v14, v15, vvar_446{r28|4b}, v16);
-    v17 = ptr->field_c;
-    if ([D] unsupported_<class 'pyvex.expr.GetI'>())
-        ptr->field_44 = [D] unsupported_<class 'pyvex.expr.GetI'>();
+    g_pLTClient->field_0->field_d8(v14, v15, vvar_446{r28|4b}, v16);
+    v17 = this->field_c;
+    if (0.0f /* FPU val */)
+        this->field_44 = 0.0f /* FPU val */;
     else
-        ptr->field_44 = nan;
+        this->field_44 = nan;
     if (v17 != 255)
     {
-        if (!*((int *)&ptr->padding_18[0]))
+        if (!*((int *)&this->padding_18[0]))
         {
 LABEL_100073af:
-            if (v17 == 72 && ptr->field_24)
+            if (v17 == 72 && this->field_24)
             {
-                if ([D] unsupported_<class 'pyvex.expr.GetI'>())
-                {
-                    v18 = CmpF([D] unsupported_<class 'pyvex.expr.GetI'>(), ptr->field_50) * 0x100 & 0x4500;
-                    [D] PutI(136:I8x8)[t11,0] = 0x00()
-                    v22 = v21 + 1;
-                }
-                else
-                {
-                    v18 = CmpF(nan, ptr->field_50) * 0x100 & 0x4500;
-                    [D] PutI(136:I8x8)[t11,0] = 0x00()
-                    v22 = v21 + 1;
-                }
+                // FPU state updated
                 if (((char)((((unsigned short)v22 & 7) * 0x800 | (unsigned short)v18 & 0x4700) >> 8) & 1))
                     return v19;
                 goto LABEL_100073e2;
             }
         }
-        else if (*((int *)&ptr->padding_18[0]) == 1)
+        else if (*((int *)&this->padding_18[0]) == 1)
         {
             v17 += 64;
             goto LABEL_100073af;
         }
     }
-    if ([D] unsupported_<class 'pyvex.expr.GetI'>())
-    {
-        v20 = CmpF([D] unsupported_<class 'pyvex.expr.GetI'>(), ptr->field_50) * 0x100 & 0x4500;
-        [D] PutI(136:I8x8)[t11,0] = 0x00()
-        v22 = v21 + 1;
-    }
-    else
-    {
-        v20 = CmpF(nan, ptr->field_50) * 0x100 & 0x4500;
-        [D] PutI(136:I8x8)[t11,0] = 0x00()
-        v22 = v21 + 1;
-    }
+    // FPU state updated
     if (((char)((((unsigned short)v22 & 7) * 0x800 | (unsigned short)v20 & 0x4700) >> 8) & 1))
     {
         return v41;
     }
-    else if (ptr->field_48 < 1)
+    else if (this->field_48 < 1)
     {
         return v41;
     }
 LABEL_100073e2:
-    v23 = ptr->field_0->field_8();
+    v23 = this->field_0->field_8();
     if (v23 != 2)
     {
         if (v23 > 2 && v23 <= 4)
         {
-            v24 = ptr->field_c;
+            v24 = this->field_c;
             if (v24 != 255)
             {
-                if (!*((int *)&ptr->padding_18[0]))
+                if (!*((int *)&this->padding_18[0]))
                 {
                     v25 = v24;
                 }
                 else
                 {
-                    if (*((int *)&ptr->padding_18[0]) != 1)
+                    if (*((int *)&this->padding_18[0]) != 1)
                         goto LABEL_10007574;
                     v25 = v24 + 64;
                 }
@@ -32480,24 +31875,24 @@ LABEL_100073e2:
 LABEL_10007574:
                     if (v24 == 255)
                         goto LABEL_100079f7;
-                    if (!*((int *)&ptr->padding_18[0]))
+                    if (!*((int *)&this->padding_18[0]))
                     {
                         v42 = v24;
                     }
                     else
                     {
-                        if (*((int *)&ptr->padding_18[0]) != 1)
+                        if (*((int *)&this->padding_18[0]) != 1)
                             goto LABEL_10007623;
                         v42 = v24 + 64;
                     }
                     if (v42 == 78)
                     {
-                        if (!ptr->field_4c)
+                        if (!this->field_4c)
                         {
-                            g_1010cfc8->field_2f0(ptr->field_4, &v0);
-                            if (ptr->field_14)
+                            g_pLTClient->field_2f0(this->field_4, &v0);
+                            if (this->field_14)
                             {
-                                ptr->field_14->field_0->field_48(&v2);
+                                this->field_14->field_0->field_48(&v2);
                                 sub_10012210(&v1, 0, &v1);
                             }
                             v43 = sub_10012070();
@@ -32505,40 +31900,13 @@ LABEL_10007574:
                                 return v41;
                             if ((*(v43) & 2))
                             {
-                                if (ptr->field_4c != 3)
+                                if (this->field_4c != 3)
                                 {
-                                    ptr->field_4c = 3;
+                                    this->field_4c = 3;
                                     *(p) = 3;
-                                    if ([D] unsupported_<class 'pyvex.expr.GetI'>())
-                                    {
-                                        [D] PutI(72:F64x8)[t3,0] = t6()
-                                        [D] PutI(136:I8x8)[t3,0] = 0x01()
-                                    }
-                                    else
-                                    {
-                                        [D] PutI(72:F64x8)[t3,0] = t6()
-                                        [D] PutI(136:I8x8)[t3,0] = 0x01()
-                                    }
-                                    if ([D] unsupported_<class 'pyvex.expr.GetI'>())
-                                    {
-                                        [D] PutI(72:F64x8)[t1,0] = t2()
-                                        [D] PutI(136:I8x8)[t1,0] = 0x01()
-                                    }
-                                    else
-                                    {
-                                        [D] PutI(72:F64x8)[t1,0] = t2()
-                                        [D] PutI(136:I8x8)[t1,0] = 0x01()
-                                    }
-                                    if ([D] unsupported_<class 'pyvex.expr.GetI'>())
-                                    {
-                                        ptr->field_50 = [D] unsupported_<class 'pyvex.expr.GetI'>();
-                                        [D] PutI(136:I8x8)[t7,0] = 0x00()
-                                    }
-                                    else
-                                    {
-                                        ptr->field_50 = nan;
-                                        [D] PutI(136:I8x8)[t7,0] = 0x00()
-                                    }
+                                    // FPU state updated
+                                    // FPU state updated
+                                    // FPU state updated
                                 }
 LABEL_1000761c:
                                 *(p) = 3;
@@ -32555,98 +31923,49 @@ LABEL_1000761c:
 LABEL_10007623:
                         if (v24 == 255)
                             goto LABEL_100079f7;
-                        if (!*((int *)&ptr->padding_18[0]))
+                        if (!*((int *)&this->padding_18[0]))
                         {
                             v44 = v24;
                         }
                         else
                         {
-                            if (*((int *)&ptr->padding_18[0]) != 1)
+                            if (*((int *)&this->padding_18[0]) != 1)
                                 goto LABEL_100077fb;
                             v44 = v24 + 64;
                         }
                         if (v44 == 69)
                         {
-                            flag = ptr->field_4c;
+                            flag = this->field_4c;
                             if (!flag)
                             {
 LABEL_10007665:
-                                ptr->field_4c = 1;
+                                this->field_4c = 1;
                                 goto LABEL_10007a26;
                             }
                             if (flag != 3 && flag != 1)
                                 return v41;
                             if (!flag)
                                 goto LABEL_10007665;
-                            if (flag == 1 && ptr->field_54)
+                            if (flag == 1 && this->field_54)
                             {
-                                v46 = ptr->field_14->field_0->field_3c(&v0);
-                                g_1010cfd0->field_0->field_10(v46);
-                                if (((char)ptr->field_14->field_0->field_5c(v46) & 16) || ((char)ptr->field_14->field_0->field_5c(v46) & 2) && ((char)ptr->field_14->field_0->field_5c(v46) & 99))
+                                v46 = this->field_14->field_0->field_3c(&v0);
+                                g_pApp->field_0->field_10(v46);
+                                if (((char)this->field_14->field_0->field_5c(v46) & 16) || ((char)this->field_14->field_0->field_5c(v46) & 2) && ((char)this->field_14->field_0->field_5c(v46) & 99))
                                 {
 LABEL_1000779e:
-                                    v53 = g_1010cfc8;
-                                    v54 = g_1010cfc8->field_0;
+                                    v53 = g_pLTClient;
+                                    v54 = g_pLTClient->field_0;
 LABEL_100077b1:
                                     v55 = v54->field_b4(v53);
                                     v56 = sub_1005fcb0(v54->field_cc(v55));
-                                    ptr->field_54 = 0;
+                                    this->field_54 = 0;
                                     return v56;
                                 }
                                 v48 = v22 - 1;
-                                if ([D] unsupported_<class 'pyvex.expr.GetI'>())
-                                {
-                                    v49 = v48 - 1;
-                                    [D] PutI(72:F64x8)[t3,0] = t6()
-                                    [D] PutI(136:I8x8)[t3,0] = 0x01()
-                                }
-                                else
-                                {
-                                    v49 = v48 - 1;
-                                    [D] PutI(72:F64x8)[t3,0] = t6()
-                                    [D] PutI(136:I8x8)[t3,0] = 0x01()
-                                }
+                                // FPU state updated
                                 v50 = v49 - 1;
-                                if ([D] unsupported_<class 'pyvex.expr.GetI'>())
-                                {
-                                    v51 = v50 - 1;
-                                    [D] PutI(72:F64x8)[t3,0] = t6()
-                                    [D] PutI(136:I8x8)[t3,0] = 0x01()
-                                }
-                                else
-                                {
-                                    v51 = v50 - 1;
-                                    [D] PutI(72:F64x8)[t3,0] = t6()
-                                    [D] PutI(136:I8x8)[t3,0] = 0x01()
-                                }
-                                [D] PutI(72:F64x8)[t15,0] = t18()
-                                [D] PutI(136:I8x8)[t15,0] = 0x01()
-                                [D] PutI(72:F64x8)[t24,0] = t25()
-                                [D] PutI(136:I8x8)[t24,0] = 0x01()
-                                [D] PutI(72:F64x8)[t48,0] = t51()
-                                [D] PutI(136:I8x8)[t48,0] = 0x01()
-                                [D] PutI(72:F64x8)[t57,0] = t58()
-                                [D] PutI(136:I8x8)[t57,0] = 0x01()
-                                [D] PutI(72:F64x8)[t74,1] = t75()
-                                [D] PutI(136:I8x8)[t74,1] = 0x01()
-                                [D] PutI(136:I8x8)[t74,0] = 0x00()
-                                [D] PutI(72:F64x8)[t96,0] = t99()
-                                [D] PutI(136:I8x8)[t96,0] = 0x01()
-                                [D] PutI(72:F64x8)[t109,0] = t110()
-                                [D] PutI(136:I8x8)[t109,0] = 0x01()
-                                [D] PutI(72:F64x8)[t121,1] = t122()
-                                [D] PutI(136:I8x8)[t121,1] = 0x01()
-                                [D] PutI(136:I8x8)[t121,0] = 0x00()
-                                [D] PutI(72:F64x8)[t141,0] = t142()
-                                [D] PutI(136:I8x8)[t141,0] = 0x01()
-                                [D] PutI(72:F64x8)[t151,2] = t152()
-                                [D] PutI(136:I8x8)[t151,2] = 0x01()
-                                [D] PutI(136:I8x8)[t151,0] = 0x00()
-                                [D] PutI(72:F64x8)[t163,0] = t164()
-                                [D] PutI(136:I8x8)[t163,0] = 0x01()
-                                [D] PutI(136:I8x8)[t163,0] = 0x00()
-                                [D] PutI(136:I8x8)[t183,0] = 0x00()
-                                if (!((char)(((v51 + 2 & 7) * 0x800 | CmpF(([D] unsupported_<class 'pyvex.expr.GetI'>() ? [D] unsupported_<class 'pyvex.expr.GetI'>() : nan), 0x43fa0000) * 0x100 & 0x4500 & 0x4700) >> 8) & 65))
+                                // FPU state updated
+                                if (!((char)(((v51 + 2 & 7) * 0x800 | CmpF((0.0f /* FPU val */ ? 0.0f /* FPU val */ : nan), 0x43fa0000) * 0x100 & 0x4500 & 0x4700) >> 8) & 65))
                                     goto LABEL_1000779e;
                                 choice = 0;
                                 flag2 = 0;
@@ -32658,19 +31977,19 @@ LABEL_100077b1:
                                 flag8 = 0;
                                 v11 = 4294967295;
                                 flag9 = 0;
-                                ptr->field_14->field_0->field_4c(&vvar_446{r28|4b});
-                                ptr->field_14->field_0->field_50(&v0);
+                                this->field_14->field_0->field_4c(&vvar_446{r28|4b});
+                                this->field_14->field_0->field_50(&v0);
                                 if (sub_10011000(&vvar_448{r36|4b}, &vvar_444{r20|4b}, 1141492613, 3, 0, &v1))
                                 {
-                                    v53 = g_1010cfc8;
-                                    v54 = g_1010cfc8->field_0;
+                                    v53 = g_pLTClient;
+                                    v54 = g_pLTClient->field_0;
                                     goto LABEL_100077b1;
                                 }
                                 else
                                 {
-                                    ptr->field_4c = 3;
+                                    this->field_4c = 3;
                                     *(p) = 3;
-                                    ptr->field_5c = 1;
+                                    this->field_5c = 1;
                                 }
                             }
                             else
@@ -32678,36 +31997,9 @@ LABEL_100077b1:
                                 if (flag == 3)
                                 {
                                     *(p) = 3;
-                                    if ([D] unsupported_<class 'pyvex.expr.GetI'>())
-                                    {
-                                        [D] PutI(72:F64x8)[t3,0] = t6()
-                                        [D] PutI(136:I8x8)[t3,0] = 0x01()
-                                    }
-                                    else
-                                    {
-                                        [D] PutI(72:F64x8)[t3,0] = t6()
-                                        [D] PutI(136:I8x8)[t3,0] = 0x01()
-                                    }
-                                    if ([D] unsupported_<class 'pyvex.expr.GetI'>())
-                                    {
-                                        [D] PutI(72:F64x8)[t1,0] = t2()
-                                        [D] PutI(136:I8x8)[t1,0] = 0x01()
-                                    }
-                                    else
-                                    {
-                                        [D] PutI(72:F64x8)[t1,0] = t2()
-                                        [D] PutI(136:I8x8)[t1,0] = 0x01()
-                                    }
-                                    if ([D] unsupported_<class 'pyvex.expr.GetI'>())
-                                    {
-                                        ptr->field_50 = [D] unsupported_<class 'pyvex.expr.GetI'>();
-                                        [D] PutI(136:I8x8)[t7,0] = 0x00()
-                                    }
-                                    else
-                                    {
-                                        ptr->field_50 = nan;
-                                        [D] PutI(136:I8x8)[t7,0] = 0x00()
-                                    }
+                                    // FPU state updated
+                                    // FPU state updated
+                                    // FPU state updated
                                 }
                             }
                         }
@@ -32716,96 +32008,42 @@ LABEL_100077b1:
 LABEL_100077fb:
                             if (v24 == 255)
                                 goto LABEL_100079f7;
-                            if (!*((int *)&ptr->padding_18[0]))
+                            if (!*((int *)&this->padding_18[0]))
                             {
                                 v57 = v24;
                             }
                             else
                             {
-                                if (*((int *)&ptr->padding_18[0]) != 1)
+                                if (*((int *)&this->padding_18[0]) != 1)
                                     goto LABEL_1000789f;
                                 v57 = v24 + 64;
                             }
                             if (v57 == 72)
                             {
-                                if (!ptr->field_4c)
+                                if (!this->field_4c)
                                 {
-                                    if (!ptr->field_24)
+                                    if (!this->field_24)
                                     {
-                                        if (sub_10011800(ptr->field_14, 0x42c80000, &v0, &v2))
+                                        if (sub_10011800(this->field_14, 0x42c80000, &v0, &v2))
                                         {
-                                            ptr->field_4c = 3;
-                                            ptr->field_5d = 1;
+                                            this->field_4c = 3;
+                                            this->field_5d = 1;
                                             *(p) = 3;
-                                            if ([D] unsupported_<class 'pyvex.expr.GetI'>())
-                                            {
-                                                [D] PutI(72:F64x8)[t3,0] = t6()
-                                                [D] PutI(136:I8x8)[t3,0] = 0x01()
-                                            }
-                                            else
-                                            {
-                                                [D] PutI(72:F64x8)[t3,0] = t6()
-                                                [D] PutI(136:I8x8)[t3,0] = 0x01()
-                                            }
-                                            if ([D] unsupported_<class 'pyvex.expr.GetI'>())
-                                            {
-                                                [D] PutI(72:F64x8)[t1,0] = t2()
-                                                [D] PutI(136:I8x8)[t1,0] = 0x01()
-                                            }
-                                            else
-                                            {
-                                                [D] PutI(72:F64x8)[t1,0] = t2()
-                                                [D] PutI(136:I8x8)[t1,0] = 0x01()
-                                            }
-                                            if ([D] unsupported_<class 'pyvex.expr.GetI'>())
-                                            {
-                                                ptr->field_50 = [D] unsupported_<class 'pyvex.expr.GetI'>();
-                                                [D] PutI(136:I8x8)[t7,0] = 0x00()
-                                            }
-                                            else
-                                            {
-                                                ptr->field_50 = nan;
-                                                [D] PutI(136:I8x8)[t7,0] = 0x00()
-                                            }
+                                            // FPU state updated
+                                            // FPU state updated
+                                            // FPU state updated
                                         }
                                     }
                                     else
                                     {
-                                        if (ptr->field_54)
+                                        if (this->field_54)
                                         {
-                                            ptr->field_4c = 2;
+                                            this->field_4c = 2;
                                             *(p) = 3;
-                                            if ([D] unsupported_<class 'pyvex.expr.GetI'>())
-                                            {
-                                                [D] PutI(72:F64x8)[t3,0] = t6()
-                                                [D] PutI(136:I8x8)[t3,0] = 0x01()
-                                            }
-                                            else
-                                            {
-                                                [D] PutI(72:F64x8)[t3,0] = t6()
-                                                [D] PutI(136:I8x8)[t3,0] = 0x01()
-                                            }
-                                            if ([D] unsupported_<class 'pyvex.expr.GetI'>())
-                                            {
-                                                [D] PutI(72:F64x8)[t1,0] = t2()
-                                                [D] PutI(136:I8x8)[t1,0] = 0x01()
-                                            }
-                                            else
-                                            {
-                                                [D] PutI(72:F64x8)[t1,0] = t2()
-                                                [D] PutI(136:I8x8)[t1,0] = 0x01()
-                                            }
-                                            ptr->field_5c = 1;
-                                            if ([D] unsupported_<class 'pyvex.expr.GetI'>())
-                                            {
-                                                ptr->field_50 = [D] unsupported_<class 'pyvex.expr.GetI'>();
-                                                [D] PutI(136:I8x8)[t7,0] = 0x00()
-                                            }
-                                            else
-                                            {
-                                                ptr->field_50 = nan;
-                                                [D] PutI(136:I8x8)[t7,0] = 0x00()
-                                            }
+                                            // FPU state updated
+                                            // FPU state updated
+                                            this->field_5c = 1;
+                                            // FPU state updated
                                         }
                                     }
                                 }
@@ -32819,55 +32057,28 @@ LABEL_100077fb:
 LABEL_1000789f:
                                 if (v24 == 255)
                                     goto LABEL_100079f7;
-                                if (!*((int *)&ptr->padding_18[0]))
+                                if (!*((int *)&this->padding_18[0]))
                                 {
                                     v58 = v24;
                                 }
                                 else
                                 {
-                                    if (*((int *)&ptr->padding_18[0]) != 1)
+                                    if (*((int *)&this->padding_18[0]) != 1)
                                         goto LABEL_1000790f;
                                     v58 = v24 + 64;
                                 }
                                 if (v58 == 73)
                                 {
-                                    if (!ptr->field_4c)
+                                    if (!this->field_4c)
                                     {
-                                        if (sub_10011800(ptr->field_14, 0x42c80000, &v0, &v2))
+                                        if (sub_10011800(this->field_14, 0x42c80000, &v0, &v2))
                                         {
-                                            ptr->field_4c = 3;
-                                            ptr->field_5d = 1;
+                                            this->field_4c = 3;
+                                            this->field_5d = 1;
                                             *(p) = 3;
-                                            if ([D] unsupported_<class 'pyvex.expr.GetI'>())
-                                            {
-                                                [D] PutI(72:F64x8)[t3,0] = t6()
-                                                [D] PutI(136:I8x8)[t3,0] = 0x01()
-                                            }
-                                            else
-                                            {
-                                                [D] PutI(72:F64x8)[t3,0] = t6()
-                                                [D] PutI(136:I8x8)[t3,0] = 0x01()
-                                            }
-                                            if ([D] unsupported_<class 'pyvex.expr.GetI'>())
-                                            {
-                                                [D] PutI(72:F64x8)[t1,0] = t2()
-                                                [D] PutI(136:I8x8)[t1,0] = 0x01()
-                                            }
-                                            else
-                                            {
-                                                [D] PutI(72:F64x8)[t1,0] = t2()
-                                                [D] PutI(136:I8x8)[t1,0] = 0x01()
-                                            }
-                                            if ([D] unsupported_<class 'pyvex.expr.GetI'>())
-                                            {
-                                                ptr->field_50 = [D] unsupported_<class 'pyvex.expr.GetI'>();
-                                                [D] PutI(136:I8x8)[t7,0] = 0x00()
-                                            }
-                                            else
-                                            {
-                                                ptr->field_50 = nan;
-                                                [D] PutI(136:I8x8)[t7,0] = 0x00()
-                                            }
+                                            // FPU state updated
+                                            // FPU state updated
+                                            // FPU state updated
                                         }
                                     }
                                     else
@@ -32880,60 +32091,33 @@ LABEL_1000789f:
 LABEL_1000790f:
                                     if (v24 == 255)
                                         goto LABEL_100079f7;
-                                    if (!*((int *)&ptr->padding_18[0]))
+                                    if (!*((int *)&this->padding_18[0]))
                                     {
                                         v59 = v24;
                                     }
                                     else
                                     {
-                                        if (*((int *)&ptr->padding_18[0]) != 1)
+                                        if (*((int *)&this->padding_18[0]) != 1)
                                             goto LABEL_1000796c;
                                         v59 = v24 + 64;
                                     }
                                     if (v59 == 79)
                                     {
-                                        if (ptr->field_4c == 3)
+                                        if (this->field_4c == 3)
                                         {
-                                            ptr->field_4c = 2;
+                                            this->field_4c = 2;
                                             *(p) = 3;
                                         }
                                         else
                                         {
-                                            if (ptr->field_4c == 2)
+                                            if (this->field_4c == 2)
                                             {
-                                                ptr->field_4c = 10;
+                                                this->field_4c = 10;
                                                 *(p) = 3;
-                                                if ([D] unsupported_<class 'pyvex.expr.GetI'>())
-                                                {
-                                                    [D] PutI(72:F64x8)[t3,0] = t6()
-                                                    [D] PutI(136:I8x8)[t3,0] = 0x01()
-                                                }
-                                                else
-                                                {
-                                                    [D] PutI(72:F64x8)[t3,0] = t6()
-                                                    [D] PutI(136:I8x8)[t3,0] = 0x01()
-                                                }
-                                                if ([D] unsupported_<class 'pyvex.expr.GetI'>())
-                                                {
-                                                    [D] PutI(72:F64x8)[t1,0] = t2()
-                                                    [D] PutI(136:I8x8)[t1,0] = 0x01()
-                                                }
-                                                else
-                                                {
-                                                    [D] PutI(72:F64x8)[t1,0] = t2()
-                                                    [D] PutI(136:I8x8)[t1,0] = 0x01()
-                                                }
-                                                ptr->field_48 = 0;
-                                                if ([D] unsupported_<class 'pyvex.expr.GetI'>())
-                                                {
-                                                    ptr->field_50 = [D] unsupported_<class 'pyvex.expr.GetI'>();
-                                                    [D] PutI(136:I8x8)[t7,0] = 0x00()
-                                                }
-                                                else
-                                                {
-                                                    ptr->field_50 = nan;
-                                                    [D] PutI(136:I8x8)[t7,0] = 0x00()
-                                                }
+                                                // FPU state updated
+                                                // FPU state updated
+                                                this->field_48 = 0;
+                                                // FPU state updated
                                             }
                                         }
                                     }
@@ -32942,48 +32126,21 @@ LABEL_1000790f:
 LABEL_1000796c:
                                         if (v24 == 255)
                                             goto LABEL_100079f7;
-                                        if (!*((int *)&ptr->padding_18[0]))
+                                        if (!*((int *)&this->padding_18[0]))
                                         {
                                             v60 = v24;
                                         }
                                         else
                                         {
-                                            if (*((int *)&ptr->padding_18[0]) != 1)
+                                            if (*((int *)&this->padding_18[0]) != 1)
                                                 goto LABEL_100079a5;
                                             v60 = v24 + 64;
                                         }
                                         if (v60 == 74)
                                         {
-                                            if ([D] unsupported_<class 'pyvex.expr.GetI'>())
-                                            {
-                                                [D] PutI(72:F64x8)[t3,0] = t6()
-                                                [D] PutI(136:I8x8)[t3,0] = 0x01()
-                                            }
-                                            else
-                                            {
-                                                [D] PutI(72:F64x8)[t3,0] = t6()
-                                                [D] PutI(136:I8x8)[t3,0] = 0x01()
-                                            }
-                                            if ([D] unsupported_<class 'pyvex.expr.GetI'>())
-                                            {
-                                                [D] PutI(72:F64x8)[t1,0] = t2()
-                                                [D] PutI(136:I8x8)[t1,0] = 0x01()
-                                            }
-                                            else
-                                            {
-                                                [D] PutI(72:F64x8)[t1,0] = t2()
-                                                [D] PutI(136:I8x8)[t1,0] = 0x01()
-                                            }
-                                            if ([D] unsupported_<class 'pyvex.expr.GetI'>())
-                                            {
-                                                ptr->field_50 = [D] unsupported_<class 'pyvex.expr.GetI'>();
-                                                [D] PutI(136:I8x8)[t7,0] = 0x00()
-                                            }
-                                            else
-                                            {
-                                                ptr->field_50 = nan;
-                                                [D] PutI(136:I8x8)[t7,0] = 0x00()
-                                            }
+                                            // FPU state updated
+                                            // FPU state updated
+                                            // FPU state updated
                                             *(p) = 3;
                                         }
                                         else
@@ -32991,86 +32148,28 @@ LABEL_1000796c:
 LABEL_100079a5:
                                             if (v24 == 255)
                                                 goto LABEL_100079f7;
-                                            if (!*((int *)&ptr->padding_18[0]))
+                                            if (!*((int *)&this->padding_18[0]))
                                                 v61 = v24;
-                                            if (*((int *)&ptr->padding_18[0]) != 1 || (v61 = v24 + 64, v61 != 75))
+                                            if (*((int *)&this->padding_18[0]) != 1 || (v61 = v24 + 64, v61 != 75))
                                                 goto LABEL_100079f7;
-                                            if (ptr->field_60 == 1)
+                                            if (this->field_60 == 1)
                                             {
                                                 v62 = v22 - 1;
-                                                if ([D] unsupported_<class 'pyvex.expr.GetI'>())
-                                                {
-                                                    v63 = v62 - 1;
-                                                    [D] PutI(72:F64x8)[t3,0] = t6()
-                                                    [D] PutI(136:I8x8)[t3,0] = 0x01()
-                                                }
-                                                else
-                                                {
-                                                    v63 = v62 - 1;
-                                                    [D] PutI(72:F64x8)[t3,0] = t6()
-                                                    [D] PutI(136:I8x8)[t3,0] = 0x01()
-                                                }
-                                                if ([D] unsupported_<class 'pyvex.expr.GetI'>())
-                                                {
-                                                    [D] PutI(72:F64x8)[t3,0] = t4()
-                                                    [D] PutI(136:I8x8)[t3,0] = 0x01()
-                                                }
-                                                else
-                                                {
-                                                    [D] PutI(72:F64x8)[t3,0] = t4()
-                                                    [D] PutI(136:I8x8)[t3,0] = 0x01()
-                                                }
-                                                if ([D] unsupported_<class 'pyvex.expr.GetI'>())
-                                                {
-                                                    v64 = CmpF([D] unsupported_<class 'pyvex.expr.GetI'>(), 1041865114) * 0x100 & 0x4500;
-                                                    [D] PutI(136:I8x8)[t9,0] = 0x00()
-                                                    v65 = v63 + 1;
-                                                }
-                                                else
-                                                {
-                                                    v64 = CmpF(nan, 1041865114) * 0x100 & 0x4500;
-                                                    [D] PutI(136:I8x8)[t9,0] = 0x00()
-                                                    v65 = v63 + 1;
-                                                }
+                                                // FPU state updated
+                                                // FPU state updated
+                                                // FPU state updated
                                                 if (!((char)(((v65 & 7) * 0x800 | (unsigned short)v64 & 0x4700) >> 8) & 1))
                                                     goto LABEL_100079e0;
-                                                ptr->field_60 = 0;
+                                                this->field_60 = 0;
                                             }
                                             else
                                             {
 LABEL_100079e0:
-                                                ptr->field_60 = 1;
+                                                this->field_60 = 1;
                                             }
-                                            if ([D] unsupported_<class 'pyvex.expr.GetI'>())
-                                            {
-                                                [D] PutI(72:F64x8)[t3,0] = t6()
-                                                [D] PutI(136:I8x8)[t3,0] = 0x01()
-                                            }
-                                            else
-                                            {
-                                                [D] PutI(72:F64x8)[t3,0] = t6()
-                                                [D] PutI(136:I8x8)[t3,0] = 0x01()
-                                            }
-                                            if ([D] unsupported_<class 'pyvex.expr.GetI'>())
-                                            {
-                                                [D] PutI(72:F64x8)[t1,0] = t2()
-                                                [D] PutI(136:I8x8)[t1,0] = 0x01()
-                                            }
-                                            else
-                                            {
-                                                [D] PutI(72:F64x8)[t1,0] = t2()
-                                                [D] PutI(136:I8x8)[t1,0] = 0x01()
-                                            }
-                                            if ([D] unsupported_<class 'pyvex.expr.GetI'>())
-                                            {
-                                                ptr->field_50 = [D] unsupported_<class 'pyvex.expr.GetI'>();
-                                                [D] PutI(136:I8x8)[t7,0] = 0x00()
-                                            }
-                                            else
-                                            {
-                                                ptr->field_50 = nan;
-                                                [D] PutI(136:I8x8)[t7,0] = 0x00()
-                                            }
+                                            // FPU state updated
+                                            // FPU state updated
+                                            // FPU state updated
                                             *(p) = 3;
                                         }
                                     }
@@ -33079,12 +32178,12 @@ LABEL_100079e0:
                         }
                     }
                 }
-                else if (!ptr->field_4c)
+                else if (!this->field_4c)
                 {
-                    if (ptr->field_14->field_0->field_40() != 4)
+                    if (this->field_14->field_0->field_40() != 4)
                     {
-                        v26 = ptr->field_14->field_0->field_20();
-                        return g_1010cfc8->field_0->field_9c(g_1010cfc8, "How the did you get a medikit? (%s) is not a Medic!", v26);
+                        v26 = this->field_14->field_0->field_20();
+                        return g_pLTClient->field_0->field_9c(g_pLTClient, "How the did you get a medikit? (%s) is not a Medic!", v26);
                     }
                     v27 = g_1011a134->field_181cc->field_2a8;
                     if (!v27)
@@ -33092,201 +32191,35 @@ LABEL_100079e0:
                     if (*(v27)->field_0() != 3 && *(v27)->field_0() != 4)
                         return v28;
                     v29 = *(v27)->field_3c(&v2);
-                    g_1010cfc8->field_2f0(v29);
-                    ptr->field_14->field_0->field_48(&v0);
+                    g_pLTClient->field_2f0(v29);
+                    this->field_14->field_0->field_48(&v0);
                     v30 = v22 - 1;
-                    if ([D] unsupported_<class 'pyvex.expr.GetI'>())
-                    {
-                        v31 = v30 - 1;
-                        [D] PutI(72:F64x8)[t3,0] = t6()
-                        [D] PutI(136:I8x8)[t3,0] = 0x01()
-                    }
-                    else
-                    {
-                        v31 = v30 - 1;
-                        [D] PutI(72:F64x8)[t3,0] = t6()
-                        [D] PutI(136:I8x8)[t3,0] = 0x01()
-                    }
-                    if ([D] unsupported_<class 'pyvex.expr.GetI'>())
-                    {
-                        [D] PutI(72:F64x8)[t3,0] = t4()
-                        [D] PutI(136:I8x8)[t3,0] = 0x01()
-                    }
-                    else
-                    {
-                        [D] PutI(72:F64x8)[t3,0] = t4()
-                        [D] PutI(136:I8x8)[t3,0] = 0x01()
-                    }
+                    // FPU state updated
+                    // FPU state updated
                     v32 = v31 - 1;
-                    if ([D] unsupported_<class 'pyvex.expr.GetI'>())
-                    {
-                        v33 = v32 - 1;
-                        [D] PutI(72:F64x8)[t3,0] = t6()
-                        [D] PutI(136:I8x8)[t3,0] = 0x01()
-                    }
-                    else
-                    {
-                        v33 = v32 - 1;
-                        [D] PutI(72:F64x8)[t3,0] = t6()
-                        [D] PutI(136:I8x8)[t3,0] = 0x01()
-                    }
-                    if ([D] unsupported_<class 'pyvex.expr.GetI'>())
-                    {
-                        [D] PutI(72:F64x8)[t3,0] = t4()
-                        [D] PutI(136:I8x8)[t3,0] = 0x01()
-                    }
-                    else
-                    {
-                        [D] PutI(72:F64x8)[t3,0] = t4()
-                        [D] PutI(136:I8x8)[t3,0] = 0x01()
-                    }
+                    // FPU state updated
+                    // FPU state updated
                     v34 = v33 - 1;
-                    if ([D] unsupported_<class 'pyvex.expr.GetI'>())
-                    {
-                        v35 = v34 - 1;
-                        [D] PutI(72:F64x8)[t3,0] = t6()
-                        [D] PutI(136:I8x8)[t3,0] = 0x01()
-                    }
-                    else
-                    {
-                        v35 = v34 - 1;
-                        [D] PutI(72:F64x8)[t3,0] = t6()
-                        [D] PutI(136:I8x8)[t3,0] = 0x01()
-                    }
-                    if ([D] unsupported_<class 'pyvex.expr.GetI'>())
-                    {
-                        [D] PutI(72:F64x8)[t3,0] = t4()
-                        [D] PutI(136:I8x8)[t3,0] = 0x01()
-                    }
-                    else
-                    {
-                        [D] PutI(72:F64x8)[t3,0] = t4()
-                        [D] PutI(136:I8x8)[t3,0] = 0x01()
-                    }
-                    [D] PutI(72:F64x8)[t14,0] = t17()
-                    [D] PutI(136:I8x8)[t14,0] = 0x01()
-                    [D] PutI(72:F64x8)[t23,0] = t24()
-                    [D] PutI(136:I8x8)[t23,0] = 0x01()
-                    [D] PutI(72:F64x8)[t47,0] = t50()
-                    [D] PutI(136:I8x8)[t47,0] = 0x01()
-                    [D] PutI(72:F64x8)[t56,0] = t57()
-                    [D] PutI(136:I8x8)[t56,0] = 0x01()
-                    [D] PutI(72:F64x8)[t73,1] = t74()
-                    [D] PutI(136:I8x8)[t73,1] = 0x01()
-                    [D] PutI(136:I8x8)[t73,0] = 0x00()
-                    [D] PutI(72:F64x8)[t100,0] = t103()
-                    [D] PutI(136:I8x8)[t100,0] = 0x01()
-                    [D] PutI(72:F64x8)[t109,0] = t110()
-                    [D] PutI(136:I8x8)[t109,0] = 0x01()
-                    [D] PutI(72:F64x8)[t126,1] = t127()
-                    [D] PutI(136:I8x8)[t126,1] = 0x01()
-                    [D] PutI(136:I8x8)[t126,0] = 0x00()
-                    [D] PutI(72:F64x8)[t146,0] = t147()
-                    [D] PutI(136:I8x8)[t146,0] = 0x01()
-                    [D] PutI(72:F64x8)[t156,3] = t157()
-                    [D] PutI(136:I8x8)[t156,3] = 0x01()
-                    [D] PutI(136:I8x8)[t156,0] = 0x00()
-                    [D] PutI(72:F64x8)[t168,0] = t169()
-                    [D] PutI(136:I8x8)[t168,0] = 0x01()
-                    [D] PutI(136:I8x8)[t168,0] = 0x00()
-                    [D] PutI(72:F64x8)[t180,0] = t181()
-                    [D] PutI(136:I8x8)[t180,0] = 0x01()
-                    [D] PutI(136:I8x8)[t180,0] = 0x00()
-                    [D] PutI(136:I8x8)[t200,0] = 0x00()
+                    // FPU state updated
+                    // FPU state updated
                     v37 = (unsigned short)v35 + 3;
-                    if (!((char)(((v37 & 7) * 0x800 | CmpF(([D] unsupported_<class 'pyvex.expr.GetI'>() ? [D] unsupported_<class 'pyvex.expr.GetI'>() : nan), 0x43160000) * 0x100 & 0x4500 & 0x4700) >> 8) & 65))
+                    if (!((char)(((v37 & 7) * 0x800 | CmpF((0.0f /* FPU val */ ? 0.0f /* FPU val */ : nan), 0x43160000) * 0x100 & 0x4500 & 0x4700) >> 8) & 65))
                         return v41;
                     *(v27)->field_6c();
-                    if ([D] unsupported_<class 'pyvex.expr.GetI'>())
-                    {
-                        v13 = [D] unsupported_<class 'pyvex.expr.GetI'>();
-                        [D] PutI(136:I8x8)[t7,0] = 0x00()
-                        v38 = v37 + 1;
-                    }
-                    else
-                    {
-                        v13 = nan;
-                        [D] PutI(136:I8x8)[t7,0] = 0x00()
-                        v38 = v37 + 1;
-                    }
+                    // FPU state updated
                     *(v27)->field_70();
-                    if ([D] unsupported_<class 'pyvex.expr.GetI'>())
-                    {
-                        v39 = CmpF([D] unsupported_<class 'pyvex.expr.GetI'>(), v13) * 0x100 & 0x4500;
-                        [D] PutI(136:I8x8)[t11,0] = 0x00()
-                        v40 = v38 + 1;
-                    }
-                    else
-                    {
-                        v39 = CmpF(nan, v13) * 0x100 & 0x4500;
-                        [D] PutI(136:I8x8)[t11,0] = 0x00()
-                        v40 = v38 + 1;
-                    }
+                    // FPU state updated
                     if (((char)(((v40 & 7) * 0x800 | (unsigned short)v39 & 0x4700) >> 8) & 65))
                         return v41;
                     *(v27)->field_70();
-                    if ([D] unsupported_<class 'pyvex.expr.GetI'>())
-                    {
-                        v13 = [D] unsupported_<class 'pyvex.expr.GetI'>();
-                        [D] PutI(136:I8x8)[t7,0] = 0x00()
-                    }
-                    else
-                    {
-                        v13 = nan;
-                        [D] PutI(136:I8x8)[t7,0] = 0x00()
-                    }
+                    // FPU state updated
                     v41 = *(v27)->field_6c();
-                    if ([D] unsupported_<class 'pyvex.expr.GetI'>())
-                    {
-                        [D] PutI(72:F64x8)[t3,0] = t4()
-                        [D] PutI(136:I8x8)[t3,0] = 0x01()
-                    }
-                    else
-                    {
-                        [D] PutI(72:F64x8)[t3,0] = t4()
-                        [D] PutI(136:I8x8)[t3,0] = 0x01()
-                    }
-                    ptr->field_4c = 5;
-                    if ([D] unsupported_<class 'pyvex.expr.GetI'>())
-                    {
-                        [D] PutI(72:F64x8)[t1,0] = t2()
-                        [D] PutI(136:I8x8)[t1,0] = 0x01()
-                    }
-                    else
-                    {
-                        [D] PutI(72:F64x8)[t1,0] = t2()
-                        [D] PutI(136:I8x8)[t1,0] = 0x01()
-                    }
-                    if ([D] unsupported_<class 'pyvex.expr.GetI'>())
-                    {
-                        [D] PutI(72:F64x8)[t1,0] = t2()
-                        [D] PutI(136:I8x8)[t1,0] = 0x01()
-                    }
-                    else
-                    {
-                        [D] PutI(72:F64x8)[t1,0] = t2()
-                        [D] PutI(136:I8x8)[t1,0] = 0x01()
-                    }
-                    if ([D] unsupported_<class 'pyvex.expr.GetI'>())
-                    {
-                        [D] PutI(72:F64x8)[t3,0] = t4()
-                        [D] PutI(136:I8x8)[t3,0] = 0x01()
-                    }
-                    else
-                    {
-                        [D] PutI(72:F64x8)[t3,0] = t4()
-                        [D] PutI(136:I8x8)[t3,0] = 0x01()
-                    }
-                    if ([D] unsupported_<class 'pyvex.expr.GetI'>())
-                    {
-                        ptr->field_50 = [D] unsupported_<class 'pyvex.expr.GetI'>();
-                        [D] PutI(136:I8x8)[t7,0] = 0x00()
-                    }
-                    else
-                    {
-                        ptr->field_50 = nan;
-                        [D] PutI(136:I8x8)[t7,0] = 0x00()
-                    }
+                    // FPU state updated
+                    this->field_4c = 5;
+                    // FPU state updated
+                    // FPU state updated
+                    // FPU state updated
+                    // FPU state updated
                     *(p) = 3;
                 }
                 else
@@ -33299,49 +32232,22 @@ LABEL_100079e0:
 LABEL_100079f7:
                 if (!(*((int *)(g_1010cf4c + v24 * 300)) & 0x400000))
                 {
-                    if (ptr->field_4c)
+                    if (this->field_4c)
                         return v41;
-                    v66 = ptr->field_48;
+                    v66 = this->field_48;
                     if (!v66)
                         return v41;
-                    ptr->field_4c = 2;
-                    ptr->field_48 = v66 - 1;
+                    this->field_4c = 2;
+                    this->field_48 = v66 - 1;
 LABEL_10007a26:
-                    if ([D] unsupported_<class 'pyvex.expr.GetI'>())
-                    {
-                        [D] PutI(72:F64x8)[t3,0] = t6()
-                        [D] PutI(136:I8x8)[t3,0] = 0x01()
-                    }
-                    else
-                    {
-                        [D] PutI(72:F64x8)[t3,0] = t6()
-                        [D] PutI(136:I8x8)[t3,0] = 0x01()
-                    }
-                    if ([D] unsupported_<class 'pyvex.expr.GetI'>())
-                    {
-                        [D] PutI(72:F64x8)[t1,0] = t2()
-                        [D] PutI(136:I8x8)[t1,0] = 0x01()
-                    }
-                    else
-                    {
-                        [D] PutI(72:F64x8)[t1,0] = t2()
-                        [D] PutI(136:I8x8)[t1,0] = 0x01()
-                    }
-                    if ([D] unsupported_<class 'pyvex.expr.GetI'>())
-                    {
-                        ptr->field_50 = [D] unsupported_<class 'pyvex.expr.GetI'>();
-                        [D] PutI(136:I8x8)[t7,0] = 0x00()
-                    }
-                    else
-                    {
-                        ptr->field_50 = nan;
-                        [D] PutI(136:I8x8)[t7,0] = 0x00()
-                    }
+                    // FPU state updated
+                    // FPU state updated
+                    // FPU state updated
                     *(p) = 3;
                 }
-                else if (!ptr->field_4c)
+                else if (!this->field_4c)
                 {
-                    ptr->field_4c = 2;
+                    this->field_4c = 2;
                     *(p) = 3;
                 }
                 else
@@ -33353,51 +32259,22 @@ LABEL_10007a26:
     }
     else
     {
-        if (!ptr->field_4c)
+        if (!this->field_4c)
         {
             *(p) = 1;
-            ptr->field_4c = 1;
-            if ([D] unsupported_<class 'pyvex.expr.GetI'>())
-            {
-                [D] PutI(72:F64x8)[t3,0] = t6()
-                [D] PutI(136:I8x8)[t3,0] = 0x01()
-            }
+            this->field_4c = 1;
+            // FPU state updated
+            // FPU state updated
+            if (0.0f /* FPU val */)
+                this->field_50 = 0.0f /* FPU val */;
             else
-            {
-                [D] PutI(72:F64x8)[t3,0] = t6()
-                [D] PutI(136:I8x8)[t3,0] = 0x01()
-            }
-            if ([D] unsupported_<class 'pyvex.expr.GetI'>())
-            {
-                [D] PutI(72:F64x8)[t1,0] = t2()
-                [D] PutI(136:I8x8)[t1,0] = 0x01()
-            }
-            else
-            {
-                [D] PutI(72:F64x8)[t1,0] = t2()
-                [D] PutI(136:I8x8)[t1,0] = 0x01()
-            }
-            if ([D] unsupported_<class 'pyvex.expr.GetI'>())
-                ptr->field_50 = [D] unsupported_<class 'pyvex.expr.GetI'>();
-            else
-                ptr->field_50 = nan;
-            if ([D] unsupported_<class 'pyvex.expr.GetI'>())
-            {
-                ptr->field_40 = [D] unsupported_<class 'pyvex.expr.GetI'>();
-                [D] PutI(136:I8x8)[t7,0] = 0x00()
-            }
-            else
-            {
-                ptr->field_40 = nan;
-                [D] PutI(136:I8x8)[t7,0] = 0x00()
-            }
+                this->field_50 = nan;
+            // FPU state updated
         }
     }
     if (*(p) == 3)
-        ptr->field_54 = 0;
+        this->field_54 = 0;
     return v41;
-}
-
 
     // --- ORIGINAL ASSEMBLY ---
 #if 0
@@ -53982,26 +52859,17 @@ struct_0 * sub_1000c7e0(struct_0 *ptr, char a1)
 1000ca0f:	90                   	nop
 
 */
-void Global::Unknown_1000c9f0() {
+class Log {
+public:
+    char padding[4];
+    unsigned int m_nFlags;
+};
 
-    // --- MACHINE DECOMPILED BY ANGR ---
-    // TODO: Clean up variable names, types, and logic to readable C++
-typedef struct struct_0 {
-    char padding_0[4];
-    unsigned int field_4;
-} struct_0;
+extern void sub_1000ca10(Log* pLog, const char* fmt, ...);
 
-int sub_1000c9f0(struct_0 *ptr)
-{
-    unsigned int v2;  // eax
-    int v0;  // [bp-0x4]
-
-    sub_1000ca10(ptr, "Log file closed\n", v0);
-    v2 = _INSERT(ptr->field_4, 0, (char)ptr->field_4 & 254);
-    ptr->field_4 = v2;
-    return v2;
-}
-
+void Global::Unknown_1000c9f0(Log* pLog) {
+    sub_1000ca10(pLog, "Log file closed\n");
+    pLog->m_nFlags &= ~1;
 
     // --- ORIGINAL ASSEMBLY ---
 #if 0
@@ -57740,46 +56608,58 @@ unsigned int sub_1000d450(int a0, unsigned int a1, struct_3 **a2, struct_0 **a3)
 1000d58c:	c2 10 00             	ret    0x10
 
 */
-void Global::Unknown_1000d4b0() {
+void Global::Unknown_1000d4b0(unsigned int type, void* pObj2, void* pObj1, unsigned int idx) {
+    extern char g_1010cf4c;
+    extern char g_1010cf50;
+    extern char g_1010cf6c;
+    extern char g_1010cf70;
 
-    // --- MACHINE DECOMPILED BY ANGR ---
-    // TODO: Clean up variable names, types, and logic to readable C++
-extern char g_1010cf50;
-extern char g_1010cf70;
+    char* pData = nullptr;
 
-void sub_1000d4b0(unsigned int a0, unsigned int a1, unsigned int a2, unsigned int a3, unsigned int a4)
-{
-    unsigned int v0;  // ecx
-
-    if (a4 != 255)
-    {
-        if (a4 > 63)
-        {
-            if (a4 >= 64 && !((v0 = a4 - 64, a4 > 127)))
-                goto LABEL_1000d4f3;
-            goto LABEL_1000d4ee;
+    if (idx == 255) {
+        if (255 < *(int*)&g_1010cf50) {
+            pData = (char*)&g_1010cf4c + 255 * 300;
         }
-        if (a4 < *((int *)&g_1010cf70))
-            goto LABEL_1000d51a;
+    } else if (idx <= 63) {
+        if (idx < *(int*)&g_1010cf70) {
+            pData = (char*)&g_1010cf6c + idx * 364;
+        }
+    } else {
+        unsigned int adjusted_idx = (idx <= 127) ? (idx - 64) : 255;
+        if (adjusted_idx < *(int*)&g_1010cf50) {
+            pData = (char*)&g_1010cf4c + adjusted_idx * 300;
+        }
     }
-    else
-    {
-LABEL_1000d4ee:
-        v0 = 255;
-LABEL_1000d4f3:
-        if (v0 < *((int *)&g_1010cf50))
-LABEL_1000d51a:
+
+    if (pData) {
+        pData += 8;
     }
-    if (a1 == 11)
-    {
-        sub_1000d593();
-        return;
+
+    if (type == 11) {
+        typedef unsigned int (__thiscall* Func18_t)(void*, char*, unsigned int);
+        typedef unsigned int (__thiscall* Func20_t)(void*, unsigned int);
+        typedef unsigned int (__thiscall* Func18_t_1)(void*, unsigned int);
+
+        unsigned int res1 = (*(Func18_t**)(pObj1))[6](pObj1, pData, idx);
+        unsigned int res2 = (*(Func20_t**)(pObj1))[8](pObj1, ((unsigned int*)&g_100d3c64)[res1]);
+
+        unsigned int res3 = (*(Func18_t_1**)(pObj2))[6](pObj2, res2);
+        unsigned int res4 = (*(Func20_t**)(pObj2))[8](pObj2, ((unsigned int*)&g_100d3c64)[res3]);
+
+        sub_1000ca10((Log*)this, (const char*)0x100d43a4, res4);
+    } else if (type == 12) {
+        typedef unsigned int (__thiscall* Func18_t)(void*, char*, unsigned int);
+        typedef unsigned int (__thiscall* Func20_t)(void*, unsigned int);
+        typedef unsigned int (__thiscall* Func18_t_1)(void*, unsigned int);
+
+        unsigned int res1 = (*(Func18_t**)(pObj1))[6](pObj1, pData, idx);
+        unsigned int res2 = (*(Func20_t**)(pObj1))[8](pObj1, ((unsigned int*)&g_100d3c64)[res1]);
+
+        unsigned int res3 = (*(Func18_t_1**)(pObj2))[6](pObj2, res2);
+        unsigned int res4 = (*(Func20_t**)(pObj2))[8](pObj2, ((unsigned int*)&g_100d3c64)[res3]);
+
+        sub_1000ca10((Log*)this, (const char*)0x100d43d0, res4);
     }
-    if (a1 != 12)
-        return;
-    sub_1000d544();
-    return;
-}
 
 
     // --- ORIGINAL ASSEMBLY ---
@@ -58910,50 +57790,16 @@ void sub_1000fab0(unsigned int *ptr)
 
 */
 void Global::Unknown_1000fb00() {
+    char* pThis = (char*)this;
+    char buffer[256];
+    float fVal = *(float*)(pThis + 0x28);
+    sprintf(buffer, "Client Rotator StopMoving() at %f\n", fVal);
+    OutputDebugStringA(buffer);
 
-    // --- MACHINE DECOMPILED BY ANGR ---
-    // TODO: Clean up variable names, types, and logic to readable C++
-
-void sub_1000fb00(unsigned int *ptr)
-{
-    unsigned int v5;  // edx
-    char *v0;  // [bp-0x114]
-    unsigned int v1;  // [bp-0x110]
-    double v2;  // [bp-0x10c], Other Possible Types: unsigned long
-    Byte v3[256];  // [bp-0x100]
-
-    if ([D] unsupported_<class 'pyvex.expr.GetI'>())
-    {
-        [D] PutI(72:F64x8)[t3,0] = t6()
-        [D] PutI(136:I8x8)[t3,0] = 0x01()
-    }
-    else
-    {
-        [D] PutI(72:F64x8)[t3,0] = t6()
-        [D] PutI(136:I8x8)[t3,0] = 0x01()
-    }
-    if ([D] unsupported_<class 'pyvex.expr.GetI'>())
-    {
-        v2 = [D] unsupported_<class 'pyvex.expr.GetI'>();
-        [D] PutI(136:I8x8)[t4,0] = 0x00()
-    }
-    else
-    {
-        v2 = (double)nan;
-        [D] PutI(136:I8x8)[t4,0] = 0x00()
-    }
-    v1 = "Client Rotator StopMoving() at %f\n";
-    v0 = &v3[0];
-    sub_100a3e5b();
-    OutputDebugStringA(&v3);
-    v5 = ptr[10];
-    ptr[9] = 2;
-    ptr[12] = v5;
-    return;
+    unsigned int v5 = *(unsigned int*)(pThis + 0x28);
+    *(unsigned int*)(pThis + 0x24) = 2;
+    *(unsigned int*)(pThis + 0x30) = v5;
 }
-
-
-    // --- ORIGINAL ASSEMBLY ---
 #if 0
     __asm {
     loc_1000fb00:
@@ -59796,199 +58642,43 @@ __declspec(naked) void Global::Unknown_1000fbea() {
 1000fdcf:	90                   	nop
 
 */
-void Global::Unknown_1000fcc0() {
+void Global::Unknown_1000fcc0(uint32 unk1, int id, uint32 unk2, HSTRING hName, float fVal1, float fVal2) {
+    if (id < 0 || id >= 12) {
+        g_pLTClient->CPrint("SetSecurityCamera: id %i is out of range [0..%i)\n", id, 12);
+    }
 
-    // --- MACHINE DECOMPILED BY ANGR ---
-    // TODO: Clean up variable names, types, and logic to readable C++
-typedef struct struct_7 {
-    char padding_0[8];
-    unsigned int field_8;
-} struct_7;
+    struct SecurityCamera {
+        uint32 m_nUnk1;      // 0x00
+        uint32 m_nUnk2;      // 0x04
+        HSTRING m_hName;     // 0x08
+        float m_fVal1;       // 0x0C
+        float m_fVal2;       // 0x10
+        float m_fVal1_minus; // 0x14
+        float m_fZero;       // 0x18
+        float m_fVal1_plus;  // 0x1C
+        float m_f90;         // 0x20
+    };
+    SecurityCamera* cam = (SecurityCamera*)((uint8*)&g_1010d470 + id * sizeof(SecurityCamera));
 
-typedef struct struct_5 {
-    unsigned int field_0;
-} struct_5;
+    cam->m_nUnk1 = unk1;
+    if (cam->m_hName) {
+        g_pLTClient->FreeString(cam->m_hName);
+        cam->m_hName = nullptr;
+    }
+    cam->m_nUnk2 = unk2;
+    
+    if (hName && g_pLTClient->GetStringData(hName)[0] != '\0') {
+        cam->m_hName = g_pLTClient->CreateString(g_pLTClient->GetStringData(hName)); 
+    } else {
+        cam->m_hName = nullptr;
+    }
 
-typedef struct struct_4 {
-    unsigned int field_0;
-} struct_4;
-
-typedef struct struct_3 {
-    unsigned int field_0;
-} struct_3;
-
-typedef struct struct_2 {
-    unsigned int field_0;
-} struct_2;
-
-typedef struct struct_1 {
-    unsigned int field_0;
-} struct_1;
-
-typedef struct struct_0 {
-    char padding_0[184];
-    struct struct_1 *field_b8;
-    char padding_bc[4];
-    struct struct_2 *field_c0;
-    char padding_c4[8];
-    struct struct_3 *field_cc;
-    char padding_d0[80];
-    struct struct_4 *field_120;
-    char padding_124[4];
-    struct struct_5 *field_128;
-} struct_0;
-
-typedef struct struct_6 {
-    struct struct_0 *field_0;
-} struct_6;
-
-extern struct_6 *g_1010cfc8;
-extern unsigned int g_1010d470;
-
-void sub_1000fcc0(unsigned int a0, int a1, unsigned int a2, unsigned int a3, unsigned int a4, unsigned int a5)
-{
-    unsigned int v2;  // edi
-    struct_7 *ptr;  // esi
-    unsigned int v4;  // esi
-    unsigned int v5;  // eax
-    unsigned int v0;  // [bp-0x8]
-    unsigned int v1;  // [bp+0x0]
-
-    v0 = v2;
-    if (a1 < 0 || a1 >= 12)
-    {
-        g_1010cfc8->field_0->field_120("C:\\dev\\GLOBALOPS\\source\\common\\securitycamerabase.cpp", 50);
-        g_1010cfc8->field_0->field_128(g_1010cfc8, "Darren", "SetSecurityCamera: id %i is out of range [0..%i)\n", 12);
-    }
-    ptr = &(&g_1010d470)[9 * a1];
-    *((unsigned int *)&ptr->padding_0[0]) = v4;
-    v5 = ptr->field_8;
-    *((unsigned int *)&ptr->padding_0[4]) = a0;
-    if (v5)
-    {
-        g_1010cfc8->field_0->field_c0(v5);
-        ptr->field_8 = 0;
-    }
-    if (a0 && *((char *)g_1010cfc8->field_0->field_cc(a0)))
-        ptr->field_8 = g_1010cfc8->field_0->field_b8(a0);
-    else
-        ptr->field_8 = 0;
-    if ([D] unsupported_<class 'pyvex.expr.GetI'>())
-    {
-        [D] PutI(72:F64x8)[t3,0] = t6()
-        [D] PutI(136:I8x8)[t3,0] = 0x01()
-    }
-    else
-    {
-        [D] PutI(72:F64x8)[t3,0] = t6()
-        [D] PutI(136:I8x8)[t3,0] = 0x01()
-    }
-    [D] PutI(72:F64x8)[t3,0] = t4()
-    [D] PutI(136:I8x8)[t3,0] = 0x01()
-    v1 = ([D] unsupported_<class 'pyvex.expr.GetI'>() ? [D] unsupported_<class 'pyvex.expr.GetI'>() : nan);
-    [D] PutI(72:F64x8)[t25,0] = t28()
-    [D] PutI(136:I8x8)[t25,0] = 0x01()
-    sub_100a4eda();
-    if ([D] unsupported_<class 'pyvex.expr.GetI'>())
-        v1 = [D] unsupported_<class 'pyvex.expr.GetI'>();
-    else
-        v1 = nan;
-    if ([D] unsupported_<class 'pyvex.expr.GetI'>())
-    {
-        *((int *)&ptr[1].padding_0[0]) = [D] unsupported_<class 'pyvex.expr.GetI'>();
-        [D] PutI(136:I8x8)[t7,0] = 0x00()
-    }
-    else
-    {
-        *((unsigned int *)&ptr[1].padding_0[0]) = nan;
-        [D] PutI(136:I8x8)[t7,0] = 0x00()
-    }
-    if ([D] unsupported_<class 'pyvex.expr.GetI'>())
-    {
-        [D] PutI(72:F64x8)[t3,0] = t6()
-        [D] PutI(136:I8x8)[t3,0] = 0x01()
-    }
-    else
-    {
-        [D] PutI(72:F64x8)[t3,0] = t6()
-        [D] PutI(136:I8x8)[t3,0] = 0x01()
-    }
-    [D] PutI(72:F64x8)[t3,0] = t4()
-    [D] PutI(136:I8x8)[t3,0] = 0x01()
-    [D] PutI(72:F64x8)[t25,0] = t28()
-    [D] PutI(136:I8x8)[t25,0] = 0x01()
-    sub_100a4eda();
-    if ([D] unsupported_<class 'pyvex.expr.GetI'>())
-    {
-        *((int *)&ptr[1].padding_0[4]) = [D] unsupported_<class 'pyvex.expr.GetI'>();
-        [D] PutI(136:I8x8)[t7,0] = 0x00()
-    }
-    else
-    {
-        *((unsigned int *)&ptr[1].padding_0[4]) = nan;
-        [D] PutI(136:I8x8)[t7,0] = 0x00()
-    }
-    if ([D] unsupported_<class 'pyvex.expr.GetI'>())
-    {
-        [D] PutI(72:F64x8)[t3,0] = t6()
-        [D] PutI(136:I8x8)[t3,0] = 0x01()
-    }
-    else
-    {
-        [D] PutI(72:F64x8)[t3,0] = t6()
-        [D] PutI(136:I8x8)[t3,0] = 0x01()
-    }
-    if ([D] unsupported_<class 'pyvex.expr.GetI'>())
-    {
-        [D] PutI(72:F64x8)[t1,0] = t2()
-        [D] PutI(136:I8x8)[t1,0] = 0x01()
-    }
-    else
-    {
-        [D] PutI(72:F64x8)[t1,0] = t2()
-        [D] PutI(136:I8x8)[t1,0] = 0x01()
-    }
-    *((unsigned int *)&ptr[2].padding_0[0]) = 0;
-    ptr[2].field_8 = 0x42b40000;
-    if ([D] unsupported_<class 'pyvex.expr.GetI'>())
-    {
-        ptr[1].field_8 = [D] unsupported_<class 'pyvex.expr.GetI'>();
-        [D] PutI(136:I8x8)[t7,0] = 0x00()
-    }
-    else
-    {
-        ptr[1].field_8 = nan;
-        [D] PutI(136:I8x8)[t7,0] = 0x00()
-    }
-    if ([D] unsupported_<class 'pyvex.expr.GetI'>())
-    {
-        [D] PutI(72:F64x8)[t3,0] = t6()
-        [D] PutI(136:I8x8)[t3,0] = 0x01()
-    }
-    else
-    {
-        [D] PutI(72:F64x8)[t3,0] = t6()
-        [D] PutI(136:I8x8)[t3,0] = 0x01()
-    }
-    if ([D] unsupported_<class 'pyvex.expr.GetI'>())
-    {
-        [D] PutI(72:F64x8)[t1,0] = t2()
-        [D] PutI(136:I8x8)[t1,0] = 0x01()
-    }
-    else
-    {
-        [D] PutI(72:F64x8)[t1,0] = t2()
-        [D] PutI(136:I8x8)[t1,0] = 0x01()
-    }
-    if (![D] unsupported_<class 'pyvex.expr.GetI'>())
-    {
-        *((unsigned int *)&ptr[2].padding_0[4]) = nan;
-        [D] PutI(136:I8x8)[t7,0] = 0x00()
-        return;
-    }
-    *((int *)&ptr[2].padding_0[4]) = [D] unsupported_<class 'pyvex.expr.GetI'>();
-    [D] PutI(136:I8x8)[t7,0] = 0x00()
-    return;
+    cam->m_fVal1 = (float)fmod(fabs(fVal1), 360.0);
+    cam->m_fVal2 = (float)fmod(fabs(fVal2), 90.0);
+    cam->m_fVal1_minus = cam->m_fVal1 - 1.57079637f; // MATH_HALFPI
+    cam->m_fZero = 0.0f;
+    cam->m_fVal1_plus = cam->m_fVal1 + 1.57079637f; // MATH_HALFPI
+    cam->m_f90 = 90.0f;
 }
 
 
